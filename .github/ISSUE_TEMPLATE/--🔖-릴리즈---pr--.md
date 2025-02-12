@@ -2,7 +2,7 @@
 name: "[ \U0001F516 릴리즈 / PR ]"
 about: "\U0001F516 Release / Version tags."
 title: "[ \U0001F516 PR ] "
-labels: ''
+labels: "\U0001F516 release / pr"
 assignees: ''
 
 ---
