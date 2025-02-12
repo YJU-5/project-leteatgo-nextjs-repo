@@ -1,6 +1,6 @@
 ---
 name: "[ \U0001F516 릴리즈 / PR ]"
-about: "\U0001F516 Pull requests"
+about: "\U0001F516 Release / Version tags."
 title: "[ \U0001F516 PR ] "
 labels: ''
 assignees: ''
