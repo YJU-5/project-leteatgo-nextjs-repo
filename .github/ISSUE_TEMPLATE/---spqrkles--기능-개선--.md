@@ -1,7 +1,7 @@
 ---
-name: "[Feature] "
-about: Feature
-title: ''
+name: "[ :spqrkles: 기능 개선 ]"
+about: ":spqrkles: Feature"
+title: "[ :spqrkles: Feature ] "
 labels: ''
 assignees: ''
 
