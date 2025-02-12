@@ -1,7 +1,7 @@
 ---
-name: "[ :bookmark: 릴리즈 / PR ]"
-about: ":bookmark: Pull requests"
-title: "[ :bookmark: PR ] "
+name: "[ \U0001F516 릴리즈 / PR ]"
+about: "\U0001F516 Pull requests"
+title: "[ \U0001F516 PR ] "
 labels: ''
 assignees: ''
 
