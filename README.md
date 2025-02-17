@@ -1,6 +1,7 @@
-# TEST 222 
 # 🌿 브랜치 네이밍 규칙
+
 ## ✅ 기본 규칙
+
 - **소문자 사용** (대문자 X)
 - **공백 대신 하이픈(`-`) 사용**
 - **브랜치 타입/설명 형식** 유지
@@ -8,60 +9,66 @@
 ---
 
 ## 🏛 기본 브랜치
+
 - `main` 또는 `master` → 제품의 **안정적인 배포 버전**
 
 ---
 
 ## 🛠 기능 개발 브랜치 (Feature)
+
 - **형식:** `feature/기능명`
-- **예시:**  
+- **예시:**
   - `feature/login-page`
   - `feature/search-bar`
 
 ---
 
 ## 🐞 버그 수정 브랜치 (Bugfix)
+
 - **형식:** `bugfix/버그명`
-- **예시:**  
+- **예시:**
   - `bugfix/fix-login-error`
   - `bugfix/typo-fix`
 
 ---
 
 ## 🎨 스타일 수정 브랜치 (Style)
+
 - **형식:** `style/수정대상`
-- **예시:**  
+- **예시:**
   - `style/update-button-ui`
   - `style/fix-css-padding`
 
 ---
 
 ## 🚨 긴급 수정 브랜치 (Hotfix)
+
 - **형식:** `hotfix/수정내용`
-- **예시:**  
+- **예시:**
   - `hotfix/critical-security-fix`
   - `hotfix/fix-500-error`
 
 ---
 
 ## 🔄 리팩토링 브랜치 (Refactoring)
+
 - **형식:** `refactoring/리팩토링-대상`
-- **예시:**  
+- **예시:**
   - `refactoring/improve-api-structure`
   - `refactoring/optimize-db-queries`
 
 ---
 
 ## 🧪 실험 브랜치 (Experimental)
+
 - **형식:** `experiment/실험내용`
-- **예시:**  
+- **예시:**
   - `experiment/new-algorithm`
   - `experiment/ui-redesign`
 
 ---
 
 📌 **규칙을 지켜 브랜치를 생성하면 협업이 더 원활해집니다! 🚀**
-
 
 <!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
