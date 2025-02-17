@@ -6,9 +6,9 @@ addAssignees: author
 
 # A list of reviewers to be added to pull requests (GitHub user name)
 reviewers:
-  - SeungHyun CHA
-  - TaeGwan Hong
-  - hyeongsun kim
+  - mCaHtA
+  - lemonwasp
+  - KimHyeongSun445
   - jinmo550
 
 # A number of reviewers added to the pull request
