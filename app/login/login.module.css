@@ -1,0 +1,43 @@
+.body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 전체 높이 설정 */
+  margin: 0; /* 기본 여백 제거 */
+}
+
+.container{
+  background-color: #FEE500;
+  width: 460px;
+  border-radius: 12px;
+  display: inline-block;
+  color: #000000;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.symbol{
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  position: relative;
+  right: 80px;
+}
+
+.label{
+  font-size: 30px;
+  display: inline-block;
+}
+
+.container:hover {
+  background-color: #ECD800;
+}
