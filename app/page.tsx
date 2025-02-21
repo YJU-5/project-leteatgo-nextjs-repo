@@ -1,3 +1,9 @@
+import MainHeader from "../components/main-header";
+
 export default function Home() {
-  return <div>hello</div>;
+  return (
+    <div>
+      <MainHeader />
+    </div>
+  );
 }

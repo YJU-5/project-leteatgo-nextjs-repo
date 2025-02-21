@@ -1,0 +1,86 @@
+.header {
+  height: 10vh;
+}
+
+.header_content {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 80%;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: start;
+  background-color: #f0f0f0;
+}
+
+.header .header_title {
+  width: 15%;
+  min-width: 150px;
+  margin-left: 1rem;
+  font-size: 1.8rem;
+  padding: 2rem;
+  padding-bottom: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: start;
+}
+
+.header .header_content nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .header_content nav .nav_bar_first {
+  min-width: 500px;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  padding-left: 0;
+  margin: 0;
+  float: left;
+}
+
+.header .header_content nav .nav_bar_first li {
+  font-size: 1.4rem;
+  display: inline-block;
+  margin-right: 4rem;
+  min-width: 100px;
+}
+
+.gradient {
+  width: 100%;
+  height: 20%;
+  background-image: linear-gradient(to right, #f0f0f0 55%, transparent 100%);
+}
+
+.header a {
+  font-family: "Golos Text", sans-serif;
+}
+
+.header a:link {
+  text-decoration: none;
+}
+
+.header a:visited {
+  color: #121212;
+}
+
+.header a:hover {
+  color: #3f3f3f;
+}
+
+.header .header_content .nav_login {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.header .header_content .nav_login li {
+  display: inline-block;
+  min-width: 60px;
+}
+
+.header .header_content .nav_login li a {
+  font-size: 1rem;
+  color: #333;
+}
