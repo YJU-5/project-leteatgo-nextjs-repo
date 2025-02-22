@@ -47,10 +47,19 @@
   min-width: 100px;
 }
 
+.header .header_content nav .nav_bar_first li a {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.header .header_content nav .nav_bar_first li a:hover {
+  color: #3f3f3f;
+}
+
 .gradient {
   width: 100%;
   height: 20%;
-  background-image: linear-gradient(to right, #f0f0f0 55%, transparent 100%);
+  background-image: linear-gradient(to right, #f0f0f0 65%, transparent 100%);
 }
 
 .header a {

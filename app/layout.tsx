@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Home from "./home/page";
+import MainHeader from "../components/main-header/main-header";
 
 export const metadata: Metadata = {
   title: "Let Eat Go",
@@ -14,9 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ backgroundColor: "#121212" }}>
+      <body>
+        <MainHeader />
         {children}
-        <Home />
       </body>
     </html>
   );

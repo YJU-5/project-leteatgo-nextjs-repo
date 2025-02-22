@@ -11,27 +11,27 @@ export default function MainHeader() {
         <nav>
           <ul className={styles.nav_bar_first}>
             <li>
-              <Link href="/">소셜다이닝이란?</Link>
+              <Link href="/what-is-social-dining">소셜다이닝이란?</Link>
             </li>
             <li>
-              <Link href="/">시작하기</Link>
+              <Link href="/start">시작하기</Link>
             </li>
             <li>
-              <Link href="/">사진첩</Link>
+              <Link href="/album">사진첩</Link>
             </li>
             <li>
-              <Link href="/">MAP</Link>
+              <Link href="/map">MAP</Link>
             </li>
             <li>
-              <Link href="/">후기</Link>
+              <Link href="/reviews">후기</Link>
             </li>
           </ul>
           <ul className={styles.nav_login}>
             <li>
-              <Link href="/">로그인</Link>
+              <Link href="/login">로그인</Link>
             </li>
             <li>
-              <Link href="/">회원가입</Link>
+              <Link href="/signup">회원가입</Link>
             </li>
           </ul>
         </nav>
