@@ -1,0 +1,59 @@
+.what_is_social_dining {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.what_is_social_dining .what_is_social_dining_text_container {
+  width: 100%;
+  height: 100%;
+  padding: 7%;
+  margin: 0 auto;
+  position: relative;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.what_is_social_dining .what_is_social_dining_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  filter: blur(5px);
+}
+
+.what_is_social_dining .what_is_social_dining_title {
+  color: #fff;
+  text-align: start;
+  font-size: 3rem;
+  margin: 0 auto;
+}
+
+.what_is_social_dining .what_is_social_dining_text {
+  color: #fff;
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+.what_is_social_dining ul {
+  color: #fff;
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
+
+.what_is_social_dining ul li {
+  color: #fff;
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+}

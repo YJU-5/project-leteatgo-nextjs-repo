@@ -1,0 +1,25 @@
+.home .home_image {
+  width: 100%;
+  height: auto;
+  opacity: 0.75;
+}
+
+.home .text_container_1 {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 15%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.home .text_container_2 {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  width: 15%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  color: white;
+}
