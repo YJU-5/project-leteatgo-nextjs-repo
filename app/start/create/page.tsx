@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Create() {
   const [price, setPrice] = useState(0);
   const [age, setAge] = useState(0);
+  const [people, setPeople] = useState(0);
 
   return (
     <div className={styles.create}>
@@ -64,6 +65,17 @@ export default function Create() {
         </div>
         <div>
           <h2>인원</h2>
+          <input
+            className={styles.slider}
+            type="range"
+            min={0}
+            max={20}
+            step={1}
+            value={people}
+            onChange={(event) => {
+              setPeople(Number(event.target.value));
+            }}
+          />
         </div>
         <div>
           <h2>카테고리</h2>
