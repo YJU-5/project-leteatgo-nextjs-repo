@@ -31,7 +31,7 @@ export default function Create() {
         <div>
           <div className={styles.h2_wrap}>
             <h2>평균 가격</h2>
-            <h2>{price}원</h2>
+            {price === 100000 ? <h2>100000+ 원</h2> : <h2>{price} 원</h2>}
           </div>
           <input
             className={styles.slider}
@@ -48,7 +48,7 @@ export default function Create() {
         <div>
           <div className={styles.h2_wrap}>
             <h2>나이</h2>
-            <h2>{age}세</h2>
+            {age === 100 ? <h2>100+ 세</h2> : <h2>{age} 세</h2>}
           </div>
           <input
             className={styles.slider}
