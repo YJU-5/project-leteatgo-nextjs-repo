@@ -26,7 +26,7 @@ export default function KakaoAuth(){
           body: new URLSearchParams({
             grant_type: "authorization_code",
             client_id: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID ||"",
-            redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI ||"",
+            redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI ||"",
             code,
           }),
         });
