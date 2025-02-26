@@ -2,10 +2,11 @@
 
 import styles from "./page.module.css";
 import { useState } from "react";
-
+import { RangeSlider } from "@/components/multi-range-slider/multi-range-slider";
 export default function Create() {
   const [price, setPrice] = useState(0);
-  const [age, setAge] = useState(0);
+  const [minAge, setMinAge] = useState(0);
+  const [maxAge, setMaxAge] = useState(100);
   const [people, setPeople] = useState(0);
 
   return (
@@ -48,23 +49,9 @@ export default function Create() {
         </div>
         <div>
           <div className={styles.h2_wrap}>
-            <h2>나이</h2>
-            {age === 100 ? <h2>100+ 세</h2> : <h2>{age} 세</h2>}
+            <h2>인원</h2>
+            {people === 20 ? <h2>20+ 명</h2> : <h2>{people} 명</h2>}
           </div>
-          <input
-            className={styles.slider}
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={age}
-            onChange={(event) => {
-              setAge(Number(event.target.value));
-            }}
-          />
-        </div>
-        <div>
-          <h2>인원</h2>
           <input
             className={styles.slider}
             type="range"
@@ -77,6 +64,27 @@ export default function Create() {
             }}
           />
         </div>
+        <div>
+          <div className={styles.h2_wrap}>
+            <h2>나이</h2>
+            {maxAge === 100 ? (
+              <h2>{minAge} ~ 100+ 세</h2>
+            ) : (
+              <h2>
+                {minAge} ~ {maxAge} 세
+              </h2>
+            )}
+          </div>
+          <RangeSlider
+            min={0}
+            max={100}
+            onChange={(values) => {
+              setMinAge(values.min);
+              setMaxAge(values.max);
+            }}
+          />
+        </div>
+
         <div>
           <h2>카테고리</h2>
         </div>
