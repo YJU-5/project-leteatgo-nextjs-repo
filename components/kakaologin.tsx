@@ -1,12 +1,11 @@
 "use client"
 
-import styles from "../login.module.css"
+import styles from "../app/login/login.module.css"
 
 export default function KakaoLogin(){
 
   const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID; //카카오에서 발급한 클라이언트ID
   const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI; // 로그인후 이동할 페이지
-  console.log(KAKAO_CLIENT_ID,REDIRECT_URI)
 
   const handlekakaoLogin = ()=>{
     const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`  
