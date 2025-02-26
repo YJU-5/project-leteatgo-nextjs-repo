@@ -60,6 +60,7 @@
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   height: 3rem;
+  margin-top: 8px;
 }
 
 .create .create_container .slider {
@@ -121,4 +122,8 @@
 
 .create .create_container .slider:focus::-webkit-slider-runnable-track {
   background: #f2f4f6;
+}
+
+.create .create_container input {
+  font-size: 1.4rem;
 }
