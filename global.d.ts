@@ -20,8 +20,8 @@ declare namespace kakao {
         place_name: string;
         address_name: string;
         road_address_name: string;
-        x: string;
-        y: string;
+        latitude: string;  
+        longitude: string;
       }
     }
     class Marker {
