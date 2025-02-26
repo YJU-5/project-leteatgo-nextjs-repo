@@ -3,11 +3,14 @@
 import styles from "./page.module.css";
 import { useState } from "react";
 import { RangeSlider } from "@/components/multi-range-slider/multi-range-slider";
+import DatePickerComponent from "@/components/date-picker/date-picker";
+
 export default function Create() {
   const [price, setPrice] = useState(0);
   const [minAge, setMinAge] = useState(0);
   const [maxAge, setMaxAge] = useState(100);
   const [people, setPeople] = useState(0);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   return (
     <div className={styles.create}>
@@ -24,7 +27,10 @@ export default function Create() {
           </div>
           <div className={styles.input2_container}>
             <h2>날짜</h2>
-            <input type="text" className={styles.input_2} />
+            <DatePickerComponent
+              value={selectedDate}
+              onChange={(newValue: Date | null) => setSelectedDate(newValue)}
+            />
           </div>
         </div>
         <div>
