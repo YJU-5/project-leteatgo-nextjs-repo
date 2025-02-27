@@ -100,7 +100,6 @@ export default function Create() {
             }}
           />
         </div>
-
         <div>
           <h2>카테고리</h2>
         </div>
