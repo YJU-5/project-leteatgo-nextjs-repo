@@ -60,14 +60,31 @@ export default function Create() {
         <div>
           <div className={styles.h2_wrap}>
             <h2>평균 가격</h2>
-            {price === 100000 ? <h2>100000+ 원</h2> : <h2>{price} 원</h2>}
+            <input
+              type="text"
+              className={styles.none_input}
+              value={price}
+              onChange={(event) => {
+                const value = Number(event.target.value);
+                if (!isNaN(value)) {
+                  if (value > 100000) {
+                    setPrice(100000);
+                  } else if (value < 0) {
+                    setPrice(0);
+                  } else {
+                    setPrice(value);
+                  }
+                }
+              }}
+            />
+            {price === 100000 ? <h2>＋&nbsp;원</h2> : <h2>&nbsp;원</h2>}
           </div>
           <input
             className={styles.slider}
             type="range"
             min={0}
             max={100000}
-            step={100}
+            step={500}
             value={price}
             onChange={(event) => {
               setPrice(Number(event.target.value));
@@ -77,7 +94,24 @@ export default function Create() {
         <div>
           <div className={styles.h2_wrap}>
             <h2>인원</h2>
-            {people === 20 ? <h2>20+ 명</h2> : <h2>{people} 명</h2>}
+            <input
+              type="text"
+              className={styles.none_input}
+              value={people}
+              onChange={(event) => {
+                const value = Number(event.target.value);
+                if (!isNaN(value)) {
+                  if (value > 20) {
+                    setPeople(20);
+                  } else if (value < 0) {
+                    setPeople(0);
+                  } else {
+                    setPeople(value);
+                  }
+                }
+              }}
+            />
+            {people === 20 ? <h2>＋&nbsp;명</h2> : <h2>&nbsp;명</h2>}
           </div>
           <input
             className={styles.slider}

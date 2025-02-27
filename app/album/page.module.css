@@ -1,0 +1,19 @@
+.album {
+  width: 100%;
+  height: 100%;
+}
+
+.album .profile {
+  width: 25%;
+  height: 100%;
+  float: left;
+  background-color: blue;
+}
+
+.album .profile {
+  width: 150px;
+  height: 150px;
+  margin-left: 10%;
+  margin-top: 5%;
+  background-color: red;
+}
