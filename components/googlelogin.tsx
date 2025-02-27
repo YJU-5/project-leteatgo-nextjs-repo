@@ -12,8 +12,11 @@ export default  function GoogleLogin(){
 
 
   const handleGoogleLogin = () => {
-    const googleAuthUrl = 'https:account.google.com/o/oauth2/v2/auth?client_id='+GOOGLE_ID+'&redirect_uri='+REDIRECT_URI+'&response_type=code'+'&scope=email profile'
-
+    const googleAuthUrl =`https://accounts.google.com/o/oauth2/auth?` +
+    `client_id=${GOOGLE_ID}` +
+    `&redirect_uri=${REDIRECT_URI}` +
+    `&response_type=token` +
+    `&scope=email profile`;
   
     window.location.href = googleAuthUrl;
   };
@@ -30,8 +33,3 @@ export default  function GoogleLogin(){
   )
 }
 
-// `https://accounts.google.com/o/oauth2/auth?
-//       client_id=${GOOGLE_ID}
-//       &redirect_uri=${REDIRECT_URI}
-//       &response_type=token
-//       &scope=email profile`;
