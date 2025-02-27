@@ -7,10 +7,13 @@
 
 .join .join_container {
   width: 80%;
+  min-width: 800px;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  gap: 2rem;
 }
 
 .join .join_container .join_container_wrap img {
@@ -22,7 +25,7 @@
 }
 
 .join .join_container .join_container_wrap {
-  width: 23%;
+  width: 20%;
   height: 40vh;
   background-color: #313131;
   border-radius: 10px;
@@ -32,7 +35,7 @@
 }
 
 .join .join_container .join_container_wrap:hover {
-  background-color: #faf0f3;
+  background-color: #f0f0f0;
   color: #121212;
   transform: scale(1.05);
 }
@@ -57,7 +60,7 @@
 }
 
 .join .join_container .join_container_wrap .under_content h1 {
-  font-size: 2rem;
+  font-size: 200%;
   font-weight: bold;
   margin: 0 auto;
   margin-bottom: 10px;
@@ -69,4 +72,50 @@
   text-align: center;
   word-break: keep-all;
   line-height: 1.5;
+}
+
+/* 태블릿 크기에서의 스타일 */
+@media screen and (max-width: 1200px) {
+  .join .join_container {
+    min-width: auto;
+    width: 90%;
+  }
+
+  .join .join_container .join_container_wrap {
+    width: 100%; /* 2열로 변경 */
+    height: 45vh;
+  }
+}
+
+/* 모바일 크기에서의 스타일 */
+@media screen and (max-width: 768px) {
+  .join .join_container {
+    width: 95%;
+  }
+
+  .join .join_container .join_container_wrap {
+    width: 90%; /* 1열로 변경 */
+    height: 50vh;
+    margin-bottom: 2rem;
+  }
+
+  .join .join_container .join_container_wrap .under_content h1 {
+    font-size: 150%;
+  }
+
+  .join .join_container .join_container_wrap .under_content p {
+    font-size: 1rem;
+  }
+}
+
+/* 작은 모바일 크기에서의 스타일 */
+@media screen and (max-width: 480px) {
+  .join .join_container .join_container_wrap {
+    width: 95%;
+    height: 45vh;
+  }
+
+  .join .join_container .join_container_wrap .under_content h1 {
+    font-size: 130%;
+  }
 }
