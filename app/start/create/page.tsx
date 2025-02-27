@@ -6,6 +6,7 @@ import { RangeSlider } from "@/components/multi-range-slider/multi-range-slider"
 import DatePickerComponent from "@/components/date-picker/date-picker";
 import Postcode from "@/components/postcode/postcode";
 import Tag from "@/components/tag/tag";
+import ImageUpload from "@/components/image-upload/image-upload";
 
 export default function Create() {
   const [price, setPrice] = useState(0);
@@ -16,6 +17,7 @@ export default function Create() {
   const [location, setLocation] = useState("");
   const [selectedFoodTag, setSelectedFoodTag] = useState<string>("");
   const [selectedGenderTag, setSelectedGenderTag] = useState<string>("");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const foodTags = ["한식", "중식", "일식", "양식"]; // 태그 목록 정의
   const genderTags = ["남자", "여자"]; // 태그 목록 정의
@@ -124,6 +126,10 @@ export default function Create() {
         <div>
           <h2>설명</h2>
           <textarea className={styles.textarea} />
+        </div>
+        <div>
+          <h2>첨부 이미지</h2>
+          <ImageUpload onImageSelect={(files) => setSelectedFiles(files)} />
         </div>
         <div className={styles.button_container}>
           <button className={styles.button + " " + styles.cancel}>취소</button>
