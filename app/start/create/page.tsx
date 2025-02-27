@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { RangeSlider } from "@/components/multi-range-slider/multi-range-slider";
 import DatePickerComponent from "@/components/date-picker/date-picker";
+import Postcode from "@/components/postcode/postcode";
+import FoodTag from "@/components/food-tag/food-tag";
 
 export default function Create() {
   const [price, setPrice] = useState(0);
@@ -11,6 +13,8 @@ export default function Create() {
   const [maxAge, setMaxAge] = useState(100);
   const [people, setPeople] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [location, setLocation] = useState("");
+  const [selectedFoodTag, setSelectedFoodTag] = useState<string>("");
 
   return (
     <div className={styles.create}>
@@ -23,7 +27,12 @@ export default function Create() {
         <div className={styles.half_container_wrap}>
           <div className={styles.input2_container}>
             <h2>위치</h2>
-            <input type="text" className={styles.input_2} />
+            <Postcode
+              onComplete={(address) => {
+                setLocation(address);
+                console.log(location);
+              }}
+            />
           </div>
           <div className={styles.input2_container}>
             <h2>날짜</h2>
@@ -35,6 +44,7 @@ export default function Create() {
         </div>
         <div>
           <h2>음식 태그</h2>
+          <FoodTag onSelect={(tag) => setSelectedFoodTag(tag)} />
         </div>
         <div>
           <div className={styles.h2_wrap}>
