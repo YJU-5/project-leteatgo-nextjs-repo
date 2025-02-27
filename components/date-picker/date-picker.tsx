@@ -73,6 +73,17 @@ export default function DatePickerComponent({
             textField: {
               size: "small",
             },
+            popper: {
+              placement: "bottom-end",
+              modifiers: [
+                {
+                  name: "offset",
+                  options: {
+                    offset: [0, 8],
+                  },
+                },
+              ],
+            },
           }}
         />
       </DemoContainer>
