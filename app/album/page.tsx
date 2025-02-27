@@ -3,7 +3,10 @@ import styles from "./page.module.css";
 export default function Album() {
   return (
     <div className={styles.album}>
-      <h1 className={styles.album_title}>사진첩</h1>
+      <div className={styles.profile}>
+        <div className={styles.profile_image}>a</div>
+        <div className={styles.profile_name}>a</div>
+      </div>
     </div>
   );
 }

@@ -170,6 +170,7 @@
   border-radius: 0.5rem;
   background-color: transparent;
   color: #faf0f3;
+  border: 1px solid #faf0f3;
   font-size: 1.4rem;
   font-weight: bold;
   transition: all 0.1s ease;
@@ -191,4 +192,20 @@
 
 .create .create_container .button_container .button.cancel:hover {
   background-color: #ff6060;
+}
+
+.create .create_container .none_input {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  color: #faf0f3;
+  text-align: right;
+  width: auto;
+  margin-left: auto;
+  padding: 0;
+}
+
+.create .create_container .none_input:focus {
+  outline: none;
 }
