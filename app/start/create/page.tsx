@@ -5,7 +5,7 @@ import { useState } from "react";
 import { RangeSlider } from "@/components/multi-range-slider/multi-range-slider";
 import DatePickerComponent from "@/components/date-picker/date-picker";
 import Postcode from "@/components/postcode/postcode";
-import FoodTag from "@/components/food-tag/food-tag";
+import Tag from "@/components/tag/tag";
 
 export default function Create() {
   const [price, setPrice] = useState(0);
@@ -15,6 +15,10 @@ export default function Create() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [location, setLocation] = useState("");
   const [selectedFoodTag, setSelectedFoodTag] = useState<string>("");
+  const [selectedGenderTag, setSelectedGenderTag] = useState<string>("");
+
+  const foodTags = ["한식", "중식", "일식", "양식"]; // 태그 목록 정의
+  const genderTags = ["남자", "여자"]; // 태그 목록 정의
 
   return (
     <div className={styles.create}>
@@ -44,7 +48,12 @@ export default function Create() {
         </div>
         <div>
           <h2>음식 태그</h2>
-          <FoodTag onSelect={(tag) => setSelectedFoodTag(tag)} />
+          <Tag
+            tags={foodTags}
+            onSelect={(tag) => {
+              setSelectedFoodTag(tag);
+            }}
+          />
         </div>
         <div>
           <div className={styles.h2_wrap}>
@@ -105,9 +114,20 @@ export default function Create() {
         </div>
         <div>
           <h2>성별</h2>
+          <Tag
+            tags={genderTags}
+            onSelect={(tag) => {
+              setSelectedGenderTag(tag);
+            }}
+          />
         </div>
         <div>
           <h2>설명</h2>
+          <textarea className={styles.textarea} />
+        </div>
+        <div className={styles.button_container}>
+          <button className={styles.button + " " + styles.cancel}>취소</button>
+          <button className={styles.button}>등록</button>
         </div>
       </div>
     </div>

@@ -1,14 +1,13 @@
 import { useState } from "react";
-import styles from "./food-tag.module.css";
+import styles from "./tag.module.css";
 
-interface FoodTagProps {
+interface TagProps {
+  tags: string[]; // 태그 목록을 props로 받음
   onSelect: (tag: string) => void;
 }
 
-export default function FoodTag({ onSelect }: FoodTagProps) {
+export default function Tag({ tags, onSelect }: TagProps) {
   const [activeTag, setActiveTag] = useState<string>("");
-
-  const tags = ["한식", "중식", "일식", "양식"];
 
   const handleClick = (tag: string) => {
     if (activeTag === tag) {
