@@ -19,7 +19,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border: 1px solid #ffffff; /* 흰색 테두리 */
+  border: 1px solid #faf0f3; /* 흰색 테두리 */
   background-color: #121212; /* 검은 배경 */
   border-radius: 50px; /* 둥근 모서리 */
 }
@@ -28,7 +28,7 @@
 .range {
   position: absolute;
   height: 100%;
-  background-color: #fafafa; /* 흰색 배경 */
+  background-color: #faf0f3; /* 흰색 배경 */
   border-radius: 10px;
 }
 
@@ -50,7 +50,7 @@
   appearance: none;
   width: 49px;
   height: 49px;
-  background-color: #fff;
+  background-color: #faf0f3;
   border: 1px solid #121212;
   border-radius: 50%;
   cursor: pointer;
@@ -62,7 +62,7 @@
 .thumb::-moz-range-thumb {
   width: 46px;
   height: 46px;
-  background-color: #fff;
+  background-color: #faf0f3;
   border: 1px solid #121212;
   border-radius: 50%;
   cursor: pointer;
@@ -72,15 +72,15 @@
 
 /* active 상태일 때의 스타일 수정 */
 .thumb:active::-webkit-slider-thumb {
-  background-color: #fff; /* 배경색 유지 */
-  border: 3px solid #564b9a; /* 테두리 두께만 증가 */
+  background-color: #121212; /* 배경색 유지 */
+  border: 3px solid #faf0f3; /* 테두리 두께만 증가 */
   width: 49px; /* 크기 유지 */
   height: 49px;
 }
 
 .thumb:active::-moz-range-thumb {
-  background-color: #fff;
-  border: 3px solid #564b9a;
+  background-color: #121212;
+  border: 3px solid #faf0f3;
   width: 46px;
   height: 46px;
 }
@@ -113,7 +113,7 @@
   left: 0; /* 왼쪽 정렬 */
   font-size: 1rem; /* 글자 크기 */
   font-weight: 600; /* 글자 굵기 */
-  color: #ffffff; /* 흰색 텍스트 */
+  color: #faf0f3; /* 흰색 텍스트 */
 }
 
 /* 최대 나이 텍스트 스타일 */
@@ -123,5 +123,5 @@
   right: 0; /* 오른쪽 정렬 */
   font-size: 1rem; /* 글자 크기 */
   font-weight: 600; /* 글자 굵기 */
-  color: #ffffff; /* 흰색 텍스트 */
+  color: #faf0f3; /* 흰색 텍스트 */
 }

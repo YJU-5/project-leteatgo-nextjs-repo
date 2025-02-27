@@ -81,6 +81,18 @@
   width: 18px;
   margin-top: -7px;
   border-radius: 50%;
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+
+.create .create_container .slider::-webkit-slider-thumb:hover {
+  background: #faf0f3;
+  transform: scale(1.1);
+}
+
+.create .create_container .slider::-webkit-slider-thumb:active {
+  background: #faf0f3;
+  transform: scale(1.2);
 }
 
 .create .create_container .slider::-moz-range-thumb {
@@ -88,8 +100,19 @@
   cursor: pointer;
   height: 18px;
   width: 18px;
-  border: none;
   border-radius: 50%;
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+
+.create .create_container .slider::-moz-range-thumb:hover {
+  background: #faf0f3;
+  transform: scale(1.1);
+}
+
+.create .create_container .slider::-moz-range-thumb:active {
+  background: #faf0f3;
+  transform: scale(1.2);
 }
 
 .create .create_container .slider::-webkit-slider-runnable-track {
@@ -152,11 +175,14 @@
   transition: all 0.1s ease;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  transform: scale(1);
 }
 
 .create .create_container .button_container .button:hover {
-  border: 2px solid #564b9a;
-  color: #564b9a;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+  color: #121212;
+  transform: scale(1.05);
 }
 
 .create .create_container .button_container .button.cancel {
