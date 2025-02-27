@@ -127,3 +127,42 @@
 .create .create_container input {
   font-size: 1.4rem;
 }
+
+.create .create_container .textarea {
+  width: 100%;
+  height: 10rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.create .create_container .button_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.create .create_container .button_container .button {
+  width: 15%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: #faf0f3;
+  font-size: 1.4rem;
+  font-weight: bold;
+  transition: all 0.1s ease;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.create .create_container .button_container .button:hover {
+  border: 2px solid #564b9a;
+  color: #564b9a;
+}
+
+.create .create_container .button_container .button.cancel {
+  background-color: #ff7575;
+}
+
+.create .create_container .button_container .button.cancel:hover {
+  background-color: #ff6060;
+}
