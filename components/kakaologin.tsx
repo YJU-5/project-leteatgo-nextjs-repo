@@ -11,7 +11,7 @@ export default function KakaoLogin(){
     const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`  
     // kakaoAuthURL : 카카오 로그인페이지 주소
     window.location.href = kakaoAuthURL
-    // window.location.href   kakaoauthURL의 URL을 출력합니다.
+    // window.location.href   kakaoauthURL의 URL을 출력합니다. test
   }
 
   return(
