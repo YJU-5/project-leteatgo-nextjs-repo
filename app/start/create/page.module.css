@@ -86,17 +86,17 @@
 }
 
 .create .create_container .slider::-webkit-slider-thumb:hover {
-  background: #faf0f3;
+  background: #f0f0f0;
   transform: scale(1.1);
 }
 
 .create .create_container .slider::-webkit-slider-thumb:active {
-  background: #faf0f3;
+  background: #f0f0f0;
   transform: scale(1.2);
 }
 
 .create .create_container .slider::-moz-range-thumb {
-  background: #faf0f3;
+  background: #f0f0f0;
   cursor: pointer;
   height: 18px;
   width: 18px;
@@ -106,12 +106,12 @@
 }
 
 .create .create_container .slider::-moz-range-thumb:hover {
-  background: #faf0f3;
+  background: #f0f0f0;
   transform: scale(1.1);
 }
 
 .create .create_container .slider::-moz-range-thumb:active {
-  background: #faf0f3;
+  background: #f0f0f0;
   transform: scale(1.2);
 }
 
@@ -169,8 +169,8 @@
   height: 3rem;
   border-radius: 0.5rem;
   background-color: transparent;
-  color: #faf0f3;
-  border: 1px solid #faf0f3;
+  color: #f0f0f0;
+  border: 1px solid #f0f0f0;
   font-size: 1.4rem;
   font-weight: bold;
   transition: all 0.1s ease;
@@ -199,11 +199,12 @@
   font-weight: bold;
   background-color: transparent;
   border: none;
-  color: #faf0f3;
+  color: #f0f0f0;
   text-align: right;
   width: auto;
   margin-left: auto;
   padding: 0;
+  padding-right: 5px;
 }
 
 .create .create_container .none_input:focus {

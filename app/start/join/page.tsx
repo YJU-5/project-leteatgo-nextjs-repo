@@ -17,7 +17,7 @@ export default function Join() {
           </div>
           <div className={styles.under_content}>
             <h1>한식</h1>
-            <p>한국 음식을 좋아하는 사람들을 위한 소셜 다이닝</p>
+            <p>한국 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
         <Link href="/start/join/food" className={styles.join_container_wrap}>
@@ -32,7 +32,7 @@ export default function Join() {
           </div>
           <div className={styles.under_content}>
             <h1>중식</h1>
-            <p>중국 음식을 좋아하는 사람들을 위한 소셜 다이닝</p>
+            <p>중국 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
         <Link href="/start/join/food" className={styles.join_container_wrap}>
@@ -47,7 +47,7 @@ export default function Join() {
           </div>
           <div className={styles.under_content}>
             <h1>일식</h1>
-            <p>일본 음식을 좋아하는 사람들을 위한 소셜 다이닝</p>
+            <p>일본 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
         <Link href="/start/join/food" className={styles.join_container_wrap}>
@@ -62,7 +62,7 @@ export default function Join() {
           </div>
           <div className={styles.under_content}>
             <h1>양식</h1>
-            <p>서양 음식을 좋아하는 사람들을 위한 소셜 다이닝</p>
+            <p>서양 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
       </div>
