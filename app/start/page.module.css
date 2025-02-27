@@ -28,21 +28,24 @@
   background-color: transparent;
   color: white;
   width: 40%;
-  height: 10vh;
+  height: 6vh;
   min-height: 30px;
   font-size: 2rem;
   font-weight: bold;
   margin: 0 auto;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   text-align: center;
   text-decoration: none;
   align-content: center;
+  transition: all 0.2s ease;
+  transform: scale(1);
 }
 
-.start .button_group button:hover {
+.start .button_group a:hover {
   background-color: white;
   color: black;
+  transform: scale(1.05);
 }
 
 .start hr {
@@ -56,20 +59,50 @@
 .start .under_container {
   width: 90%;
   margin: 0 auto;
-  margin-top: 1rem;
   justify-content: space-between;
 }
 
-.start .popular_item {
-  padding: 1rem;
-  display: inline-block;
-  vertical-align: top;
-  width: 21%;
-  height: 10vh;
-  background-color: white;
-  border-radius: 50px;
-  color: black;
-  height: 40vh;
-  margin-right: 1%;
-  margin-bottom: 0;
+.under_container {
+  padding: 20px;
+}
+
+.popular_title {
+  margin-bottom: 20px;
+}
+
+/* 가로 스크롤을 위한 컨테이너 추가 */
+.popular_items_container {
+  display: flex;
+  gap: 20px; /* 아이템 간 간격 */
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  overflow-y: hidden; /* 세로 스크롤 비활성화 */
+  padding-bottom: 20px; /* 스크롤바 여유 공간 */
+  -webkit-overflow-scrolling: touch; /* 모바일 스크롤 부드럽게 */
+}
+
+.popular_item {
+  min-width: 300px; /* 아이템 최소 너비 */
+  height: 400px; /* 아이템 높이 */
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  flex-shrink: 0; /* 아이템 크기 고정 */
+}
+
+/* 스크롤바 스타일링 (선택사항) */
+.popular_items_container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.popular_items_container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.popular_items_container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.popular_items_container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

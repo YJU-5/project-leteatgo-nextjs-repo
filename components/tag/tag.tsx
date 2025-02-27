@@ -32,7 +32,6 @@ export default function Tag({ tags, onSelect }: TagProps) {
           aria-pressed={activeTag === tag}
         >
           {tag}
-          {activeTag === tag && <span className={styles.check_icon}>✓</span>}
         </button>
       ))}
     </div>

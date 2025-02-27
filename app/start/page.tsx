@@ -17,10 +17,12 @@ export default function Start() {
       <hr />
       <div className={styles.under_container}>
         <h1 className={styles.popular_title}>현재 인기 소셜 다이닝</h1>
-        <div className={styles.popular_item}>아잉</div>
-        <div className={styles.popular_item}></div>
-        <div className={styles.popular_item}></div>
-        <div className={styles.popular_item}></div>
+        <div className={styles.popular_items_container}>
+          <div className={styles.popular_item}>아잉</div>
+          <div className={styles.popular_item}>아잉</div>
+          <div className={styles.popular_item}>아잉</div>
+          <div className={styles.popular_item}>아잉</div>
+        </div>
       </div>
     </div>
   );

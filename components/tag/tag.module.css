@@ -16,15 +16,17 @@
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
+  transform: scale(1);
 }
 
 .tag_button:hover {
-  border-color: #564b9a;
-  color: #564b9a;
+  border-color: #faf0f3;
+  color: #faf0f3;
+  transform: scale(1.05);
 }
 
-.tag_button.selected {
-  background-color: #564b9a;
-  color: white;
-  border-color: #564b9a;
+.tag_button.active {
+  background-color: #faf0f3;
+  color: #121212;
+  border-color: #121212;
 }
