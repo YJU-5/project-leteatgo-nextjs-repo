@@ -154,8 +154,11 @@
 .create .create_container .textarea {
   width: 100%;
   height: 10rem;
+  padding: 1%;
   border: 1px solid #ccc;
+  resize: none;
   border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 .create .create_container .button_container {

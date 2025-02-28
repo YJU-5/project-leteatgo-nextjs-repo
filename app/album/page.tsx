@@ -29,7 +29,7 @@ export default function Album() {
     {
       id: "1",
       content:
-        "안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? 안녕하세요? ",
+        "안녕하십니까. 저는 차승현이라고 합니다. 게시판의 임시 내용을 채워넣기 위해 필요 없는 말을 잠시 집어넣겠습니다. 오늘의 점심은 백미밥, 얼큰양파감자국, 숯불닭볶음, 야채고로케, 양배추찜*쌈장, 포기김치입니다. 절대 포기하지 않는 사람이 않겠습니다. 감사합니다.",
       profileImage: "/gitb.png",
       profileName: "차승현",
       images: ["/foods/kr-food.jpg", "/foods/kr-food.jpg"],
@@ -38,7 +38,8 @@ export default function Album() {
     },
     {
       id: "2",
-      content: "오늘 점심 뭐 먹지?",
+      content:
+        "안녕하십니까. 저는 홍태관이라고 합니다. 저는 잘생겼습니다. 약지를 보시면 아시겠지만, 저는 여자친구가 있습니다.",
       profileImage: "/gitb.png",
       profileName: "홍태관",
       images: ["/foods/kr-food.jpg", "/foods/kr-food.jpg"],
@@ -47,7 +48,8 @@ export default function Album() {
     },
     {
       id: "3",
-      content: "오늘 점심 뭐 먹지?",
+      content:
+        "안녕하십니까. 저는 김형선이라고 합니다. 저는 잘생겼습니다. 일본에서 취업해서 생활해보고 싶습니다.",
       profileImage: "/gitb.png",
       profileName: "김형선",
       images: ["/foods/kr-food.jpg", "/foods/kr-food.jpg"],
@@ -58,24 +60,39 @@ export default function Album() {
 
   const albumComment = [
     {
+      boardId: "1",
       id: "1",
-      content: "",
+      profileImage: "/gitb.png",
+      name: "홍승현",
+      content: "안녕하세요",
     },
     {
+      boardId: "1",
       id: "2",
-      content: "",
+      profileImage: "/gitb.png",
+      name: "김태관",
+      content: "멋있어요",
     },
     {
+      boardId: "1",
       id: "3",
-      content: "",
+      profileImage: "/gitb.png",
+      name: "차형선",
+      content: "맛있어보여요",
     },
     {
-      id: "4",
-      content: "",
+      boardId: "2",
+      id: "1",
+      profileImage: "/gitb.png",
+      name: "홍승현",
+      content: "좋아요",
     },
     {
-      id: "5",
-      content: "",
+      boardId: "2",
+      id: "2",
+      profileImage: "/gitb.png",
+      name: "김태관",
+      content: "안녕하",
     },
   ];
 
@@ -142,26 +159,45 @@ export default function Album() {
               </div>
               <div className={styles.board_content_container}>
                 <p className={styles.board_content}>{board.content}</p>
-                {board.images.map((image) => (
-                  <>
-                    <Image
-                      className={styles.board_content_image}
-                      src={image}
-                      alt="image"
-                      width={250}
-                      height={250}
-                    />
-                  </>
-                ))}
+                <div className={styles.board_content_image_container}>
+                  {board.images.map((image) => (
+                    <>
+                      <Image
+                        className={styles.board_content_image}
+                        src={image}
+                        alt="image"
+                        width={250}
+                        height={250}
+                      />
+                    </>
+                  ))}
+                </div>
               </div>
-              <div className={styles.board_comment_container}>
-                <p className={styles.board_comment_content}>
-                  {albumComment.map((comment) => (
-                    <div key={comment.id}>
-                      <p>{comment.content}</p>
+              <div className={styles.board_bottom_container}>
+                {albumComment
+                  .filter((comment) => comment.boardId === board.id)
+                  .map((comment) => (
+                    <div
+                      className={styles.board_comment_container}
+                      key={comment.id}
+                    >
+                      <Image
+                        className={styles.board_comment_profile_image}
+                        src={comment.profileImage}
+                        alt="profile"
+                        width={50}
+                        height={50}
+                      />
+                      <div className={styles.board_comment_content_wrap}>
+                        <p className={styles.board_comment_name}>
+                          {comment.name}
+                        </p>
+                        <p className={styles.board_comment_content}>
+                          {comment.content}
+                        </p>
+                      </div>
                     </div>
                   ))}
-                </p>
               </div>
             </div>
           ))}
