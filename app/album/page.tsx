@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-// import { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Album() {
@@ -64,37 +64,57 @@ export default function Album() {
       id: "1",
       profileImage: "/gitb.png",
       name: "홍승현",
-      content: "안녕하세요",
+      content: "1번 - 1번 댓글",
     },
     {
       boardId: "1",
       id: "2",
       profileImage: "/gitb.png",
       name: "김태관",
-      content: "멋있어요",
+      content: "1번 - 2번 댓글",
     },
     {
       boardId: "1",
       id: "3",
       profileImage: "/gitb.png",
       name: "차형선",
-      content: "맛있어보여요",
+      content: "1번 - 3번 댓글",
     },
     {
       boardId: "2",
       id: "1",
       profileImage: "/gitb.png",
       name: "홍승현",
-      content: "좋아요",
+      content: "2번 - 1번 댓글",
     },
     {
       boardId: "2",
       id: "2",
       profileImage: "/gitb.png",
       name: "김태관",
-      content: "안녕하",
+      content: "2번 - 2번 댓글",
+    },
+    {
+      boardId: "3",
+      id: "1",
+      profileImage: "/gitb.png",
+      name: "차형선",
+      content: "3번 - 1번 댓글",
     },
   ];
+
+  // 각 게시물의 댓글 표시 상태를 관리하는 state
+  const [showComments, setShowComments] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+
+  // 댓글 토글 함수
+  const toggleComments = (boardId: string) => {
+    setShowComments((prev) => ({
+      ...prev,
+      [boardId]: !prev[boardId],
+    }));
+  };
 
   return (
     <div className={styles.album}>
@@ -173,32 +193,44 @@ export default function Album() {
                   ))}
                 </div>
               </div>
-              <div className={styles.board_bottom_container}>
-                {albumComment
-                  .filter((comment) => comment.boardId === board.id)
-                  .map((comment) => (
-                    <div
-                      className={styles.board_comment_container}
-                      key={comment.id}
-                    >
-                      <Image
-                        className={styles.board_comment_profile_image}
-                        src={comment.profileImage}
-                        alt="profile"
-                        width={50}
-                        height={50}
-                      />
-                      <div className={styles.board_comment_content_wrap}>
-                        <p className={styles.board_comment_name}>
-                          {comment.name}
-                        </p>
-                        <p className={styles.board_comment_content}>
-                          {comment.content}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+              <div className={styles.board_input_container}>
+                <input type="text" className={styles.board_input} />
               </div>
+              <button
+                className={styles.board_more_comment}
+                onClick={() => toggleComments(board.id)}
+              >
+                {showComments[board.id] ? "댓글 접기" : "댓글 더보기"}
+              </button>
+
+              {showComments[board.id] && (
+                <div className={styles.board_bottom_container}>
+                  {albumComment
+                    .filter((comment) => comment.boardId === board.id)
+                    .map((comment) => (
+                      <div
+                        className={styles.board_comment_container}
+                        key={comment.id}
+                      >
+                        <Image
+                          className={styles.board_comment_profile_image}
+                          src={comment.profileImage}
+                          alt="profile"
+                          width={50}
+                          height={50}
+                        />
+                        <div className={styles.board_comment_content_wrap}>
+                          <p className={styles.board_comment_name}>
+                            {comment.name}
+                          </p>
+                          <p className={styles.board_comment_content}>
+                            {comment.content}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
