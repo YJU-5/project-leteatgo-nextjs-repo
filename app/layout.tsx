@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <MainHeader />
-        {children}
+        <div style={{ marginTop: "10vh" }}>{children}</div>
       </body>
     </html>
   );
