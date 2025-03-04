@@ -136,8 +136,8 @@ export default function RadarChart({ data }: RadarChartProps) {
     <div
       style={{
         display: "inline-block",
-        width: "500px",
-        height: "400px",
+        width: "400px",
+        height: "300px",
         margin: "0 auto",
         padding: "0 auto",
       }}

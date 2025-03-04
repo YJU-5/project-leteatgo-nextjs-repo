@@ -5,6 +5,14 @@
   padding: 0 auto;
 }
 
+.nameContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile .chartContainer {
   width: 100%;
   height: 100%;
@@ -14,22 +22,54 @@
 
 .profile .rightChart {
   display: inline-block;
-  height: 400px;
+  height: 300px;
   vertical-align: top;
   text-align: center;
   align-content: center;
 }
 
-.profile .average .crown {
-  font-size: 1.5rem;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 0.7rem;
-}
-
 .profile .average {
   width: 100%;
-  font-size: 6rem;
-  font-weight: bold;
+  font-size: 4rem;
+  font-weight: 600;
   margin: 0 auto;
+}
+
+.profile .average .crown {
+  display: inline-block;
+  margin: 0 auto;
+  margin-right: 0.7rem;
+  vertical-align: middle;
+}
+
+.introductionContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.introduction {
+  width: 50%;
+  height: 100%;
+  background-color: #f0f0f0;
+  color: #121212;
+  padding: 1.8rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.introduction h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 0.6rem;
+}
+
+.introduction p {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 auto;
+  line-height: 1.5;
 }
