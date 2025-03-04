@@ -20,6 +20,13 @@
   align-content: center;
 }
 
+.profile .average .crown {
+  font-size: 1.5rem;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0.7rem;
+}
+
 .profile .average {
   width: 100%;
   font-size: 6rem;

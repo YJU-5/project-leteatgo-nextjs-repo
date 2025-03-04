@@ -19,7 +19,10 @@ export default function ProfilePage() {
         <div className={styles.chartWrap}>
           <RadarChart data={data} />
           <div className={styles.rightChart}>
-            <p className={styles.average}>{calculateAverage(data)}</p>
+            <p className={styles.average}>
+              <p className={styles.crown}>👑</p>
+              {calculateAverage(data)}
+            </p>
             <Chart data={data} />
           </div>
         </div>

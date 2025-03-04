@@ -40,7 +40,7 @@ export default function RadarChart({ data }: RadarChartProps) {
     ],
     datasets: [
       {
-        label: "점수",
+        label: "",
         data: data,
         // 반투명한 회색 배경
         backgroundColor: "#D9D9D970",
