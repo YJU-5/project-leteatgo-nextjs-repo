@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from "react";
-import styles from "./image-upload.module.css";
+import styles from "./ImageUpload.module.css";
+import Image from "next/image";
 
 interface ImageUploadProps {
   onImageSelect: (files: File[]) => void;
@@ -34,25 +35,27 @@ export default function ImageUpload({ onImageSelect }: ImageUploadProps) {
   };
 
   return (
-    <div className={styles.upload_container}>
+    <div className={styles.uploadContainer}>
       <input
         type="file"
         accept="image/*"
         multiple
         onChange={handleImageChange}
-        className={styles.file_input}
+        className={styles.fileInput}
       />
-      <div className={styles.preview_container}>
+      <div className={styles.previewContainer}>
         {selectedImages.map((image, index) => (
-          <div key={index} className={styles.preview_item}>
-            <img
+          <div key={index} className={styles.previewItem}>
+            <Image
               src={image.preview}
               alt={`Preview ${index + 1}`}
-              className={styles.preview_image}
+              className={styles.previewImage}
+              width={150}
+              height={150}
             />
             <button
               onClick={() => handleRemoveImage(index)}
-              className={styles.remove_button}
+              className={styles.removeButton}
             >
               ✕
             </button>

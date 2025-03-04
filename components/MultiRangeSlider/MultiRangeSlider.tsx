@@ -1,7 +1,7 @@
 "use client"; // Next.js에서 클라이언트 컴포넌트임을 명시
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./multi-range-slider.module.css";
+import styles from "./MultiRangeSlider.module.css";
 
 // 컴포넌트 props 타입 정의
 interface RangeSliderProps {
@@ -93,7 +93,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
         value={leftValue}
         onChange={handleLeftInput}
       />
-      <p className={styles.min_age_text}>{min}</p> {/* 최소값 표시 */}
+      <p className={styles.minAgeText}>{min}</p> {/* 최소값 표시 */}
       {/* 오른쪽 슬라이더 input */}
       <input
         type="range"
@@ -103,7 +103,7 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({
         value={rightValue}
         onChange={handleRightInput}
       />
-      <p className={styles.max_age_text}>{max}</p> {/* 최대값 표시 */}
+      <p className={styles.maxAgeText}>{max}</p> {/* 최대값 표시 */}
     </div>
   );
 };

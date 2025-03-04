@@ -1,15 +1,15 @@
 import Link from "next/link";
-import styles from "./main-header.module.css";
+import styles from "./MainHeader.module.css";
 
 export default function MainHeader() {
   return (
     <header className={styles.header}>
-      <div className={styles.header_content}>
-        <Link href="/" className={styles.header_title}>
+      <div className={styles.headerContent}>
+        <Link href="/" className={styles.headerTitle}>
           Let Eat Go
         </Link>
         <nav>
-          <ul className={styles.nav_bar_first}>
+          <ul className={styles.navBarFirst}>
             <li>
               <Link href="/what-is-social-dining">소셜다이닝이란?</Link>
             </li>
@@ -26,7 +26,7 @@ export default function MainHeader() {
               <Link href="/reviews">후기</Link>
             </li>
           </ul>
-          <ul className={styles.nav_login}>
+          <ul className={styles.navLogin}>
             <li>
               <Link href="/login">로그인</Link>
             </li>

@@ -6,19 +6,19 @@
   box-sizing: border-box;
 }
 
-.reviews_list {
+.reviews .reviewsList {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.reviews_list_item {
+.reviews .reviewsListItem {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-.reviews_list_item_image {
+.reviews .reviewsListItemImage {
   width: 200px;
   height: 200px;
   display: inline-block;
@@ -26,7 +26,7 @@
   border-radius: 5px;
 }
 
-.reviews_list_item_content {
+.reviews .reviewsListItemContent {
   display: inline-block;
   border-radius: 5px;
   padding: 2%;
@@ -34,24 +34,24 @@
   box-sizing: border-box;
 }
 
-.reviews_list_item_title {
+.reviews .reviewsListItemTitle {
   vertical-align: top;
   margin: 0 auto;
 }
 
-.reviews_list_item_date {
-  vertical-align: top;
-  margin: 0 auto;
-  margin-top: 2%;
-}
-
-.reviews_list_item_reviews {
+.reviews .reviewsListItemDate {
   vertical-align: top;
   margin: 0 auto;
   margin-top: 2%;
 }
 
-.reviews_list_item_completed {
+.reviews .reviewsListItemReviews {
+  vertical-align: top;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+
+.reviews .reviewsListItemCompleted {
   position: absolute;
   width: 100%;
   vertical-align: top;
@@ -60,13 +60,13 @@
   left: 224px;
 }
 
-.reviews_list_item_completed p {
+.reviews .reviewsListItemCompleted p {
   margin: 0 auto;
   font-size: 1.2rem;
   color: #f0f0f0af;
 }
 
-.reviews_list_item_completed button {
+.reviews .reviewsListItemCompleted button {
   margin: 0 auto;
   font-size: 1.4rem;
   font-weight: bold;

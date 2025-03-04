@@ -1,16 +1,16 @@
-.tag_container {
+.tagContainer {
   display: flex;
   gap: 1rem;
   width: 100%;
 }
 
-.tag_button {
+.tagButton {
   flex: 1;
   padding: 0.8rem 1.5rem;
   border: 1px solid #ccc;
   border-radius: 30px;
   background-color: transparent;
-  color: #faf0f3;
+  color: #f0f0f0;
   cursor: pointer;
   transition: all 0.1s ease;
   text-align: center;
@@ -19,14 +19,14 @@
   transform: scale(1);
 }
 
-.tag_button:hover {
-  border-color: #faf0f3;
-  color: #faf0f3;
+.tagButton:hover {
+  border-color: #f0f0f0;
+  color: #f0f0f0;
   transform: scale(1.05);
 }
 
-.tag_button.active {
-  background-color: #faf0f3;
+.tagButton.active {
+  background-color: #f0f0f0;
   color: #121212;
   border-color: #121212;
 }
