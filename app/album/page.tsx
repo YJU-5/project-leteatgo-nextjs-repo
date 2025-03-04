@@ -108,6 +108,9 @@ export default function Album() {
     {}
   );
 
+  const [write, setWrite] = useState("");
+  const [comment, setComment] = useState("");
+
   // 댓글 토글 함수
   const toggleComments = (boardId: string) => {
     setShowComments((prev) => ({
@@ -135,6 +138,8 @@ export default function Album() {
           <textarea
             className={styles.album_textarea}
             placeholder="글을 작성해보세요!"
+            value={write}
+            onChange={(e) => setWrite(e.target.value)}
           />
           <hr />
           <div className={styles.button_row}>
@@ -142,13 +147,16 @@ export default function Album() {
               className={styles.album_button + " " + styles.album_button_camera}
             >
               <Image src="/camera.png" alt="camera" width={30} height={30} />
-              사진/동영상
+              사진 올리기
             </button>
             <div className={styles.album_button_container}>
               <button
                 className={
                   styles.album_button + " " + styles.album_button_cancel
                 }
+                onClick={() => {
+                  setWrite("");
+                }}
               >
                 취소
               </button>
@@ -194,7 +202,22 @@ export default function Album() {
                 </div>
               </div>
               <div className={styles.board_input_container}>
-                <input type="text" className={styles.board_input} />
+                <input
+                  type="text"
+                  className={styles.board_input}
+                  placeholder="댓글 작성하기"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setComment("");
+                      setShowComments((prev) => ({
+                        ...prev,
+                        [board.id]: true,
+                      }));
+                    }
+                  }}
+                />
               </div>
               <button
                 className={styles.board_more_comment}
@@ -202,7 +225,6 @@ export default function Album() {
               >
                 {showComments[board.id] ? "댓글 접기" : "댓글 더보기"}
               </button>
-
               {showComments[board.id] && (
                 <div className={styles.board_bottom_container}>
                   {albumComment
