@@ -37,9 +37,10 @@ export default function Create() {
           <div className={styles.input2Container}>
             <h2>위치</h2>
             <Postcode
-              onComplete={(address) => {
+              onComplete={(address, coordinates) => {
                 setLocation(address);
-                console.log(location);
+                console.log(address);
+                console.log(coordinates);
               }}
             />
           </div>

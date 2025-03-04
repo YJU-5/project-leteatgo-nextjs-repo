@@ -77,8 +77,8 @@ const Chart: React.FC<ChartProps> = ({ data }) => {
     <div
       style={{
         display: "inline-block",
-        width: "400px",
-        height: "200px",
+        width: "300px",
+        height: "150px",
         margin: "0 auto",
         padding: "0 auto",
       }}
