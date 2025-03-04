@@ -25,7 +25,7 @@ interface ChartProps {
 
 const Chart: React.FC<ChartProps> = ({ data }) => {
   const chartData = {
-    labels: ["친절함", "유머", "적극성", "요리", "약속 준수"],
+    labels: ["친절함 ❤️", "유머 🤣", "적극성 💪", "요리 🍳", "약속 🔒"],
     datasets: [
       {
         label: "",
