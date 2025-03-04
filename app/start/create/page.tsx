@@ -2,11 +2,11 @@
 
 import styles from "./page.module.css";
 import { useState } from "react";
-import { RangeSlider } from "@/components/multi-range-slider/multi-range-slider";
-import DatePickerComponent from "@/components/date-picker/date-picker";
-import Postcode from "@/components/postcode/postcode";
-import Tag from "@/components/tag/tag";
-import ImageUpload from "@/components/image-upload/image-upload";
+import { RangeSlider } from "@/components/MultiRangeSlider/MultiRangeSlider";
+import DatePickerComponent from "@/components/DatePicker/DatePicker";
+import Postcode from "@/components/Postcode/Postcode";
+import Tag from "@/components/Tag/Tag";
+import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import { useRouter } from "next/navigation";
 
 export default function Create() {
@@ -27,14 +27,14 @@ export default function Create() {
 
   return (
     <div className={styles.create}>
-      <div className={styles.create_container}>
+      <div className={styles.createContainer}>
         <h1>소셜다이닝 개최하기</h1>
         <div>
           <h2>제목</h2>
           <input type="text" className={styles.input} />
         </div>
-        <div className={styles.half_container_wrap}>
-          <div className={styles.input2_container}>
+        <div className={styles.halfContainerWrap}>
+          <div className={styles.input2Container}>
             <h2>위치</h2>
             <Postcode
               onComplete={(address) => {
@@ -43,7 +43,7 @@ export default function Create() {
               }}
             />
           </div>
-          <div className={styles.input2_container}>
+          <div className={styles.input2Container}>
             <h2>날짜</h2>
             <DatePickerComponent
               value={selectedDate}
@@ -61,11 +61,11 @@ export default function Create() {
           />
         </div>
         <div>
-          <div className={styles.h2_wrap}>
+          <div className={styles.h2Wrap}>
             <h2>평균 가격</h2>
             <input
               type="text"
-              className={styles.none_input}
+              className={styles.noneInput}
               value={price}
               onChange={(event) => {
                 const value = Number(event.target.value);
@@ -95,11 +95,11 @@ export default function Create() {
           />
         </div>
         <div>
-          <div className={styles.h2_wrap}>
+          <div className={styles.h2Wrap}>
             <h2>인원</h2>
             <input
               type="text"
-              className={styles.none_input}
+              className={styles.noneInput}
               value={people}
               onChange={(event) => {
                 const value = Number(event.target.value);
@@ -129,7 +129,7 @@ export default function Create() {
           />
         </div>
         <div>
-          <div className={styles.h2_wrap}>
+          <div className={styles.h2Wrap}>
             <h2>나이</h2>
             {maxAge === 100 ? (
               <h2>{minAge} ~ 100+ 세</h2>
@@ -168,7 +168,7 @@ export default function Create() {
           <h2>첨부 이미지</h2>
           <ImageUpload onImageSelect={(files) => setSelectedFiles(files)} />
         </div>
-        <div className={styles.button_container}>
+        <div className={styles.buttonContainer}>
           <button
             className={styles.button + " " + styles.cancel}
             onClick={() => {

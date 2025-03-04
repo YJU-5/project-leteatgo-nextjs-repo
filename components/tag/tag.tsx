@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./tag.module.css";
+import styles from "./Tag.module.css";
 
 interface TagProps {
   tags: string[]; // 태그 목록을 props로 받음
@@ -20,11 +20,11 @@ export default function Tag({ tags, onSelect }: TagProps) {
   };
 
   return (
-    <div className={styles.tag_container}>
+    <div className={styles.tagContainer}>
       {tags.map((tag) => (
         <button
           key={tag}
-          className={`${styles.tag_button} ${
+          className={`${styles.tagButton} ${
             activeTag === tag ? styles.active : ""
           }`}
           onClick={() => handleClick(tag)}

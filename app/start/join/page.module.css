@@ -5,7 +5,7 @@
   min-height: 80vh;
 }
 
-.join .join_container {
+.join .joinContainer {
   width: 80%;
   min-width: 800px;
   height: 100%;
@@ -16,7 +16,7 @@
   gap: 2rem;
 }
 
-.join .join_container .join_container_wrap img {
+.join .joinContainer .joinContainerWrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -24,7 +24,7 @@
   border-top-right-radius: 10px;
 }
 
-.join .join_container .join_container_wrap {
+.join .joinContainer .joinContainerWrap {
   width: 20%;
   height: 40vh;
   background-color: #313131;
@@ -34,24 +34,24 @@
   transform: scale(1);
 }
 
-.join .join_container .join_container_wrap:hover {
+.join .joinContainer .joinContainerWrap:hover {
   background-color: #f0f0f0;
   color: #121212;
   transform: scale(1.05);
 }
 
-.join .join_container a {
+.join .joinContainer a {
   text-decoration: none;
   color: white;
 }
 
-.join .join_container .join_container_wrap .top_content {
+.join .joinContainer .joinContainerWrap .topContent {
   width: 100%;
   height: 50%;
   background-color: transparent;
 }
 
-.join .join_container .join_container_wrap .under_content {
+.join .joinContainer .joinContainerWrap .underContent {
   width: 100%;
   height: 50%;
   background-color: transparent;
@@ -59,7 +59,7 @@
   box-sizing: border-box;
 }
 
-.join .join_container .join_container_wrap .under_content h1 {
+.join .joinContainer .joinContainerWrap .underContent h1 {
   font-size: 200%;
   font-weight: bold;
   margin: 0 auto;
@@ -67,7 +67,7 @@
   text-align: center;
 }
 
-.join .join_container .join_container_wrap .under_content p {
+.join .joinContainer .joinContainerWrap .underContent p {
   font-size: 1.2rem;
   text-align: center;
   word-break: keep-all;
@@ -76,12 +76,12 @@
 
 /* 태블릿 크기에서의 스타일 */
 @media screen and (max-width: 1200px) {
-  .join .join_container {
+  .join .joinContainer {
     min-width: auto;
     width: 90%;
   }
 
-  .join .join_container .join_container_wrap {
+  .join .joinContainer .joinContainerWrap {
     width: 100%; /* 2열로 변경 */
     height: 45vh;
   }
@@ -89,33 +89,33 @@
 
 /* 모바일 크기에서의 스타일 */
 @media screen and (max-width: 768px) {
-  .join .join_container {
+  .join .joinContainer {
     width: 95%;
   }
 
-  .join .join_container .join_container_wrap {
+  .join .joinContainer .joinContainerWrap {
     width: 90%; /* 1열로 변경 */
     height: 50vh;
     margin-bottom: 2rem;
   }
 
-  .join .join_container .join_container_wrap .under_content h1 {
+  .join .joinContainer .joinContainerWrap .underContent h1 {
     font-size: 150%;
   }
 
-  .join .join_container .join_container_wrap .under_content p {
+  .join .joinContainer .joinContainerWrap .underContent p {
     font-size: 1rem;
   }
 }
 
 /* 작은 모바일 크기에서의 스타일 */
 @media screen and (max-width: 480px) {
-  .join .join_container .join_container_wrap {
+  .join .joinContainer .joinContainerWrap {
     width: 95%;
     height: 45vh;
   }
 
-  .join .join_container .join_container_wrap .under_content h1 {
+  .join .joinContainer .joinContainerWrap .underContent h1 {
     font-size: 130%;
   }
 }

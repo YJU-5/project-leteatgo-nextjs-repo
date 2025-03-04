@@ -122,38 +122,36 @@ export default function Album() {
   return (
     <div className={styles.album}>
       <div className={styles.profile}>
-        <div className={styles.profile_container}>
+        <div className={styles.profileContainer}>
           <Image
-            className={styles.profile_image}
+            className={styles.profileImage}
             src={user.image}
             alt="profile"
             width={1000}
             height={1000}
           />
-          <h1 className={styles.profile_name}>{user.name}</h1>
+          <h1 className={styles.profileName}>{user.name}</h1>
         </div>
       </div>
-      <div className={styles.album_top_content_container}>
-        <div className={styles.album_top_content}>
+      <div className={styles.albumTopContentContainer}>
+        <div className={styles.albumTopContent}>
           <textarea
-            className={styles.album_textarea}
+            className={styles.albumTextarea}
             placeholder="글을 작성해보세요!"
             value={write}
             onChange={(e) => setWrite(e.target.value)}
           />
           <hr />
-          <div className={styles.button_row}>
+          <div className={styles.buttonRow}>
             <button
-              className={styles.album_button + " " + styles.album_button_camera}
+              className={styles.albumButton + " " + styles.albumButtonCamera}
             >
               <Image src="/camera.png" alt="camera" width={30} height={30} />
               사진 올리기
             </button>
-            <div className={styles.album_button_container}>
+            <div className={styles.albumButtonContainer}>
               <button
-                className={
-                  styles.album_button + " " + styles.album_button_cancel
-                }
+                className={styles.albumButton + " " + styles.albumButtonCancel}
                 onClick={() => {
                   setWrite("");
                 }}
@@ -161,9 +159,7 @@ export default function Album() {
                 취소
               </button>
               <button
-                className={
-                  styles.album_button + " " + styles.album_button_submit
-                }
+                className={styles.albumButton + " " + styles.albumButtonSubmit}
               >
                 올리기
               </button>
@@ -171,27 +167,27 @@ export default function Album() {
           </div>
         </div>
       </div>
-      <div className={styles.album_board_container}>
-        <div className={styles.album_board_wrap}>
+      <div className={styles.albumBoardContainer}>
+        <div className={styles.albumBoardWrap}>
           {albumBoard.map((board) => (
-            <div className={styles.album_board} key={board.id}>
-              <div className={styles.board_profile_container}>
+            <div className={styles.albumBoard} key={board.id}>
+              <div className={styles.boardProfileContainer}>
                 <Image
-                  className={styles.board_profile_image}
+                  className={styles.boardProfileImage}
                   src={board.profileImage}
                   alt="profile"
                   width={50}
                   height={50}
                 />
-                <p className={styles.board_profile_name}>{board.profileName}</p>
+                <p className={styles.boardProfileName}>{board.profileName}</p>
               </div>
-              <div className={styles.board_content_container}>
-                <p className={styles.board_content}>{board.content}</p>
-                <div className={styles.board_content_image_container}>
+              <div className={styles.boardContentContainer}>
+                <p className={styles.boardContent}>{board.content}</p>
+                <div className={styles.boardContentImageContainer}>
                   {board.images.map((image) => (
                     <>
                       <Image
-                        className={styles.board_content_image}
+                        className={styles.boardContentImage}
                         src={image}
                         alt="image"
                         width={250}
@@ -201,10 +197,10 @@ export default function Album() {
                   ))}
                 </div>
               </div>
-              <div className={styles.board_input_container}>
+              <div className={styles.boardInputContainer}>
                 <input
                   type="text"
-                  className={styles.board_input}
+                  className={styles.boardInput}
                   placeholder="댓글 작성하기"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
@@ -220,32 +216,32 @@ export default function Album() {
                 />
               </div>
               <button
-                className={styles.board_more_comment}
+                className={styles.boardMoreComment}
                 onClick={() => toggleComments(board.id)}
               >
                 {showComments[board.id] ? "댓글 접기" : "댓글 더보기"}
               </button>
               {showComments[board.id] && (
-                <div className={styles.board_bottom_container}>
+                <div className={styles.boardBottomContainer}>
                   {albumComment
                     .filter((comment) => comment.boardId === board.id)
                     .map((comment) => (
                       <div
-                        className={styles.board_comment_container}
+                        className={styles.boardCommentContainer}
                         key={comment.id}
                       >
                         <Image
-                          className={styles.board_comment_profile_image}
+                          className={styles.boardCommentProfileImage}
                           src={comment.profileImage}
                           alt="profile"
                           width={50}
                           height={50}
                         />
-                        <div className={styles.board_comment_content_wrap}>
-                          <p className={styles.board_comment_name}>
+                        <div className={styles.boardCommentContentWrap}>
+                          <p className={styles.boardCommentName}>
                             {comment.name}
                           </p>
-                          <p className={styles.board_comment_content}>
+                          <p className={styles.boardCommentContent}>
                             {comment.content}
                           </p>
                         </div>

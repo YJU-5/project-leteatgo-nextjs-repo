@@ -7,6 +7,7 @@ import {
   Filler,
   Tooltip,
   Legend,
+  ScriptableScalePointLabelContext,
 } from "chart.js";
 import type { ChartOptions } from "chart.js";
 
@@ -24,8 +25,12 @@ interface RadarChartProps {
   data: number[]; // 5개의 점수를 받는 배열
 }
 
+// RadarChart 컴포넌트: 레이더 차트를 표시하는 컴포넌트
+// data: 5개의 점수를 포함하는 배열 (0-5 사이의 값)
 export default function RadarChart({ data }: RadarChartProps) {
+  // 차트 데이터 설정
   const chartData = {
+    // 5개의 평가 항목 레이블
     labels: [
       "친절해요",
       "재밌어요",
@@ -36,19 +41,25 @@ export default function RadarChart({ data }: RadarChartProps) {
     datasets: [
       {
         label: "점수",
-        data: data, // props로 받은 데이터 사용
+        data: data,
+        // 반투명한 회색 배경
         backgroundColor: "#D9D9D970",
+        // 테두리 색상 및 두께
         borderColor: "#f0f0f0",
         borderWidth: 2,
+        // 데이터 포인트 스타일링
         pointBackgroundColor: "#f0f0f0",
         pointBorderColor: "transparent",
       },
     ],
   };
 
+  // 차트 옵션 설정
   const chartOptions: ChartOptions<"radar"> = {
+    // 반응형 설정
     responsive: true,
     maintainAspectRatio: false,
+    // 차트 요소 스타일링
     elements: {
       line: {
         borderWidth: 2,
@@ -60,6 +71,7 @@ export default function RadarChart({ data }: RadarChartProps) {
         hoverRadius: 5,
       },
     },
+    // 레이더 차트 축 설정
     scales: {
       r: {
         beginAtZero: true,
@@ -67,23 +79,36 @@ export default function RadarChart({ data }: RadarChartProps) {
           stepSize: 2.5,
           display: false,
         },
+        // 그리드 라인 스타일링
         grid: {
           color: "#f0f0f0",
           lineWidth: 1,
         },
+        // 레이블 스타일링
         pointLabels: {
           font: {
-            size: 16,
+            size: 14,
             weight: "bold",
             family: "Pretendard",
           },
-          color: "#f0f0f0",
+          color: (context: ScriptableScalePointLabelContext) => {
+            const colors = [
+              "#FF7B7B",
+              "#FFEA82",
+              "#6955FF",
+              "#FB7AFF",
+              "#6AFF79",
+            ];
+            return colors[context.index];
+          },
         },
+        // 각도 라인 설정
         angleLines: {
           display: true,
           color: "#f0f0f0",
           lineWidth: 1,
         },
+        // 최소/최대 값 설정
         suggestedMin: 0,
         suggestedMax: 5,
       },
@@ -110,7 +135,8 @@ export default function RadarChart({ data }: RadarChartProps) {
   return (
     <div
       style={{
-        width: "100%",
+        display: "inline-block",
+        width: "500px",
         height: "400px",
         margin: "0 auto",
         padding: "0 auto",

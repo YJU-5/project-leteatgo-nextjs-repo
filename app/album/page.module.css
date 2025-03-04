@@ -10,7 +10,7 @@
   position: fixed;
 }
 
-.album .profile .profile_container {
+.album .profile .profileContainer {
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -20,14 +20,14 @@
   justify-content: center;
 }
 
-.album .profile .profile_image {
+.album .profile .profileImage {
   width: 150px;
   height: 150px;
   margin-left: 10%;
   margin-top: 10%;
 }
 
-.album .profile .profile_name {
+.album .profile .profileName {
   width: 100%;
   height: 100%;
   font-size: 2rem;
@@ -38,7 +38,7 @@
   text-align: center;
 }
 
-.album .album_top_content_container {
+.album .albumTopContentContainer {
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -47,7 +47,7 @@
   justify-content: center;
 }
 
-.album .album_top_content {
+.album .albumTopContent {
   width: 50%;
   height: 100%;
   background-color: #242424;
@@ -55,7 +55,7 @@
   flex-direction: column;
 }
 
-.album .album_top_content_container .album_textarea {
+.album .albumTopContentContainer .albumTextarea {
   width: 100%;
   height: 14vh;
   background-color: transparent;
@@ -68,18 +68,18 @@
   resize: none;
 }
 
-.album .album_top_content_container .album_textarea:focus {
+.album .albumTopContentContainer .albumTextarea:focus {
   outline: none;
 }
 
-.album .album_top_content_container hr {
+.album .albumTopContentContainer hr {
   width: 90%;
   height: 1px;
   background-color: #f0f0f0;
   margin-top: 2%;
 }
 
-.album .album_top_content_container .button_row {
+.album .albumTopContentContainer .buttonRow {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -87,7 +87,7 @@
   box-sizing: border-box;
 }
 
-.album .album_top_content_container .album_button {
+.album .albumTopContentContainer .albumButton {
   background-color: transparent;
   border: none;
   color: #f0f0f0;
@@ -98,7 +98,7 @@
   gap: 10px;
 }
 
-.album .album_top_content_container .album_button_container {
+.album .albumTopContentContainer .albumButtonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,17 +106,17 @@
   position: static;
 }
 
-.album .album_top_content_container .album_button_camera {
+.album .albumTopContentContainer .albumButtonCamera {
   transition: all 0.3s ease;
   transform: scale(1);
   cursor: pointer;
 }
 
-.album .album_top_content_container .album_button_camera:hover {
+.album .albumTopContentContainer .albumButtonCamera:hover {
   transform: scale(1.1);
 }
 
-.album .album_top_content_container .album_button_cancel {
+.album .albumTopContentContainer .albumButtonCancel {
   width: 100px;
   height: 40px;
   font-size: 1rem;
@@ -130,7 +130,7 @@
   cursor: pointer;
 }
 
-.album .album_top_content_container .album_button_submit {
+.album .albumTopContentContainer .albumButtonSubmit {
   width: 100px;
   height: 40px;
   font-size: 1rem;
@@ -144,31 +144,31 @@
   cursor: pointer;
 }
 
-.album .album_top_content_container .album_button_cancel:hover {
+.album .albumTopContentContainer .albumButtonCancel:hover {
   background: #ffacac;
   color: #f0f0f0;
   transform: scale(1.1);
 }
 
-.album .album_top_content_container .album_button_submit:hover {
+.album .albumTopContentContainer .albumButtonSubmit:hover {
   background: #aaffaa;
   color: #f0f0f0;
   transform: scale(1.1);
 }
 
-.album .album_board_container {
+.album .albumBoardContainer {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
 }
 
-.album .album_board_wrap {
+.album .albumBoardWrap {
   width: 50%;
   height: 100%;
 }
 
-.album .album_board {
+.album .albumBoard {
   width: 100%;
   height: 100%;
   padding: 5%;
@@ -180,31 +180,31 @@
   border-radius: 10px;
 }
 
-.album .board_content_container {
+.album .boardContentContainer {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
 }
 
-.album .board_content_container .board_content {
+.album .boardContentContainer .boardContent {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   margin-bottom: 4%;
 }
 
-.album .board_profile_container {
+.album .boardProfileContainer {
   width: 100%;
   height: 100%;
 }
 
-.album .board_profile_image {
+.album .boardProfileImage {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.album .board_profile_name {
+.album .boardProfileName {
   display: inline-block;
   vertical-align: top;
   margin-left: 10px;
@@ -212,7 +212,7 @@
   font-weight: bold;
 }
 
-.album .board_content_image_container {
+.album .boardContentImageContainer {
   width: 100%;
   height: 100%;
   padding: 0 auto;
@@ -222,7 +222,7 @@
   justify-content: center;
 }
 
-.album .board_content_image {
+.album .boardContentImage {
   box-sizing: border-box;
   width: 46%;
   height: 50%;
@@ -232,13 +232,13 @@
   border-radius: 5px;
 }
 
-.album .board_bottom_container {
+.album .boardBottomContainer {
   width: 100%;
   height: 100%;
   margin-top: 2%;
 }
 
-.album .board_bottom_container .board_comment_container {
+.album .boardBottomContainer .boardCommentContainer {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -248,7 +248,7 @@
   padding: 2%;
 }
 
-.album .board_comment_profile_image {
+.album .boardCommentProfileImage {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -256,7 +256,7 @@
   box-sizing: border-box;
 }
 
-.album .board_comment_content_wrap {
+.album .boardCommentContentWrap {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -265,25 +265,25 @@
   box-sizing: border-box;
 }
 
-.album .board_comment_name {
+.album .boardCommentName {
   font-size: 1rem;
   font-weight: bold;
   margin: 0;
 }
 
-.album .board_comment_content {
+.album .boardCommentContent {
   font-size: 1rem;
   color: white;
   margin: 0;
 }
 
-.album .board_input_container {
+.album .boardInputContainer {
   width: 100%;
   height: 100%;
   margin-top: 5%;
 }
 
-.album .board_input {
+.album .boardInput {
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -294,7 +294,7 @@
   color: #121212;
 }
 
-.album .board_more_comment {
+.album .boardMoreComment {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -306,6 +306,6 @@
   text-align: left;
 }
 
-.album .board_more_comment:hover {
+.album .boardMoreComment:hover {
   text-decoration: underline;
 }

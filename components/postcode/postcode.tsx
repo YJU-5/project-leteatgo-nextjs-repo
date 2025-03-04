@@ -1,5 +1,5 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import styles from "./postcode.module.css";
+import styles from "./Postcode.module.css";
 import { useState } from "react";
 
 interface PostcodeProps {
@@ -26,7 +26,7 @@ export default function Postcode({ onComplete }: PostcodeProps) {
   return (
     <input
       type="text"
-      className={styles.input_2}
+      className={styles.input2}
       onClick={handleClick}
       readOnly
       placeholder="주소 검색"

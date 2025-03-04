@@ -107,7 +107,7 @@
 }
 
 /* 최소 나이 텍스트 스타일 */
-.min_age_text {
+.minAgeText {
   position: absolute;
   top: 40px; /* 상단에서의 거리 */
   left: 0; /* 왼쪽 정렬 */
@@ -117,7 +117,7 @@
 }
 
 /* 최대 나이 텍스트 스타일 */
-.max_age_text {
+.maxAgeText {
   position: absolute;
   top: 40px; /* 상단에서의 거리 */
   right: 0; /* 오른쪽 정렬 */

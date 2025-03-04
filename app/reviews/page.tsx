@@ -40,11 +40,11 @@ export default function Reviews() {
 
   return (
     <div className={styles.reviews}>
-      <h1 className={styles.reviews_title}>방문한 곳 목록</h1>
-      <div className={styles.reviews_list}>
+      <h1 className={styles.reviewsTitle}>방문한 곳 목록</h1>
+      <div className={styles.reviewsList}>
         {reviews.map((review) => (
-          <div className={styles.reviews_list_item} key={review.id}>
-            <div className={styles.reviews_list_item_image}>
+          <div className={styles.reviewsListItem} key={review.id}>
+            <div className={styles.reviewsListItemImage}>
               <Image
                 src={review.image}
                 alt={review.title}
@@ -52,13 +52,13 @@ export default function Reviews() {
                 height={200}
               />
             </div>
-            <div className={styles.reviews_list_item_content}>
-              <h1 className={styles.reviews_list_item_title}>{review.title}</h1>
-              <p className={styles.reviews_list_item_date}>{review.date}</p>
-              <p className={styles.reviews_list_item_reviews}>
+            <div className={styles.reviewsListItemContent}>
+              <h1 className={styles.reviewsListItemTitle}>{review.title}</h1>
+              <p className={styles.reviewsListItemDate}>{review.date}</p>
+              <p className={styles.reviewsListItemReviews}>
                 {review.reviews}개의 후기
               </p>
-              <p className={styles.reviews_list_item_completed}>
+              <p className={styles.reviewsListItemCompleted}>
                 {review.completed ? (
                   <>
                     <p>후기 작성을 완료하였습니다.</p>

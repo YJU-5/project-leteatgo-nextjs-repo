@@ -1,4 +1,4 @@
-.input_2 {
+.input2 {
   width: 100%;
   box-sizing: border-box;
   padding: 0 1rem;
@@ -9,6 +9,6 @@
   cursor: pointer;
 }
 
-.input_2:hover {
+.input2:hover {
   border-color: #564b9a;
 }
