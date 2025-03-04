@@ -1,7 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import ImageSlider from "@/components/ImageSlider/ImageSlider";
 
 export default function Home() {
+  const images = [
+    "/foods/cn-food.jpg",
+    "/foods/jp-food.jpg",
+    "/foods/cn-food.jpg",
+    "/foods/kr-food.jpg",
+    "/foods/us-food.jpg",
+    "/foods/kr-food.jpg",
+    "/foods/cn-food.jpg",
+  ];
+
   return (
     <div className={styles.home}>
       <Image
@@ -30,6 +43,13 @@ export default function Home() {
       >
         <h1>일상에서 지쳤을 때, 새로운 일상을 만들어 보세요.</h1>
         <p>새로움이 당신을 기다리고 있습니다.</p>
+      </div>
+      <div className={styles.popularSocialDiningContainer}>
+        <h1>인기 소셜다이닝 리스트</h1>
+      </div>
+      <div>
+        <h1>소셜다이닝 후기</h1>
+        <ImageSlider images={images} />
       </div>
     </div>
   );
