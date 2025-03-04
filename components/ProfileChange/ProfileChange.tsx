@@ -36,6 +36,8 @@ const ProfileChange: React.FC<ProfileChangeProps> = ({
     setPreview: (preview: string) => void,
     onImageChange?: (file: File) => void
   ) => {
+    if (!event.target) return;
+
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
