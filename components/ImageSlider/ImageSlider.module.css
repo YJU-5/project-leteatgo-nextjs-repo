@@ -1,0 +1,121 @@
+.sliderContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.imageContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(1, 0.7, 0.7, 1);
+}
+
+.imageContainer.slidingNext {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.imageContainer.slidingPrev {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.imageWrapper {
+  flex: 1;
+  max-width: 300px;
+  aspect-ratio: 3/2;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.3s cubic-bezier(1, 0.7, 0.7, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sliderImage {
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0;
+  animation: fadeIn 0.3s cubic-bezier(1, 0.7, 0.7, 1) forwards;
+}
+
+.sliderButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.sliderButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sliderButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.prevButton {
+  left: 10px;
+}
+
+.nextButton {
+  right: 10px;
+}
+
+.dotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.dot:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.activeDot {
+  background-color: #666;
+  transform: scale(1.2);
+}
