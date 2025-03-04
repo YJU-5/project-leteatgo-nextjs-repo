@@ -7,8 +7,11 @@ import DatePickerComponent from "@/components/date-picker/date-picker";
 import Postcode from "@/components/postcode/postcode";
 import Tag from "@/components/tag/tag";
 import ImageUpload from "@/components/image-upload/image-upload";
+import { useRouter } from "next/navigation";
 
 export default function Create() {
+  const router = useRouter();
+
   const [price, setPrice] = useState(0);
   const [minAge, setMinAge] = useState(0);
   const [maxAge, setMaxAge] = useState(100);
@@ -166,7 +169,14 @@ export default function Create() {
           <ImageUpload onImageSelect={(files) => setSelectedFiles(files)} />
         </div>
         <div className={styles.button_container}>
-          <button className={styles.button + " " + styles.cancel}>취소</button>
+          <button
+            className={styles.button + " " + styles.cancel}
+            onClick={() => {
+              router.back();
+            }}
+          >
+            취소
+          </button>
           <button className={styles.button}>등록</button>
         </div>
       </div>
