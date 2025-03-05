@@ -1,5 +1,5 @@
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import styles from "./postcode.module.css";
+import styles from "./Postcode.module.css";
 import { useState } from "react";
 
 interface PostcodeProps {
