@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { RangeSlider } from "@/components/MultiRangeSlider/MultiRangeSlider";
 import DatePickerComponent from "@/components/DatePicker/DatePicker";
 import Postcode from "@/components/Postcode/Postcode";
@@ -9,12 +9,25 @@ import Tag from "@/components/Tag/Tag";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import { useRouter } from "next/navigation";
 
+// 상수는 컴포넌트 외부로 이동
+const FOOD_TAGS = ["한식", "중식", "일식", "양식"] as const;
+const GENDER_TAGS = ["남자", "여자", "무관"] as const;
+const MAX_PRICE = 100000;
+const MAX_PEOPLE = 20;
+const MAX_AGE = 100;
+
+// 메모이제이션된 하위 컴포넌트들
+const MemoizedDatePicker = memo(DatePickerComponent);
+const MemoizedPostcode = memo(Postcode);
+const MemoizedTag = memo(Tag);
+const MemoizedImageUpload = memo(ImageUpload);
+
 export default function Create() {
   const router = useRouter();
 
   const [price, setPrice] = useState(0);
   const [minAge, setMinAge] = useState(0);
-  const [maxAge, setMaxAge] = useState(100);
+  const [maxAge, setMaxAge] = useState(MAX_AGE);
   const [people, setPeople] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [location, setLocation] = useState("");
@@ -22,8 +35,50 @@ export default function Create() {
   const [selectedGenderTag, setSelectedGenderTag] = useState<string>("");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
-  const foodTags = ["한식", "중식", "일식", "양식"]; // 태그 목록 정의
-  const genderTags = ["남자", "여자"]; // 태그 목록 정의
+  // 이벤트 핸들러 메모이제이션
+  const handlePostcodeComplete = useCallback(
+    (address: string, coordinates: any) => {
+      setLocation(address);
+      console.log(address, coordinates);
+    },
+    []
+  );
+
+  const handleDateChange = useCallback((newValue: Date | null) => {
+    setSelectedDate(newValue);
+  }, []);
+
+  const handleFoodTagSelect = useCallback((tag: string) => {
+    setSelectedFoodTag(tag);
+  }, []);
+
+  const handleGenderTagSelect = useCallback((tag: string) => {
+    setSelectedGenderTag(tag);
+  }, []);
+
+  const handlePriceChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = Number(event.target.value);
+      if (!isNaN(value)) {
+        setPrice(Math.max(0, Math.min(value, MAX_PRICE)));
+      }
+    },
+    []
+  );
+
+  const handlePeopleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = Number(event.target.value);
+      if (!isNaN(value)) {
+        setPeople(Math.max(0, Math.min(value, MAX_PEOPLE)));
+      }
+    },
+    []
+  );
+
+  const handleCancel = useCallback(() => {
+    router.back();
+  }, [router]);
 
   return (
     <div className={styles.create}>
@@ -36,30 +91,19 @@ export default function Create() {
         <div className={styles.halfContainerWrap}>
           <div className={styles.input2Container}>
             <h2>위치</h2>
-            <Postcode
-              onComplete={(address, coordinates) => {
-                setLocation(address);
-                console.log(address);
-                console.log(coordinates);
-              }}
-            />
+            <MemoizedPostcode onComplete={handlePostcodeComplete} />
           </div>
           <div className={styles.input2Container}>
             <h2>날짜</h2>
-            <DatePickerComponent
+            <MemoizedDatePicker
               value={selectedDate}
-              onChange={(newValue: Date | null) => setSelectedDate(newValue)}
+              onChange={handleDateChange}
             />
           </div>
         </div>
         <div>
           <h2>음식 태그</h2>
-          <Tag
-            tags={foodTags}
-            onSelect={(tag) => {
-              setSelectedFoodTag(tag);
-            }}
-          />
+          <MemoizedTag tags={FOOD_TAGS} onSelect={handleFoodTagSelect} />
         </div>
         <div>
           <div className={styles.h2Wrap}>
@@ -68,31 +112,18 @@ export default function Create() {
               type="text"
               className={styles.noneInput}
               value={price}
-              onChange={(event) => {
-                const value = Number(event.target.value);
-                if (!isNaN(value)) {
-                  if (value > 100000) {
-                    setPrice(100000);
-                  } else if (value < 0) {
-                    setPrice(0);
-                  } else {
-                    setPrice(value);
-                  }
-                }
-              }}
+              onChange={handlePriceChange}
             />
-            {price === 100000 ? <h2>＋&nbsp;원</h2> : <h2>&nbsp;원</h2>}
+            {price === MAX_PRICE ? <h2>＋&nbsp;원</h2> : <h2>&nbsp;원</h2>}
           </div>
           <input
             className={styles.slider}
             type="range"
             min={0}
-            max={100000}
+            max={MAX_PRICE}
             step={500}
             value={price}
-            onChange={(event) => {
-              setPrice(Number(event.target.value));
-            }}
+            onChange={handlePriceChange}
           />
         </div>
         <div>
@@ -102,37 +133,24 @@ export default function Create() {
               type="text"
               className={styles.noneInput}
               value={people}
-              onChange={(event) => {
-                const value = Number(event.target.value);
-                if (!isNaN(value)) {
-                  if (value > 20) {
-                    setPeople(20);
-                  } else if (value < 0) {
-                    setPeople(0);
-                  } else {
-                    setPeople(value);
-                  }
-                }
-              }}
+              onChange={handlePeopleChange}
             />
-            {people === 20 ? <h2>＋&nbsp;명</h2> : <h2>&nbsp;명</h2>}
+            {people === MAX_PEOPLE ? <h2>＋&nbsp;명</h2> : <h2>&nbsp;명</h2>}
           </div>
           <input
             className={styles.slider}
             type="range"
             min={0}
-            max={20}
+            max={MAX_PEOPLE}
             step={1}
             value={people}
-            onChange={(event) => {
-              setPeople(Number(event.target.value));
-            }}
+            onChange={handlePeopleChange}
           />
         </div>
         <div>
           <div className={styles.h2Wrap}>
             <h2>나이</h2>
-            {maxAge === 100 ? (
+            {maxAge === MAX_AGE ? (
               <h2>{minAge} ~ 100+ 세</h2>
             ) : (
               <h2>
@@ -154,12 +172,7 @@ export default function Create() {
         </div>
         <div>
           <h2>성별</h2>
-          <Tag
-            tags={genderTags}
-            onSelect={(tag) => {
-              setSelectedGenderTag(tag);
-            }}
-          />
+          <MemoizedTag tags={GENDER_TAGS} onSelect={handleGenderTagSelect} />
         </div>
         <div>
           <h2>설명</h2>
@@ -167,14 +180,14 @@ export default function Create() {
         </div>
         <div>
           <h2>첨부 이미지</h2>
-          <ImageUpload onImageSelect={(files) => setSelectedFiles(files)} />
+          <MemoizedImageUpload
+            onImageSelect={(files) => setSelectedFiles(files)}
+          />
         </div>
         <div className={styles.buttonContainer}>
           <button
             className={styles.button + " " + styles.cancel}
-            onClick={() => {
-              router.back();
-            }}
+            onClick={handleCancel}
           >
             취소
           </button>
