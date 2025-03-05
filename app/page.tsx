@@ -6,9 +6,6 @@ export default function Home() {
   
 
   return (
-    <div>
-      home
-      <Link href="./ex">ex</Link>
-    </div>
+    <div>home</div>
   );
 }
