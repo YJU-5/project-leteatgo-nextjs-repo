@@ -1,0 +1,127 @@
+/* 슬라이더의 전체 컨테이너 */
+.container {
+  position: relative; /* 내부 요소들의 절대 위치 기준점 */
+  width: 100%; /* 부모 요소의 전체 너비 사용 */
+  height: 50px; /* 컨테이너 높이 */
+}
+
+/* 실제 슬라이더가 위치하는 영역 */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 18px; /* 상단 여백 */
+}
+
+/* 슬라이더의 배경 트랙 */
+.track {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid #f0f0f0; /* 흰색 테두리 */
+  background-color: #121212; /* 검은 배경 */
+  border-radius: 50px; /* 둥근 모서리 */
+}
+
+/* 선택된 범위를 나타내는 영역 */
+.range {
+  position: absolute;
+  height: 100%;
+  background-color: #f0f0f0; /* 흰색 배경 */
+  border-radius: 10px;
+}
+
+/* 슬라이더의 input range 공통 스타일 */
+.thumb {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  pointer-events: none; /* 기본 input 요소 클릭 이벤트 비활성화 */
+  -webkit-appearance: none; /* 기본 브라우저 스타일 제거 */
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.1s ease;
+}
+
+/* Chrome, Safari 등의 슬라이더 썸(동그라미) 스타일 */
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 49px;
+  height: 49px;
+  background-color: #f0f0f0;
+  border: 1px solid #121212;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: border-width 0.2s ease; /* 테두리 변화에 애니메이션 추가 */
+}
+
+/* Firefox의 슬라이더 썸 스타일 */
+.thumb::-moz-range-thumb {
+  width: 46px;
+  height: 46px;
+  background-color: #f0f0f0;
+  border: 1px solid #121212;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: border-width 0.2s ease;
+}
+
+/* active 상태일 때의 스타일 수정 */
+.thumb:active::-webkit-slider-thumb {
+  background-color: #121212; /* 배경색 유지 */
+  border: 3px solid #f0f0f0; /* 테두리 두께만 증가 */
+  width: 49px; /* 크기 유지 */
+  height: 49px;
+}
+
+.thumb:active::-moz-range-thumb {
+  background-color: #121212;
+  border: 3px solid #f0f0f0;
+  width: 46px;
+  height: 46px;
+}
+
+/* 기존 .thumb:active 스타일 제거 또는 수정 */
+.thumb:active {
+  background-color: transparent; /* 배경색 변경 제거 */
+}
+
+/* 왼쪽 썸 위치 및 스타일 */
+.thumbLeft {
+  z-index: 3; /* 레이어 순서 */
+  position: absolute;
+  top: 23px; /* 상단에서의 거리 */
+  left: -1px; /* 왼쪽 정렬 */
+}
+
+/* 오른쪽 썸 위치 및 스타일 */
+.thumbRight {
+  z-index: 4; /* 왼쪽 썸보다 위에 표시 */
+  position: absolute;
+  top: 23px;
+  right: -1px; /* 오른쪽 정렬 */
+}
+
+/* 최소 나이 텍스트 스타일 */
+.minAgeText {
+  position: absolute;
+  top: 40px; /* 상단에서의 거리 */
+  left: 0; /* 왼쪽 정렬 */
+  font-size: 1rem; /* 글자 크기 */
+  font-weight: 600; /* 글자 굵기 */
+  color: #f0f0f0; /* 흰색 텍스트 */
+}
+
+/* 최대 나이 텍스트 스타일 */
+.maxAgeText {
+  position: absolute;
+  top: 40px; /* 상단에서의 거리 */
+  right: 0; /* 오른쪽 정렬 */
+  font-size: 1rem; /* 글자 크기 */
+  font-weight: 600; /* 글자 굵기 */
+  color: #f0f0f0; /* 흰색 텍스트 */
+}

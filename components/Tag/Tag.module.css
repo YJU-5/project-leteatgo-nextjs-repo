@@ -1,0 +1,32 @@
+.tagContainer {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.tagButton {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  background-color: transparent;
+  color: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transform: scale(1);
+}
+
+.tagButton:hover {
+  border-color: #f0f0f0;
+  color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.tagButton.active {
+  background-color: #f0f0f0;
+  color: #121212;
+  border-color: #121212;
+}
