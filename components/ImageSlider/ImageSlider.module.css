@@ -1,18 +1,18 @@
-.sliderContainer {
+.imageSliderContainer {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
 }
 
-.sliderWrapper {
+.imageSliderContainer .sliderWrapper {
   position: relative;
   width: 100%;
   padding: 20px 0;
   overflow: hidden;
 }
 
-.imageContainer {
+.imageSliderContainer .imageContainer {
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -20,17 +20,17 @@
   transition: all 0.3s cubic-bezier(1, 0.7, 0.7, 1);
 }
 
-.imageContainer.slidingNext {
+.imageSliderContainer .imageContainer.slidingNext {
   transform: translateX(-100%);
   opacity: 0;
 }
 
-.imageContainer.slidingPrev {
+.imageSliderContainer .imageContainer.slidingPrev {
   transform: translateX(100%);
   opacity: 0;
 }
 
-.imageWrapper {
+.imageSliderContainer .imageWrapper {
   flex: 1;
   max-width: 300px;
   aspect-ratio: 3/2;
@@ -50,14 +50,14 @@
   }
 }
 
-.sliderImage {
+.imageSliderContainer .sliderImage {
   object-fit: cover;
   border-radius: 8px;
   opacity: 0;
   animation: fadeIn 0.3s cubic-bezier(1, 0.7, 0.7, 1) forwards;
 }
 
-.sliderButton {
+.imageSliderContainer .sliderButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -75,31 +75,31 @@
   z-index: 1;
 }
 
-.sliderButton:disabled {
+.imageSliderContainer .sliderButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sliderButton:hover:not(:disabled) {
+.imageSliderContainer .sliderButton:hover:not(:disabled) {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
-.prevButton {
+.imageSliderContainer .prevButton {
   left: 10px;
 }
 
-.nextButton {
+.imageSliderContainer .nextButton {
   right: 10px;
 }
 
-.dotsContainer {
+.imageSliderContainer .dotsContainer {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 16px;
 }
 
-.dot {
+.imageSliderContainer .dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -110,12 +110,29 @@
   transition: all 0.3s ease;
 }
 
-.dot:disabled {
+.imageSliderContainer .dot:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.activeDot {
+.imageSliderContainer .activeDot {
   background-color: #666;
   transform: scale(1.2);
+}
+
+.imageSliderContainer .contentInfo {
+  padding: 12px;
+  text-align: center;
+}
+
+.imageSliderContainer .userName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.imageSliderContainer .userComment {
+  font-size: 0.9rem;
+  color: #999999;
+  margin: 4px 0;
 }

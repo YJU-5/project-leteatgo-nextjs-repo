@@ -1,19 +1,22 @@
 import React, { useState, useCallback } from "react";
-import styles from "./ImageSlider.module.css";
+import styles from "./ContentSlider.module.css";
 import Image from "next/image";
 
 interface Content {
   id: number;
   img: string;
   name: string;
-  comment: string;
+  address: string;
+  date: string;
+  tag: string[];
+  person: number;
 }
 
-interface ImageSliderProps {
+interface ContentSliderProps {
   contents: Content[];
 }
 
-export default function ImageSlider({ contents }: ImageSliderProps) {
+export default function ContentSlider({ contents }: ContentSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
@@ -57,12 +60,12 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
   const visibleContents = contents.slice(currentIndex, currentIndex + 3);
 
   return (
-    <div className={styles.imageSliderContainer}>
+    <div className={styles.contentSliderContainer}>
       <div className={styles.sliderWrapper}>
         <button
           className={`${styles.sliderButton} ${styles.prevButton}`}
           onClick={handlePrev}
-          aria-label="이전 이미지"
+          aria-label="이전 내용"
           disabled={isAnimating}
         >
           左
@@ -82,12 +85,21 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
                 src={content.img}
                 alt={`${content.name}의 이미지`}
                 width={300}
-                height={200}
+                height={150}
                 className={styles.sliderImage}
               />
               <div className={styles.contentInfo}>
-                <h3 className={styles.userName}>{content.name}</h3>
-                <p className={styles.userComment}>{content.comment}</p>
+                <h3 className={styles.contentName}>{content.name}</h3>
+                <p className={styles.contentAddress}>{content.address}</p>
+                <p className={styles.contentDate}>{content.date}</p>
+                <p className={styles.contentTag}>
+                  {content.tag.map((tag) => (
+                    <span key={tag} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </p>
+                <p className={styles.contentPerson}>인원: {content.person}</p>
               </div>
             </div>
           ))}
@@ -95,7 +107,7 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
         <button
           className={`${styles.sliderButton} ${styles.nextButton}`}
           onClick={handleNext}
-          aria-label="다음 이미지"
+          aria-label="다음 내용"
           disabled={isAnimating}
         >
           右
