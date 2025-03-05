@@ -19,7 +19,6 @@ export default function KakaoCallback(){
       
 
       const code = new URL(window.location.href).searchParams.get("code");
-      console.log(code);
       if(!code) return;
 
       try {
@@ -38,7 +37,7 @@ export default function KakaoCallback(){
         });
 
         const data = await response.json();
-
+        //백엔드로 코드 보내주고 jwt토큰 받기
         const userResponse = await fetch("http://localhost:3001/user/kakao/login",{
           method: "POST",
           headers:{"Content-Type": "application/json"},
@@ -46,8 +45,8 @@ export default function KakaoCallback(){
         })
 
         const userData = await userResponse.json();
-
         const userInfo = jwtDecode(userData.token);
+        //redux store로 토큰과 유저정보 보내주기
         dispatch(login({jwtToken:userData.token,user:userInfo}));
 
         
