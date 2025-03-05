@@ -1,4 +1,4 @@
-.page{
+.container{
     display: flex; /* Flexbox를 사용하여 요소를 정렬 */
     flex-direction: column; /* 요소들을 세로 방향으로 정렬 */
     justify-content: center; /* 요소들을 세로 방향 중앙에 정렬 */

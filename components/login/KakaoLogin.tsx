@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "../app/login/login.module.css"
+import styles from "./login.module.css"
 
 export default function KakaoLogin(){
 

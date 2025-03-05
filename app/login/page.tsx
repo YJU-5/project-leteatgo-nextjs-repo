@@ -1,8 +1,8 @@
 
 
-import KakaoLogin from "@/components/KakaoLogin"
-import styles from './login.module.css'
-import GoogleLogin from "@/components/GoogleLogin"
+import KakaoLogin from "@/components/login/KakaoLogin"
+import styles from '@/components/login/login.module.css'
+import GoogleLogin from "@/components/login/GoogleLogin"
 
 
 export default  function Login(){
@@ -10,7 +10,7 @@ export default  function Login(){
 
 
   return(
-    <div className={styles.page}>
+    <div className={styles.container}>
       <KakaoLogin/>
       <GoogleLogin/>
     </div>

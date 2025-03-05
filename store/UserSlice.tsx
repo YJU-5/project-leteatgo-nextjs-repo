@@ -17,13 +17,10 @@ interface UserState{
 }
 
 
-const token = localStorage.getItem('jwtToken') !== null ? localStorage.getItem('jwtToken') : null
-const userInfo = token ? jwtDecode<User>(token) : null
-
 // 유저 정보 초기값
 const initialState:UserState = {
-  jwtToken: token,
-  user: userInfo,
+  jwtToken: null,
+  user: null,
 }
 
 // Redux 슬라이스 (로그인/로그아웃 기능 정의)
