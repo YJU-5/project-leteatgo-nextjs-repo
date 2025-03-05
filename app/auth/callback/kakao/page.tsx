@@ -2,15 +2,21 @@
 
 
 
+import { login } from '@/store/UserSlice';
+import { AppDispatch } from '@/store/Store';
+import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import {useEffect,useState} from 'react'
+import { useDispatch } from 'react-redux';
 
 
-export default function KakaoAuth(){
+export default function KakaoCallback(){
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(()=>{
     const getKakaoToken = async () =>{
+      
 
       const code = new URL(window.location.href).searchParams.get("code");
       console.log(code);
@@ -32,25 +38,21 @@ export default function KakaoAuth(){
         });
 
         const data = await response.json();
-        console.log(data);
-        console.log("카카오 액서스 토큰:", data.access_token);
 
-        // 가지고온 토큰으로 유저정보 조회
-        const userResponse = await fetch("https://kapi.kakao.com/v2/user/me",{
-          headers:{ Authorization: `Bearer ${data.access_token}`},
-        });
-
-        // const userResponse = await fetch("http://localhost:3001/user/kakao/login",{
-        //   method: "POST",
-        //   headers:{"Content-Type": "application/json"},
-        //   body: JSON.stringify({ access_token: data.access_token})
-        // })
+        const userResponse = await fetch("http://localhost:3001/user/kakao/login",{
+          method: "POST",
+          headers:{"Content-Type": "application/json"},
+          body: JSON.stringify({ access_token: data.access_token})
+        })
 
         const userData = await userResponse.json();
-        console.log("카카오 사용자 정보", userData);
-        
-        router.push('/')
 
+        const userInfo = jwtDecode(userData.token);
+        dispatch(login({jwtToken:userData.token,user:userInfo}));
+
+        
+
+        router.push('/');
       } catch (error) {
         console.log("카카오 로그인 에러:", error);
       }
@@ -61,7 +63,7 @@ export default function KakaoAuth(){
 
 
   return(
-    <p>로그인중 ...</p>
+    <p></p>
   )
 }
 
