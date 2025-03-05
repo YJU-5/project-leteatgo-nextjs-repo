@@ -107,7 +107,7 @@
 }
 
 .album .albumTopContentContainer .albumButtonCamera {
-  transition: all 0.3s ease;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
   transform: scale(1);
   cursor: pointer;
 }
@@ -125,7 +125,7 @@
   border: 1px solid #f0f0f0;
   background: transparent;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
   transform: scale(1);
   cursor: pointer;
 }
@@ -139,7 +139,7 @@
   border: 1px solid #f0f0f0;
   background: transparent;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
   transform: scale(1);
   cursor: pointer;
 }
@@ -224,12 +224,17 @@
 
 .album .boardContentImage {
   box-sizing: border-box;
-  width: 46%;
+  width: 49.4%;
   height: 50%;
-  margin: 0 auto;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 0.3%;
+  margin-top: 0;
+  margin-bottom: 0;
   border-radius: 5px;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+}
+
+.album .boardContentImage:hover {
+  transform: scale(1.05);
 }
 
 .album .boardBottomContainer {
@@ -308,4 +313,50 @@
 
 .album .boardMoreComment:hover {
   text-decoration: underline;
+}
+
+.selectedImagesContainer {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 2%;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+}
+
+.selectedImageWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.selectedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.removeImageButton {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.albumButtonCamera:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

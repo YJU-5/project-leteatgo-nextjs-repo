@@ -32,7 +32,12 @@ export default function Album() {
         "안녕하십니까. 저는 차승현이라고 합니다. 게시판의 임시 내용을 채워넣기 위해 필요 없는 말을 잠시 집어넣겠습니다. 오늘의 점심은 백미밥, 얼큰양파감자국, 숯불닭볶음, 야채고로케, 양배추찜*쌈장, 포기김치입니다. 절대 포기하지 않는 사람이 않겠습니다. 감사합니다.",
       profileImage: "/gitb.png",
       profileName: "차승현",
-      images: ["/foods/kr-food.jpg", "/foods/kr-food.jpg"],
+      images: [
+        "/foods/kr-food.jpg",
+        "/foods/kr-food.jpg",
+        "/foods/kr-food.jpg",
+        "/foods/kr-food.jpg",
+      ],
       likeNumber: 0,
       commentNumber: 0,
     },
@@ -110,6 +115,7 @@ export default function Album() {
 
   const [write, setWrite] = useState("");
   const [comment, setComment] = useState("");
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   // 댓글 토글 함수
   const toggleComments = (boardId: string) => {
@@ -117,6 +123,26 @@ export default function Album() {
       ...prev,
       [boardId]: !prev[boardId],
     }));
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    if (selectedImages.length + files.length > 4) {
+      alert("이미지는 최대 4개까지만 업로드할 수 있습니다.");
+      return;
+    }
+
+    // 파일을 URL로 변환
+    const newImages = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    setSelectedImages((prev) => [...prev, ...newImages]);
+  };
+
+  const removeImage = (index: number) => {
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -143,28 +169,60 @@ export default function Album() {
           />
           <hr />
           <div className={styles.buttonRow}>
+            <input
+              type="file"
+              id="imageUpload"
+              multiple
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
             <button
-              className={styles.albumButton + " " + styles.albumButtonCamera}
+              className={`${styles.albumButton} ${styles.albumButtonCamera}`}
+              onClick={() => document.getElementById("imageUpload")?.click()}
+              disabled={selectedImages.length >= 4}
             >
               <Image src="/camera.png" alt="camera" width={30} height={30} />
-              사진 올리기
+              사진 올리기 ({selectedImages.length}/4)
             </button>
             <div className={styles.albumButtonContainer}>
               <button
-                className={styles.albumButton + " " + styles.albumButtonCancel}
+                className={`${styles.albumButton} ${styles.albumButtonCancel}`}
                 onClick={() => {
                   setWrite("");
+                  setSelectedImages([]);
                 }}
               >
                 취소
               </button>
               <button
-                className={styles.albumButton + " " + styles.albumButtonSubmit}
+                className={`${styles.albumButton} ${styles.albumButtonSubmit}`}
               >
                 올리기
               </button>
             </div>
           </div>
+          {selectedImages.length > 0 && (
+            <div className={styles.selectedImagesContainer}>
+              {selectedImages.map((image, index) => (
+                <div key={index} className={styles.selectedImageWrapper}>
+                  <Image
+                    src={image}
+                    alt={`선택된 이미지 ${index + 1}`}
+                    width={100}
+                    height={100}
+                    className={styles.selectedImage}
+                  />
+                  <button
+                    className={styles.removeImageButton}
+                    onClick={() => removeImage(index)}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.albumBoardContainer}>
