@@ -1,0 +1,147 @@
+.imageSliderContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 50px; /* 버튼을 위한 여백 */
+}
+
+.imageSliderContainer .sliderWrapper {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  overflow: visible;
+}
+
+.imageSliderContainer .imageContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.imageSliderContainer .imageContainer.slidingNext {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.imageSliderContainer .imageContainer.slidingPrev {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.imageSliderContainer .imageWrapper {
+  flex: 1;
+  max-width: calc(25% - 15px); /* 4개 아이템일 때 */
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@media (max-width: 1499px) {
+  .imageWrapper {
+    max-width: calc(33.333% - 14px); /* 3개 아이템일 때 */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.imageSliderContainer .sliderImage {
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0;
+  animation: fadeIn 0.3s cubic-bezier(1, 0.7, 0.7, 1) forwards;
+}
+
+.imageSliderContainer .sliderButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.imageSliderContainer .sliderButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.imageSliderContainer .sliderButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.imageSliderContainer .prevButton {
+  left: -50px;
+}
+
+.imageSliderContainer .nextButton {
+  right: -50px;
+}
+
+.imageSliderContainer .dotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.imageSliderContainer .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.imageSliderContainer .dot:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.imageSliderContainer .activeDot {
+  background-color: #666;
+  transform: scale(1.2);
+}
+
+.imageSliderContainer .contentInfo {
+  padding: 12px;
+  text-align: center;
+}
+
+.imageSliderContainer .userName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.imageSliderContainer .userComment {
+  font-size: 0.9rem;
+  color: #999999;
+  margin: 4px 0;
+}

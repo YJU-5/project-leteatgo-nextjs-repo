@@ -1,0 +1,38 @@
+body {
+  background-color: #121212;
+  margin: 0;
+  font-family: "Golos", sans-serif;
+  color: white;
+}
+
+h1 {
+  font-family: "Golos", sans-serif;
+}
+
+input {
+  font-family: "Golos", sans-serif;
+}
+
+h2 {
+  font-family: "Golos", sans-serif;
+}
+
+p {
+  font-family: "Golos", sans-serif;
+}
+
+label {
+  font-family: "Golos", sans-serif;
+}
+
+button {
+  font-family: "Golos", sans-serif;
+}
+
+select {
+  font-family: "Golos", sans-serif;
+}
+
+textarea {
+  font-family: "Golos", sans-serif;
+}
