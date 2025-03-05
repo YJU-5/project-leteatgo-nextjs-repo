@@ -31,8 +31,8 @@ export default function GoogleCallback(){
 
         const userData = await response.json();
         const userInfo = jwtDecode(userData.token);
+        //redux store로 토큰과 유저정보 보내주기
         dispatch(login({jwtToken:userData.token,user:userInfo}));
-        
 
         router.push('/');
       } catch (error) {

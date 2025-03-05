@@ -5,11 +5,11 @@ import styles  from "./modal.module.css"
 
 export default function LoginGuard({children}:{children:React.ReactNode}){
   const router = useRouter();
-  const jwtToken = localStorage.getItem("jwtToken")
+  const jwtToken = localStorage.getItem("jwtToken"); //localStorage 에서 jwtToken 가지고오기
   const [showModal, setShowModal] = useState(false);
 
   useEffect(()=>{
-    if(!jwtToken){
+    if(!jwtToken){ //토큰이 없으면 모달창 열기
       setShowModal(true)
     }
 
