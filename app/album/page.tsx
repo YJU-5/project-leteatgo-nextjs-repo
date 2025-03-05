@@ -242,16 +242,15 @@ export default function Album() {
               <div className={styles.boardContentContainer}>
                 <p className={styles.boardContent}>{board.content}</p>
                 <div className={styles.boardContentImageContainer}>
-                  {board.images.map((image) => (
-                    <>
-                      <Image
-                        className={styles.boardContentImage}
-                        src={image}
-                        alt="image"
-                        width={250}
-                        height={250}
-                      />
-                    </>
+                  {board.images.map((image, index) => (
+                    <Image
+                      key={`${board.id}-image-${index}`}
+                      className={styles.boardContentImage}
+                      src={image}
+                      alt={`게시물 ${board.id}의 ${index + 1}번째 이미지`}
+                      width={250}
+                      height={250}
+                    />
                   ))}
                 </div>
               </div>
