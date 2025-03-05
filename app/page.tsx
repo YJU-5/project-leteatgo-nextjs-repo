@@ -99,6 +99,24 @@ export default function Home() {
       tag: ["한식", "요리 교실", "3만원", "28~35세"],
       person: 4,
     },
+    {
+      id: 5,
+      img: "/foods/us-food.jpg",
+      name: "차승현의 소셜다이닝",
+      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
+      date: "2025-03-04",
+      tag: ["한식", "요리 교실", "3만원", "28~35세"],
+      person: 4,
+    },
+    {
+      id: 6,
+      img: "/foods/us-food.jpg",
+      name: "차승현의 소셜다이닝",
+      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
+      date: "2025-03-04",
+      tag: ["한식", "요리 교실", "3만원", "28~35세"],
+      person: 4,
+    },
   ];
 
   return (
@@ -134,7 +152,7 @@ export default function Home() {
         <h1>인기 소셜다이닝 리스트</h1>
         <ContentSlider contents={contents} />
       </div>
-      <div>
+      <div className={styles.popularSocialDiningContainer}>
         <h1>소셜다이닝 후기</h1>
         <ImageSlider contents={reviews} />
       </div>

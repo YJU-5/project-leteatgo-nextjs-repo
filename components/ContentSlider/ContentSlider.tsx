@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styles from "./ContentSlider.module.css";
 import Image from "next/image";
 
@@ -20,44 +20,59 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerPage(window.innerWidth >= 1500 ? 4 : 3);
+    };
+
+    handleResize(); // 초기 설정
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNext = useCallback(() => {
     if (isAnimating) return;
     setIsAnimating(true);
     setDirection("next");
     setCurrentIndex((prevIndex) =>
-      prevIndex + 3 >= contents.length ? 0 : prevIndex + 3
+      prevIndex + itemsPerPage >= contents.length ? 0 : prevIndex + itemsPerPage
     );
     setTimeout(() => setIsAnimating(false), 100);
-  }, [isAnimating, contents.length]);
+  }, [isAnimating, contents.length, itemsPerPage]);
 
   const handlePrev = useCallback(() => {
     if (isAnimating) return;
     setIsAnimating(true);
     setDirection("prev");
     setCurrentIndex((prevIndex) => {
-      const newIndex = prevIndex - 3;
+      const newIndex = prevIndex - itemsPerPage;
       if (newIndex < 0) {
-        const lastGroupStart = Math.floor((contents.length - 1) / 3) * 3;
+        const lastGroupStart =
+          Math.floor((contents.length - 1) / itemsPerPage) * itemsPerPage;
         return lastGroupStart;
       }
       return newIndex;
     });
     setTimeout(() => setIsAnimating(false), 100);
-  }, [isAnimating, contents.length]);
+  }, [isAnimating, contents.length, itemsPerPage]);
 
   const handleDotClick = useCallback(
     (index: number) => {
       if (isAnimating) return;
       setIsAnimating(true);
-      setDirection(index * 3 > currentIndex ? "next" : "prev");
-      setCurrentIndex(index * 3);
+      setDirection(index * itemsPerPage > currentIndex ? "next" : "prev");
+      setCurrentIndex(index * itemsPerPage);
       setTimeout(() => setIsAnimating(false), 100);
     },
-    [isAnimating, currentIndex]
+    [isAnimating, currentIndex, itemsPerPage]
   );
 
-  const visibleContents = contents.slice(currentIndex, currentIndex + 3);
+  const visibleContents = contents.slice(
+    currentIndex,
+    currentIndex + itemsPerPage
+  );
 
   return (
     <div className={styles.contentSliderContainer}>
@@ -114,12 +129,14 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
         </button>
       </div>
       <div className={styles.dotsContainer}>
-        {Array.from({ length: Math.ceil(contents.length / 3) }).map(
+        {Array.from({ length: Math.ceil(contents.length / itemsPerPage) }).map(
           (_, index) => (
             <button
               key={index}
               className={`${styles.dot} ${
-                Math.floor(currentIndex / 3) === index ? styles.activeDot : ""
+                Math.floor(currentIndex / itemsPerPage) === index
+                  ? styles.activeDot
+                  : ""
               }`}
               onClick={() => handleDotClick(index)}
               aria-label={`${index + 1}번 그룹으로 이동`}
