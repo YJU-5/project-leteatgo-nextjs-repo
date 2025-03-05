@@ -28,10 +28,7 @@ export default function MainHeader() {
           </ul>
           <ul className={styles.navLogin}>
             <li>
-              <Link href="/login">로그인</Link>
-            </li>
-            <li>
-              <Link href="/signup">회원가입</Link>
+              <Link href="/login">소셜 로그인</Link>
             </li>
           </ul>
         </nav>
