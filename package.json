@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+
+    "@reduxjs/toolkit": "^2.6.0",
+    "jwt-decode": "^4.0.0",
+    "react-redux": "^9.2.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.5",

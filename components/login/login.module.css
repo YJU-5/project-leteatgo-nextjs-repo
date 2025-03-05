@@ -1,0 +1,46 @@
+.container{
+    display: flex; /* Flexbox를 사용하여 요소를 정렬 */
+    flex-direction: column; /* 요소들을 세로 방향으로 정렬 */
+    justify-content: center; /* 요소들을 세로 방향 중앙에 정렬 */
+    align-items: center; /* 요소들을 가로 방향 중앙에 정렬 */
+    height: 100vh; /* 높이를 화면 전체로 설정*/
+}
+
+
+
+.googleButton, .kakaoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.googleButton {
+  background-color: white;
+  color: black;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.googleButton:hover {
+  background-color: #f5f5f5;
+}
+
+.kakaoButton {
+  background-color: #fee500;
+  color: black;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.kakaoButton:hover {
+  background-color: #fdd835;
+}
