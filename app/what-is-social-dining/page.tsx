@@ -1,0 +1,49 @@
+import styles from "./page.module.css";
+import Image from "next/image";
+
+export default function WhatIsSocialDining() {
+  return (
+    <div className={styles.what_is_social_dining}>
+      <Image
+        src="/restaurant.jpg"
+        alt="restaurant"
+        width={1728}
+        height={1023}
+        className={styles.what_is_social_dining_image}
+        priority
+      />
+      <div
+        className={styles.what_is_social_dining_text_container}
+        style={{
+          whiteSpace: "pre-wrap" /* 단어별 줄바꿈 적용 */,
+          wordBreak: "keep-all" /* 한글의 경우 단어 단위로 줄바꿈 */,
+        }}
+      >
+        <h1 className={styles.what_is_social_dining_title}>소셜다이닝이란?</h1>
+        <p className={styles.what_is_social_dining_text}>
+          소셜다이닝(Social Dining)은 공통의 관심사를 가진 사람들이 모여 식사를
+          즐기고 이야기를 나누는 문화를 의미합니다. '사회적인'을 의미하는
+          Social과 '식사'를 뜻하는 Dining을 합쳐서 부르는 말입니다.
+        </p>
+        <p className={styles.what_is_social_dining_text}>
+          소셜다이닝은 단순히 끼니를 해결하는 것 이상으로, 사람들과 교류하며
+          식사를 즐기고 새로운 인연을 만들 수 있다는 장점 이 있습니다. 또한,
+          취미를 함께 즐기거나 타인의 정보를 배울 수도 있습니다.
+        </p>
+        <ul>
+          <p className={styles.what_is_social_dining_text}>
+            소셜다이닝의 예로는 다음과 같은 것들이 있습니다.
+          </p>
+          <li>
+            요리를 배우고 싶은 사람들이 유명 요리 선생님의 집에 모여 함께 요리를
+            배우고 만든 음식을 나누어 먹는 것
+          </li>
+          <li>
+            레스토랑 창업을 고려하고 있는 예비 창업자나 아마추어 쉐프가 자신의
+            요리를 사람들에게 선보이는 기회를 마련하는 것
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+}
