@@ -58,17 +58,13 @@ export default function Reviews() {
               <p className={styles.reviewsListItemReviews}>
                 {review.reviews}개의 후기
               </p>
-              <p className={styles.reviewsListItemCompleted}>
+              <div className={styles.reviewsListItemCompleted}>
                 {review.completed ? (
-                  <>
-                    <p>후기 작성을 완료하였습니다.</p>
-                  </>
+                  <p>후기 작성을 완료하였습니다.</p>
                 ) : (
-                  <>
-                    <button>후기 작성하기</button>
-                  </>
+                  <button>후기 작성하기</button>
                 )}
-              </p>
+              </div>
             </div>
           </div>
         ))}
