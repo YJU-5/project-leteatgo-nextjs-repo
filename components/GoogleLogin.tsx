@@ -16,7 +16,10 @@ export default  function GoogleLogin(){
     `client_id=${GOOGLE_ID}` +
     `&redirect_uri=${REDIRECT_URI}` +
     `&response_type=token` +
-    `&scope=email profile`;
+    `&scope=`+
+    `email profile https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read`+
+    `&prompt=select_account`;
+
   
     window.location.href = googleAuthUrl;
   };
