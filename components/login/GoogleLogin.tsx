@@ -1,7 +1,7 @@
 "use client"
 
 
-import styles from "../app/login/login.module.css"
+import styles from "./login.module.css"
 
 
 export default  function GoogleLogin(){
@@ -29,7 +29,7 @@ export default  function GoogleLogin(){
     <div>
             {/* 구글로그인 버튼 */}
         <button className={styles.googleButton} onClick={handleGoogleLogin}>
-          <img src="/google-logo.png" alt="Google Logo" width={20} height={20} />
+          <img src="/login/google-logo.png" alt="Google Logo" width={20} height={20} />
           Google로 시작하기
         </button>  
     </div>
