@@ -1,19 +1,24 @@
-import type { NextConfig } from "next";
+import { Configuration } from "webpack";
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  swcMinify: true, //SWC 최적화
-  webpack: (config, { dev, isServer }) => {
-    // 프로덕션 빌드 최적화
-    if (!dev && !isServer) {
-      config.optimization = {
-        ...config.optimization,
-        splitChunks: {
-          chunks: "all",
-          minSize: 20000,
-          maxSize: 244000,
-        },
-      };
+  swcMinify: true,
+  webpack: (config: Configuration) => {
+    // 기존 webpack 설정 유지
+    if (!config.optimization) {
+      config.optimization = {};
     }
+
+    if (!config.optimization.splitChunks) {
+      config.optimization.splitChunks = {};
+    }
+
+    config.optimization.splitChunks = {
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 100000,
+    };
+
     return config;
   },
 };

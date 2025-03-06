@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import styles from "./ContentSlider.module.css";
 import Image from "next/image";
 
@@ -21,19 +21,20 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
       setItemsPerPage(window.innerWidth >= 1500 ? 4 : 3);
     };
 
-    handleResize(); // 초기 설정
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleNext = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || !containerRef.current) return;
     setIsAnimating(true);
     setDirection("next");
     setCurrentIndex((prevIndex) =>
@@ -43,7 +44,7 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
   }, [isAnimating, contents.length, itemsPerPage]);
 
   const handlePrev = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || !containerRef.current) return;
     setIsAnimating(true);
     setDirection("prev");
     setCurrentIndex((prevIndex) => {
@@ -75,7 +76,7 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
   );
 
   return (
-    <div className={styles.contentSliderContainer}>
+    <div className={styles.contentSliderContainer} ref={containerRef}>
       <div className={styles.sliderWrapper}>
         <button
           className={`${styles.sliderButton} ${styles.prevButton}`}
