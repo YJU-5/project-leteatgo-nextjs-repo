@@ -1,0 +1,69 @@
+.searchUser {
+  position: fixed;
+  bottom: 1%;
+  left: 3%;
+  width: 100%;
+  height: 10vh;
+  z-index: 200;
+}
+
+.searchUser .searchUserContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.searchUser .searchUserButton {
+  width: 8vw;
+  height: 6vh;
+  border-radius: 10px;
+  background-color: #121212;
+  color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+  vertical-align: top;
+}
+
+.searchUser .searchUserButton:hover {
+  background-color: #f0f0f0;
+  color: #121212;
+  transform: scale(1.05);
+}
+
+.searchUser .searchUserButton p {
+  display: inline-block;
+  margin-left: 10px;
+  margin: 0 auto;
+}
+
+.searchUser .searchUserButton img {
+  vertical-align: middle;
+}
+
+.searchUser .searchUserInputContainer {
+  position: absolute;
+  top: 0;
+  left: 150px;
+  width: 100%;
+  height: 100%;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+}
+
+.searchUser .searchUserInputContainer input {
+  width: 12vw;
+  height: 3vh;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  padding: 10px;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+}
+
+.searchUser .searchUserInputContainer input:focus {
+  outline: none;
+}

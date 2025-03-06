@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ReduxProvider from "@/store/ReduxProvider";
 import MainHeader from "../components/MainHeader/MainHeader";
-
+import SearchUser from "../components/SearchUser/SearchUser";
 
 export const metadata: Metadata = {
   title: "Let Eat Go",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children, 
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -20,6 +20,7 @@ export default function RootLayout({
         <ReduxProvider>
           <MainHeader />
           <div style={{ marginTop: "10vh" }}>{children}</div>
+          <SearchUser />
         </ReduxProvider>
       </body>
     </html>
