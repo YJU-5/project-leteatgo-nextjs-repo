@@ -1,0 +1,26 @@
+.navLogin {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.navLogin li {
+  display: inline-block;
+  min-width: 60px;
+}
+
+.navLogin li a,
+.navLogin li span {
+  font-size: 1rem;
+  color: #333;
+  padding-right: 1rem;
+}
+
+
+.navLogin li img {
+  width: 100%;
+  height: auto;
+  max-height: 24px;
+  object-fit: contain;
+  vertical-align: middle;
+}

@@ -83,18 +83,3 @@
   color: #3f3f3f;
 }
 
-.header .headerContent .navLogin {
-  margin-right: 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.header .headerContent .navLogin li {
-  display: inline-block;
-  min-width: 60px;
-}
-
-.header .headerContent .navLogin li a {
-  font-size: 1rem;
-  color: #333;
-}
