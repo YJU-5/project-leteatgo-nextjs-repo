@@ -1,27 +1,47 @@
 .home .homeImage {
   width: 100%;
-  height: auto;
-  opacity: 0.75;
+  height: 623px;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.home .homeBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.home .frontContainer {
+  position: relative;
+  z-index: 1;
+  background-color: #121212;
+  padding-top: 1%;
 }
 
 .home .textContainer1 {
-  position: absolute;
-  top: 45%;
-  left: 25%;
-  width: 20%;
+  display: inline-block;
+  width: 50%;
   height: auto;
-  transform: translate(-50%, -50%);
+  padding: 10%;
+  margin: 0 auto;
+  vertical-align: top;
+  box-sizing: border-box;
   color: white;
+  white-space: pre-wrap;
+  word-break: keep-all;
 }
 
 .home .textContainer2 {
-  position: absolute;
-  top: 45%;
-  left: 75%;
-  width: 20%;
+  display: inline-block;
+  width: 50%;
   height: auto;
-  transform: translate(-50%, -50%);
+  padding: 10%;
+  margin: 0 auto;
+  box-sizing: border-box;
   color: white;
+  white-space: pre-wrap;
+  word-break: keep-all;
 }
 
 .home .hr {
