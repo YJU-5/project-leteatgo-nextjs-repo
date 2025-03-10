@@ -83,12 +83,14 @@ export default function Create() {
   return (
     <div className={styles.create}>
       <div className={styles.createContainer}>
-        <h1>소셜다이닝 개최하기</h1>
-        <div>
+        <h1 className={styles.upContent}>소셜다이닝 개최하기</h1>
+        <div className={`${styles.upContent} ${styles.delay1}`}>
           <h2>제목</h2>
           <input type="text" className={styles.input} />
         </div>
-        <div className={styles.halfContainerWrap}>
+        <div
+          className={`${styles.halfContainerWrap} ${styles.upContent} ${styles.delay2}`}
+        >
           <div className={styles.input2Container}>
             <h2>위치</h2>
             <MemoizedPostcode onComplete={handlePostcodeComplete} />
@@ -101,11 +103,11 @@ export default function Create() {
             />
           </div>
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay3}`}>
           <h2>음식 태그</h2>
           <MemoizedTag tags={FOOD_TAGS} onSelect={handleFoodTagSelect} />
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay4}`}>
           <div className={styles.h2Wrap}>
             <h2>평균 가격</h2>
             <input
@@ -126,7 +128,7 @@ export default function Create() {
             onChange={handlePriceChange}
           />
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay5}`}>
           <div className={styles.h2Wrap}>
             <h2>인원</h2>
             <input
@@ -147,7 +149,7 @@ export default function Create() {
             onChange={handlePeopleChange}
           />
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay6}`}>
           <div className={styles.h2Wrap}>
             <h2>나이</h2>
             {maxAge === MAX_AGE ? (
@@ -167,18 +169,18 @@ export default function Create() {
             }}
           />
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay7}`}>
           <h2>카테고리</h2>
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay8}`}>
           <h2>성별</h2>
           <MemoizedTag tags={GENDER_TAGS} onSelect={handleGenderTagSelect} />
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay9}`}>
           <h2>설명</h2>
           <textarea className={styles.textarea} />
         </div>
-        <div>
+        <div className={`${styles.upContent} ${styles.delay10}`}>
           <h2>첨부 이미지</h2>
           <MemoizedImageUpload
             onImageSelect={(files) => setSelectedFiles(files)}

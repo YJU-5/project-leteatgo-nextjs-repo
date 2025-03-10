@@ -5,7 +5,10 @@ export default function Join() {
   return (
     <div className={styles.join}>
       <div className={styles.joinContainer}>
-        <Link href="/start/join/food" className={styles.joinContainerWrap}>
+        <Link
+          href="/start/join/food"
+          className={`${styles.joinContainerWrap} ${styles.upContent}`}
+        >
           <div className={styles.topContent}>
             <Image
               src="/foods/kr-food.jpg"
@@ -20,7 +23,10 @@ export default function Join() {
             <p>한국 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
-        <Link href="/start/join/food" className={styles.joinContainerWrap}>
+        <Link
+          href="/start/join/food"
+          className={`${styles.joinContainerWrap} ${styles.upContent} ${styles.delay1}`}
+        >
           <div className={styles.topContent}>
             <Image
               src="/foods/cn-food.jpg"
@@ -35,7 +41,10 @@ export default function Join() {
             <p>중국 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
-        <Link href="/start/join/food" className={styles.joinContainerWrap}>
+        <Link
+          href="/start/join/food"
+          className={`${styles.joinContainerWrap} ${styles.upContent} ${styles.delay2}`}
+        >
           <div className={styles.topContent}>
             <Image
               src="/foods/jp-food.jpg"
@@ -50,7 +59,10 @@ export default function Join() {
             <p>일본 음식을 좋아하는 사람들을 위한 소셜다이닝</p>
           </div>
         </Link>
-        <Link href="/start/join/food" className={styles.joinContainerWrap}>
+        <Link
+          href="/start/join/food"
+          className={`${styles.joinContainerWrap} ${styles.upContent} ${styles.delay3}`}
+        >
           <div className={styles.topContent}>
             <Image
               src="/foods/us-food.jpg"
