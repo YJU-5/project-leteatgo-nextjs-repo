@@ -24,17 +24,17 @@ export default function SearchUser() {
     <div className={styles.searchUser} ref={containerRef}>
       <div className={styles.searchUserContainer}>
         <button className={styles.searchUserButton} onClick={handleSearch}>
-          <Image src="/search.png" alt="search" width={25} height={25} />
+          <Image src="/search.png" alt="search" width={24} height={24} />
           <p>유저 검색</p>
         </button>
       </div>
       <div
         className={styles.searchUserInputContainer}
-        style={{ top: isOpen ? "0" : "100px" }}
+        style={{ top: isOpen ? "2px" : "100px" }}
       >
         <input
           type="text"
-          placeholder="검색어를 입력하세요"
+          placeholder="사용자 이름을 입력하세요"
           value={searchValue}
           onChange={handleInputChange}
         />
