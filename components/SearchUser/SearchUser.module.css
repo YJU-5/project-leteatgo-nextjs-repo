@@ -18,7 +18,7 @@
   min-width: 120px;
   height: 6vh;
   border-radius: 10px;
-  background-color: #121212;
+  background-color: #2d2d2d;
   color: #f0f0f0;
   border: 1px solid #f0f0f0;
   font-size: 1rem;
@@ -75,4 +75,47 @@
 
 .searchUser .searchUserInputContainer input:focus {
   outline: none;
+}
+
+.searchUser .searchResults {
+  position: absolute;
+  bottom: 110%;
+  left: 160px;
+  width: 12vw;
+  padding: 10px;
+  background-color: #2d2d2d;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.searchUser .userItem {
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+}
+
+.searchUser .userItem:hover {
+  background-color: #f0f0f0;
+  color: #121212;
+}
+
+.searchUser .userItem .userProfileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.searchUser .userItem .userName {
+  margin-left: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.searchUser .noResults {
+  text-align: center;
+  color: #666;
+  padding: 10px;
 }

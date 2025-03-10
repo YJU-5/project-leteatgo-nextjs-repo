@@ -132,7 +132,9 @@ export default function Home() {
       </div>
       <div className={styles.textContainer1}>
         <h1 className={`${styles.upContent} ${styles.delay1}`}>
-          여러 사람들과 함께 하는 식사 자리는 어떠세요?
+          여러 사람들과
+          <br />
+          함께 하는 식사 자리는 어떠세요?
         </h1>
         <p className={`${styles.upContent} ${styles.delay2}`}>
           나이와 성별을 구분하지 않고 모두 식사를 나누며 대화해보세요.
@@ -140,10 +142,12 @@ export default function Home() {
       </div>
       <div className={styles.textContainer2}>
         <h1 className={`${styles.upContent} ${styles.delay2}`}>
-          일상에서 지쳤을 때, 새로운 일상을 만들어 보세요.
+          일상에서 지쳤을 때,
+          <br />
+          새로운 일상을 만들어 보세요.
         </h1>
         <p className={`${styles.upContent} ${styles.delay3}`}>
-          새로움이 당신을 기다리고 있습니다.
+          새로운 사람들과 새로운 장소에서의 만남이 당신을 기다리고 있습니다.
         </p>
       </div>
       <div className={styles.frontContainer}>
