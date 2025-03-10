@@ -57,7 +57,7 @@ export default function Start() {
   return (
     <div className={styles.start}>
       <div className={styles.topContainer}>
-        <div className={styles.buttonGroup}>
+        <div className={`${styles.buttonGroup} ${styles.upContent}`}>
           <Link href="/start/create" className={styles.createRoom}>
             개최하기
           </Link>
@@ -68,7 +68,11 @@ export default function Start() {
       </div>
       <hr />
       <div className={styles.underContainer}>
-        <h1 className={styles.popularTitle}>현재 인기 소셜 다이닝</h1>
+        <h1
+          className={`${styles.popularTitle} ${styles.upContent} ${styles.delay1}`}
+        >
+          현재 인기 소셜 다이닝
+        </h1>
         <ContentSlider contents={contents} />
       </div>
     </div>
