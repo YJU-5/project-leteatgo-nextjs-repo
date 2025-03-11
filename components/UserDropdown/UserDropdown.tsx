@@ -41,6 +41,11 @@ export default function UserDropdown({
     };
   }, [showDropdown, setShowDropdown]);
 
+  const handleMypage=()=>{
+    setShowDropdown(false)
+    router.push('/mypage/follow')
+  }
+
 
   return(
     showDropdown &&(
@@ -51,7 +56,7 @@ export default function UserDropdown({
         </div>
         <div className={styles.underLine}></div>
         <div className={styles.buttonGroup}>
-          <button className={styles.menuButton} onClick={()=>router.push('./mypage')}>마이페이지</button>
+          <button className={styles.menuButton} onClick={handleMypage}>마이페이지</button>
           <button className={styles.menuButton} onClick={handleLogout}>로그아웃</button>
         </div>
       </div>

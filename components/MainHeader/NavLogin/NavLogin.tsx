@@ -7,7 +7,7 @@ import styles from "./NavLogin.module.css"
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Notification from "@/components/Notification/Notification";
-import UserDropdown from "@/components/MypageDropdown/UserDropdown";
+import UserDropdown from "@/components/UserDropdown/UserDropdown";
 
 export default function NavLogin(){
   const router = useRouter();
