@@ -7,6 +7,8 @@ import ContentSlider from "@/components/ContentSlider/ContentSlider";
 interface Content {
   id: number;
   img: string;
+  profileImg: string;
+  username: string;
   name: string;
   address: string;
   date: string;
@@ -19,6 +21,8 @@ export default function Start() {
     {
       id: 1,
       img: "/foods/cn-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -28,6 +32,8 @@ export default function Start() {
     {
       id: 2,
       img: "/foods/jp-food.jpg",
+      profileImg: "/gitb.png",
+      username: "홍태관",
       name: "홍태관의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -37,6 +43,8 @@ export default function Start() {
     {
       id: 3,
       img: "/foods/kr-food.jpg",
+      profileImg: "/gitb.png",
+      username: "김형선",
       name: "김형선의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -46,6 +54,8 @@ export default function Start() {
     {
       id: 4,
       img: "/foods/us-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -73,7 +83,7 @@ export default function Start() {
         >
           현재 인기 소셜 다이닝
         </h1>
-        <ContentSlider contents={contents} />
+        <ContentSlider contents={contents} link={true} />
       </div>
     </div>
   );

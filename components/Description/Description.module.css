@@ -1,0 +1,156 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #343434;
+  border-radius: 10px;
+  position: relative;
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  margin-top: 5%;
+  height: 80%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.closeButton {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+.modalContentContainer {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.modalImage {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.modalTags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalContentContainer {
+  width: 100%;
+  height: 40vh;
+  box-sizing: border-box;
+}
+
+.modalContentContainer .modalContentTitle {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.modalContentContainer .modalContentText {
+  display: inline-block;
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
+
+.modalContentContainer .modalContentPerson {
+  display: inline-block;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-left: 3%;
+}
+
+.modalContentUsername {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modalContentContainer .modalContentDate {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 10px auto;
+  margin-left: 3%;
+}
+
+.modalContentProfileWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.modalContentProfileImg {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.modalContentContainer .modalContentAddress {
+  display: inline-block;
+  font-size: 1rem;
+  margin: 10px auto;
+  margin-top: 20px;
+}
+
+.modalTags {
+  margin-top: 20px;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modalTags .tag {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #343434;
+  border: 1px solid white;
+  border-radius: 30px;
+  padding: 1% 2%;
+  color: white;
+}
+
+.modalContentButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #343434;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+}
+
+.modalContentButton:hover {
+  background-color: #d6d6d6;
+  color: #121212;
+}

@@ -48,7 +48,7 @@ export default function Reviews() {
               <Image
                 src={review.image}
                 alt={review.title}
-                width={200}
+                width={400}
                 height={200}
               />
             </div>

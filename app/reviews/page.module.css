@@ -26,6 +26,12 @@
   border-radius: 5px;
 }
 
+.reviews .reviewsListItemImage img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
 .reviews .reviewsListItemContent {
   display: inline-block;
   border-radius: 5px;
