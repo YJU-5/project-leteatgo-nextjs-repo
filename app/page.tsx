@@ -15,6 +15,8 @@ interface Review {
 interface Content {
   id: number;
   img: string;
+  profileImg: string;
+  username: string;
   name: string;
   address: string;
   date: string;
@@ -66,6 +68,8 @@ export default function Home() {
     {
       id: 1,
       img: "/foods/cn-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -75,6 +79,8 @@ export default function Home() {
     {
       id: 2,
       img: "/foods/jp-food.jpg",
+      profileImg: "/gitb.png",
+      username: "홍태관",
       name: "홍태관의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -84,6 +90,8 @@ export default function Home() {
     {
       id: 3,
       img: "/foods/kr-food.jpg",
+      profileImg: "/gitb.png",
+      username: "김형선",
       name: "김형선의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -93,6 +101,8 @@ export default function Home() {
     {
       id: 4,
       img: "/foods/us-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -102,7 +112,9 @@ export default function Home() {
     {
       id: 5,
       img: "/foods/us-food.jpg",
-      name: "차승현의 소셜다이닝",
+      profileImg: "/gitb.png",
+      username: "구진모",
+      name: "구진모의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
       tag: ["한식", "요리 교실", "3만원", "28~35세"],
@@ -111,6 +123,8 @@ export default function Home() {
     {
       id: 6,
       img: "/foods/us-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -125,8 +139,8 @@ export default function Home() {
         <Image
           src="/home/socialhome.png"
           alt="socialhome"
-          width={1728}
-          height={623}
+          width={4000}
+          height={2000}
           className={styles.homeImage}
         />
       </div>
