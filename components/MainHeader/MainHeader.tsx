@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./MainHeader.module.css";
-import NavLogin from "./NavLogin/NavLogin";
+import NavLogin from "../NavLogin/NavLogin";
 
 
 

@@ -5,11 +5,11 @@ import styles from './Sidebar.module.css';
 export default function Sidebar() {
   const router = useRouter();
 
-  const menuItems = [
+  const menuItems = [ 
+    { name: '내 개최 조회', path: '/mypage/event-info' },
+    { name: '내 후기 조회', path: '/mypage/myreviews' },
     { name: '1:1 문의', path: '/mypage/inquiries' },
     { name: '팔로우 관리', path: '/mypage/follow' },
-    { name: '내 후기 조회', path: '/mypage/reviews' },
-    { name: '내 개최정보', path: '/mypage/event-info' },
   ];
 
   return (

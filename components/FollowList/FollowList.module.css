@@ -1,114 +1,135 @@
-.conatiner{
-  padding: 20px;
-  height: 140px;
+.container {
+  padding: 1.25rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.searchContainer{
+.header {
+  width: 100%;
   display: flex;
-  justify-content:space-between ;
+  justify-content: space-between; 
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
+  padding: 0 20px;
 }
 
 .searchTitle {
   color: #fff;
   margin: 0;
-  font-size: 32px;
+  font-size: 2rem;
+  text-align: left;
+  padding-left: 0;
+  white-space: nowrap;
 }
 
-.search{
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.searchBar{
+.searchContainer {
   display: flex;
   align-items: center;
-  background-color: #D9D9D9; /* 새 이미지와 동일한 배경색 */
-  border-radius: 8px;
-  border: 1px solid #333; /* 얇고 어두운 테두리 */
-  overflow: hidden;
-  width: 100%;
-  height: 40px;
+  padding-right: 0; 
 }
 
-.searchInput{
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: #D9D9D9;  
+  border-radius: 8px;
+  border: 0.5px solid #444; 
+  overflow: hidden;
+  width: 230px; 
+  height: 2.5rem;
+}
+
+.searchInput {
   flex: 1;
   padding: 8px 12px;
   background-color: transparent;
   border: none;
-  color: #000000;
+  color: #000;
   outline: none;
-  font-size: 14px;
+  font-size: 0.875rem;
+  height: 100%;
 }
 
-.searchButton{
-  background-color: #D9D9D9;
+.searchButton {
+  background-color: transparent;
   border: none;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
+  padding: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.searchButton img{
-  width: 18px;
-  height: 18px;
+.searchIcon {
+  width: 1rem;
+  height: 1rem;
 }
 
-.underLine{
+.underLine {
   border-top: 1px solid #bbb;
+  width: 100%;
+  margin: 0.625rem 0;
+}
+
+.itemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .followItem {
   display: flex;
   align-items: center;
   background-color: #2a2a2a;
-  margin: 10px 0;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.followImg{
-  width: 78px;
-  height: 78px;
+  margin: 2px 0; 
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  height: 3.75rem;
 }
 
 .img {
-  margin-right: 15px;
+  margin-right: 0.625rem;
 }
 
-.followImg{
-  width: 78px;
-  height: 78px;
+.followImg {
+  width: 50px;
+  height: 50px;
 }
 
-.info{
+.info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex: 1;
 }
 
-.info span{
+.followName {
   margin: 0;
   color: #fff;
-  font-size: 32px;
+  font-size: 1.125rem;
 }
 
-.info p {
-  margin: 5px 0 0;
+.followDate {
+  margin: 0;
   color: #a0a0a0;
-  font-size: 16px;
-  margin-right: 18px;
+  font-size: 0.75rem;
+  margin-right: 0.625rem;
 }
 
 .newBadge {
   background-color: #ff4d4f;
   color: #fff;
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-radius: 12px;
   font-size: 12px;
   margin-left: auto;
-  border: solid #ff4d4f;
+  border: none;
+  height: 24px;
+  display: flex;
+  align-items: center;
 }

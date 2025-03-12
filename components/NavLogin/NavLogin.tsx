@@ -85,7 +85,7 @@ export default function NavLogin(){
       )
     }
 
-    {/* 유저정보및마이페이지이동 창 */}
+    {/* 마이페이지이동 창 */}
     <UserDropdown
       showDropdown={showDropdown}
       setShowDropdown={setShowDropdown}

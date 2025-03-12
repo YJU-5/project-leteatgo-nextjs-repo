@@ -1,5 +1,5 @@
 .notificationMenu{
-  height: 800px;
+  height: 100vh;
   position: absolute;
   top: 100%;
   right: 0;
@@ -36,7 +36,7 @@
 
 .notificationMessage{
   color: #fff;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 2px 0 0;
 }
 

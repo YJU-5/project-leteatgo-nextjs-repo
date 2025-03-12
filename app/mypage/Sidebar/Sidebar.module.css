@@ -1,14 +1,14 @@
 .sidebar {
-  width: 304px;
+  width: 240px;
   background-color: #1a1a1a;
   color: #a0a0a0;
   padding: 20px;
   height: 100vh;
   top: 0;
   left: 0;
-  overflow: hiddlen;
   white-space: nowrap;
-  justify-items: end; 
+  justify-items: end;
+  font-size: 1.125rem;
 }
 
 .sidebar ul {
@@ -21,7 +21,7 @@
 .sidebar li {
   margin: 20px 0;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .sidebar li:hover {

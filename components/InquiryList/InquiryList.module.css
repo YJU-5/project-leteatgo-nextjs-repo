@@ -1,17 +1,19 @@
 .container{
-  padding: 20px;
+  padding: 1.25rem;
   color: #fff;
-  max-width: 1000px;
   width: 100%;
-  margin-top: 10rem;
+  margin: 0 auto; 
+  display: flex;
+  flex-direction: column;
 }
 
 .header{
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  width: 100%;
 }
 
 .author{
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .title{
@@ -21,20 +23,22 @@
 
 .formGroup{
   margin-bottom: 20px;
+  width: 80%;
 }
 
 .label{
+  margin-bottom: 0.5rem;
+  width: 100%;
   display: block;
-  font-size: 16px;
 }
 
 .input{
-  width: 100%;
-  padding: 8px 12px;
+  width: 100%; 
+  padding: 0.5rem 0.75rem; 
   background-color: #D9D9D9;
   border: 1px solid #444;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 0.875rem;
   outline: none;
 }
 

@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import Sidebar from '../Sidebar/Sidebar';
 import FollowList from '@/components/FollowList/FollowList';
 import InquiryList from '@/components/InquiryList/InquiryList';
+import MyReviews from '@/components/MyReviews/MyReviews';
 
 export default function MyPageSection() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function MyPageSection() {
     <>
       {section === 'follow' && <FollowList />}
       {section === 'inquiries' && <InquiryList />}
-      {section === 'reviews' && <h1>내 후기 조회 (미구현)</h1>}
+      {section === 'myreviews' && <MyReviews/>}
       {section === 'event-info' && <h1>내 개최정보 (미구현)</h1>}
     </>
   );  
