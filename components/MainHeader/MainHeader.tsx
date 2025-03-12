@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./MainHeader.module.css";
+import NavLogin from "../NavLogin/NavLogin";
 
 export default function MainHeader() {
   return (
@@ -27,9 +28,7 @@ export default function MainHeader() {
             </li>
           </ul>
           <ul className={styles.navLogin}>
-            <li>
-              <Link href="/login">소셜 로그인</Link>
-            </li>
+            <NavLogin/>
           </ul>
         </nav>
       </div>
