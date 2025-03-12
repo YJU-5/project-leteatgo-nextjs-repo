@@ -169,7 +169,7 @@ export default function Home() {
           <h1 className={`${styles.upContent} ${styles.delay4}`}>
             인기 소셜다이닝 리스트
           </h1>
-          <ContentSlider contents={contents} />
+          <ContentSlider contents={contents} link={true} />
         </div>
         <div className={styles.popularSocialDiningContainer}>
           <h1 className={`${styles.upContent} ${styles.delay5}`}>

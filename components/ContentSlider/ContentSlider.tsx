@@ -17,9 +17,10 @@ interface Content {
 
 interface ContentSliderProps {
   contents: Content[];
+  link: boolean;
 }
 
-export default function ContentSlider({ contents }: ContentSliderProps) {
+export default function ContentSlider({ contents, link }: ContentSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
@@ -89,6 +90,7 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
         <Description
           content={selectedContent}
           onClose={() => setSelectedContent(null)}
+          link={link}
         />
       )}
       <div className={styles.sliderWrapper}>

@@ -5,6 +5,7 @@ import styles from "./Description.module.css";
 interface DescriptionProps {
   content: Content;
   onClose: () => void;
+  link: boolean;
 }
 
 interface Content {
@@ -24,7 +25,11 @@ interface DescriptionProps {
   onClose: () => void;
 }
 
-export default function Description({ content, onClose }: DescriptionProps) {
+export default function Description({
+  content,
+  onClose,
+  link,
+}: DescriptionProps) {
   const defaultImage = "/default-image.jpg"; // 기본 이미지 경로 설정
 
   return (
@@ -64,6 +69,11 @@ export default function Description({ content, onClose }: DescriptionProps) {
               </span>
             ))}
           </div>
+          {link ? (
+            <button className={styles.modalContentButton}>참여</button>
+          ) : (
+            <button className={styles.modalContentButton}>확인</button>
+          )}
         </div>
       </div>
     </div>

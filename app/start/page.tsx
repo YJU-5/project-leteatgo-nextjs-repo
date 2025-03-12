@@ -83,7 +83,7 @@ export default function Start() {
         >
           현재 인기 소셜 다이닝
         </h1>
-        <ContentSlider contents={contents} />
+        <ContentSlider contents={contents} link={true} />
       </div>
     </div>
   );
