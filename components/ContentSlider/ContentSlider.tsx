@@ -1,10 +1,13 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import styles from "./ContentSlider.module.css";
 import Image from "next/image";
+import Description from "../Description/Description";
 
 interface Content {
   id: number;
   img: string;
+  profileImg: string;
+  username: string;
   name: string;
   address: string;
   date: string;
@@ -14,14 +17,16 @@ interface Content {
 
 interface ContentSliderProps {
   contents: Content[];
+  link: boolean;
 }
 
-export default function ContentSlider({ contents }: ContentSliderProps) {
+export default function ContentSlider({ contents, link }: ContentSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedContent, setSelectedContent] = useState<Content | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -70,6 +75,10 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
     [isAnimating, currentIndex, itemsPerPage]
   );
 
+  const handleContentClick = (content: Content) => {
+    setSelectedContent(content);
+  };
+
   const visibleContents = contents.slice(
     currentIndex,
     currentIndex + itemsPerPage
@@ -77,6 +86,13 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
 
   return (
     <div className={styles.contentSliderContainer} ref={containerRef}>
+      {selectedContent && (
+        <Description
+          content={selectedContent}
+          onClose={() => setSelectedContent(null)}
+          link={link}
+        />
+      )}
       <div className={styles.sliderWrapper}>
         <button
           className={`${styles.sliderButton} ${styles.prevButton}`}
@@ -96,7 +112,11 @@ export default function ContentSlider({ contents }: ContentSliderProps) {
           }`}
         >
           {visibleContents.map((content) => (
-            <div key={content.id} className={styles.imageWrapper}>
+            <div
+              key={content.id}
+              className={styles.imageWrapper}
+              onClick={() => handleContentClick(content)}
+            >
               <Image
                 src={content.img}
                 alt={`${content.name}의 이미지`}
