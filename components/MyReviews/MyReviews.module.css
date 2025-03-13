@@ -1,50 +1,59 @@
 .container {
-  padding: 20px;
+  padding: 1.875rem;
+  margin: 0;
+  margin-top: 6.25rem;
   color: #fff;
 }
 
 .header {
   width: 100%;
-  margin-bottom: 20px; 
+  margin-bottom: 1.25rem; 
   text-align: left;
 }
 
 .title {
   margin: 0;
-  font-size: 32px; 
+  font-size: 2rem; 
   white-space: nowrap;
+}
+
+.itemsWrapper{
+  width: 100%;
+  overflow-x: auto; /* 가로 스크롤 기능 유지 */
+  scrollbar-width: none; /* Firefox에서 스크롤 바 숨기기 */
+  -ms-overflow-style: none; /* IE, Edge에서 스크롤 바 숨기기 */
+}
+
+.itemsWrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari에서 스크롤 바 숨기기 */
 }
 
 
 .itemsContainer {
-  width: 100%;
+  width: max-content; /* 내용 크기만큼 확장 */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  gap: 30px;
-  justify-content: center;
-  align-items: start;
+  grid-auto-flow: column; /* 세로 방향으로 먼저 채우기 */
+  grid-template-rows: repeat(3, auto); /* 3행 배치 */
+  grid-template-columns: auto; /* 자동으로 필요한 만큼의 열 생성 */
+  gap: 1.875rem;
+  overflow: auto; /* 넘칠 경우 스크롤 */
 }
 
 
 .reviewCard {
-  flex: 0 0 530px;
   background: #2D2D2D;
-  border-radius: 10px;
-  padding: 16px;
+  border-radius: 0.625rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 0.75;
   white-space: normal;
-  margin: auto;
-  height: 190px;
-  width: 427px; 
+  width: 33.125rem;
 }
 
 .reviewImage {
-  width: 120px;
-  height: 120px;
-  border-radius: 8px;
+  width: 10rem;
+  height: 10rem;
 }
 
 .reviewContent {
@@ -52,19 +61,19 @@
 }
 
 .reviewTitle {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
   margin: 0;
 }
 
 .reviewLocation {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #bbb;
   margin: 0;
 }
 
 .reviewDate {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #888;
-  
+  margin-bottom: 10rem;
 }

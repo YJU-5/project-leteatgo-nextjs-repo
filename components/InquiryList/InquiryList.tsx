@@ -1,10 +1,15 @@
 import { useSelector } from "react-redux"
 import styles from "./InquiryList.module.css"
 import { RootState } from "@/store/Store";
+import { useState } from "react";
 
 export default function InquiryList(){
 
   const user = useSelector((state:RootState)=> state.user.user);
+  const [title,setTitle] = useState('');
+  const [content,setContent] = useState('');
+
+
 
   return(
     <div className={styles.container}>
@@ -19,7 +24,8 @@ export default function InquiryList(){
         <input 
           type="text" 
           id="title"
-          className={styles.input} 
+          className={styles.input}
+          onChange={(e)=>setTitle(e.target.value)} 
         />
       </div>
       <div className={styles.formGroup}>
@@ -28,6 +34,7 @@ export default function InquiryList(){
           id="content"
           placeholder="내용을 입력하세요"
           className={styles.textArea}
+          onChange={(e)=>setContent(e.target.value)}
            />
       </div>
     </div>
