@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./MainHeader.module.css";
-import NavLogin from "../NavLogin/NavLogin";
+import MainHeaderLogin from "./MainHeaderLogin/MainHeaderLogin";
 
 export default function MainHeader() {
   return (
@@ -27,7 +27,7 @@ export default function MainHeader() {
               <Link href="/reviews">후기</Link>
             </li>
           </ul>
-            <NavLogin/>
+            <MainHeaderLogin/>
         </nav>
       </div>
       <div className={styles.gradient}></div>

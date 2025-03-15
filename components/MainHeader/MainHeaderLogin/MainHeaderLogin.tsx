@@ -3,11 +3,11 @@ import { RootState } from "@/store/Store";
 import { logout } from "@/store/UserSlice";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./NavLogin.module.css"
+import styles from "./MainHeaderLogin.module.css"
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-export default function NavLogin() {
+export default function MainHeaderLogin() {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.user.jwtToken);
@@ -62,7 +62,7 @@ export default function NavLogin() {
               <p onClick={() => setShowDropdown(!showDropdown)}>{user?.name}님</p>
             </li>
             <li>
-              <p onClick={handleLogout} >소셜 로그인</p>
+              <p onClick={handleLogout} >로그아웃</p>
             </li>
           </div>
         ) : (
