@@ -17,14 +17,16 @@
   cursor: pointer;
 }
 
+.navLogin li p{
+  margin-top: 20px;
+}
 
-.navLogin li img {
+.navLogin div li img {
   width: 100%;
   height: auto;
   max-height: 24px;
   object-fit: contain;
   vertical-align: middle;
-  margin-bottom: 8%;
 }
 
 .modalContainer{
@@ -55,7 +57,6 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: #4a5568;
-  margin: bottom 20px;
   padding: 0 10px;
   margin-bottom: 15px;
 }
