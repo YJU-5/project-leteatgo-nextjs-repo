@@ -1,28 +1,26 @@
 .googleButton, .kakaoButton {
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 350px;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
+  height: 61px;
+  border-radius: 10px;
+  padding: 0 24px;
+  font-size: 18px;
+  font-family: "Golos", sans-serif;
   cursor: pointer;
   border: none;
   transition: background-color 0.2s ease-in-out;
-  gap: 8px;
-  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .googleButton {
   background-color: white;
   color: black;
-  border: 1px solid #ddd;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.googleButton:hover {
-  background-color: #f5f5f5;
+.googleIcon, .kakaoIcon{
+  margin-right: 64px;
 }
 
 .kakaoButton {
@@ -32,5 +30,9 @@
 }
 
 .kakaoButton:hover {
-  background-color: #fdd835;
+  background-color: #ebc932;
+}
+
+.googleButton:hover {
+  background-color: #dbd9d9;
 }
