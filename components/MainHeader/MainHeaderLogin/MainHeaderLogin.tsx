@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./MainHeaderLogin.module.css"
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Notification from "@/components/Notification/Notification";
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -54,8 +56,13 @@ export default function MainHeaderLogin() {
         token ? (
           <div>
             <li>
-              <img src="/login/notification.png"
+              <Image
+                src="/login/notification.png"
                 onClick={() => setShowNotifications(!showNotifications)}
+                className={styles.notificationIcon}
+                alt="알림 아이콘"
+                width={24}
+                height={24}
               />
             </li>
             <li>
@@ -71,7 +78,7 @@ export default function MainHeaderLogin() {
           </li>
         )
       }
-      
+
       {
         showModal && (
           <div className={styles.modalContainer} >
@@ -84,6 +91,10 @@ export default function MainHeaderLogin() {
         )
       }
 
+      <Notification
+        showNotifications={showNotifications}
+        setShowNotifications={setShowNotifications}
+      />
     </ul>
   )
 }
