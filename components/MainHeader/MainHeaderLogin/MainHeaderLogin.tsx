@@ -1,15 +1,13 @@
-"use client";
+"use client"
 import { RootState } from "@/store/Store";
 import { logout } from "@/store/UserSlice";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./MainHeaderLogin.module.css";
+import styles from "./MainHeaderLogin.module.css"
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
 import Image from "next/image";
-=======
->>>>>>> f3710f4f (feat: Add album feature)
+import Notification from "@/components/Notification/Notification";
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -23,27 +21,20 @@ export default function MainHeaderLogin() {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
-    setShowModal(true);
+    setShowModal(true)
     setShowDropdown(false);
-  };
+  }
 
   const CheckLogout = () => {
     dispatch(logout());
-<<<<<<< HEAD
-    localStorage.removeItem("userInfo");
-=======
->>>>>>> f3710f4f (feat: Add album feature)
-    router.push("/");
+    router.push('/');
     setShowModal(false);
-  };
+  }
 
   //모달창 바깥쪽 클릭시 모달창 닫침
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         setShowModal(false);
       }
     }
@@ -57,46 +48,53 @@ export default function MainHeaderLogin() {
     };
   }, [showModal]);
 
+
+
   return (
     <ul className={styles.navLogin}>
-      {token ? (
-        <div>
-          <li>
-<<<<<<< HEAD
-            <Image
-              src="/login/notification.png"
-              alt="알림"
-              width={24}
-              height={24}
-=======
-            <img
-              src="/login/notification.png"
->>>>>>> f3710f4f (feat: Add album feature)
-              onClick={() => setShowNotifications(!showNotifications)}
-            />
-          </li>
-          <li>
-            <p onClick={() => setShowDropdown(!showDropdown)}>{user?.name}님</p>
-          </li>
-          <li>
-            <p onClick={handleLogout}>로그아웃</p>
-          </li>
-        </div>
-      ) : (
-        <li>
-          <Link href="/login">소셜 로그인</Link>
-        </li>
-      )}
-
-      {showModal && (
-        <div className={styles.modalContainer}>
-          <div className={styles.modalContent} ref={modalRef}>
-            <h3>로그아웃 하시겠습니까.</h3>
-            <button onClick={CheckLogout}>yes</button>
-            <button onClick={() => setShowModal(false)}>no</button>
+      {
+        token ? (
+          <div>
+            <li>
+              <Image
+                src="/login/notification.png"
+                onClick={() => setShowNotifications(!showNotifications)}
+                className={styles.notificationIcon}
+                alt="알림 아이콘"
+                width={24}
+                height={24}
+              />
+            </li>
+            <li>
+              <p onClick={() => setShowDropdown(!showDropdown)}>{user?.name}님</p>
+            </li>
+            <li>
+              <p onClick={handleLogout} >로그아웃</p>
+            </li>
           </div>
-        </div>
-      )}
+        ) : (
+          <li>
+            <Link href="/login">소셜 로그인</Link>
+          </li>
+        )
+      }
+
+      {
+        showModal && (
+          <div className={styles.modalContainer} >
+            <div className={styles.modalContent} ref={modalRef}>
+              <h3>로그아웃 하시겠습니까.</h3>
+              <button onClick={CheckLogout}>yes</button>
+              <button onClick={() => setShowModal(false)}>no</button>
+            </div>
+          </div>
+        )
+      }
+
+      <Notification
+        showNotifications={showNotifications}
+        setShowNotifications={setShowNotifications}
+      />
     </ul>
-  );
+  )
 }
