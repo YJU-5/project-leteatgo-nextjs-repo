@@ -108,6 +108,47 @@
   }
 }
 
+.upContent {
+  position: relative;
+  opacity: 0;
+  animation: fade_up 0.8s ease-out forwards;
+}
+
+.delay1 {
+  animation-delay: 0.2s;
+}
+
+.delay2 {
+  animation-delay: 0.4s;
+}
+
+.delay3 {
+  animation-delay: 0.6s;
+}
+
+.delay4 {
+  animation-delay: 0.8s;
+}
+
+.delay5 {
+  animation-delay: 1s;
+}
+
+.delay6 {
+  animation-delay: 1.2s;
+}
+
+@keyframes fade_up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 작은 모바일 크기에서의 스타일 */
 @media screen and (max-width: 480px) {
   .join .joinContainer .joinContainerWrap {

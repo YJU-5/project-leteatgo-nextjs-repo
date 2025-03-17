@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import styles from "./ImageSlider.module.css";
 import Image from "next/image";
 
@@ -18,6 +18,7 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +31,7 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
   }, []);
 
   const handleNext = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || !containerRef.current) return;
     setIsAnimating(true);
     setDirection("next");
     setCurrentIndex((prevIndex) =>
@@ -40,7 +41,7 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
   }, [isAnimating, contents.length, itemsPerPage]);
 
   const handlePrev = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || !containerRef.current) return;
     setIsAnimating(true);
     setDirection("prev");
     setCurrentIndex((prevIndex) => {
@@ -57,7 +58,7 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
 
   const handleDotClick = useCallback(
     (index: number) => {
-      if (isAnimating) return;
+      if (isAnimating || !containerRef.current) return;
       setIsAnimating(true);
       setDirection(index * itemsPerPage > currentIndex ? "next" : "prev");
       setCurrentIndex(index * itemsPerPage);
@@ -72,7 +73,7 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
   );
 
   return (
-    <div className={styles.imageSliderContainer}>
+    <div className={styles.imageSliderContainer} ref={containerRef}>
       <div className={styles.sliderWrapper}>
         <button
           className={`${styles.sliderButton} ${styles.prevButton}`}

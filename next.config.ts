@@ -1,7 +1,26 @@
-import type { NextConfig } from "next";
+import { Configuration } from "webpack";
+import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+    styledComponents: true,
+    emotion: true,
+    reactRemoveProperties: true,
+  },
+  webpack: (config: Configuration) => {
+    if (!config.optimization) {
+      config.optimization = {};
+    }
+
+    config.optimization.splitChunks = {
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 100000,
+    };
+
+    return config;
+  },
 };
 
 export default nextConfig;

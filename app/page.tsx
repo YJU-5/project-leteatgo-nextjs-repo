@@ -15,6 +15,8 @@ interface Review {
 interface Content {
   id: number;
   img: string;
+  profileImg: string;
+  username: string;
   name: string;
   address: string;
   date: string;
@@ -66,6 +68,8 @@ export default function Home() {
     {
       id: 1,
       img: "/foods/cn-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -75,6 +79,8 @@ export default function Home() {
     {
       id: 2,
       img: "/foods/jp-food.jpg",
+      profileImg: "/gitb.png",
+      username: "홍태관",
       name: "홍태관의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -84,6 +90,8 @@ export default function Home() {
     {
       id: 3,
       img: "/foods/kr-food.jpg",
+      profileImg: "/gitb.png",
+      username: "김형선",
       name: "김형선의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -93,6 +101,8 @@ export default function Home() {
     {
       id: 4,
       img: "/foods/us-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -102,7 +112,9 @@ export default function Home() {
     {
       id: 5,
       img: "/foods/us-food.jpg",
-      name: "차승현의 소셜다이닝",
+      profileImg: "/gitb.png",
+      username: "구진모",
+      name: "구진모의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
       tag: ["한식", "요리 교실", "3만원", "28~35세"],
@@ -111,6 +123,8 @@ export default function Home() {
     {
       id: 6,
       img: "/foods/us-food.jpg",
+      profileImg: "/gitb.png",
+      username: "차승현",
       name: "차승현의 소셜다이닝",
       address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
       date: "2025-03-04",
@@ -121,48 +135,57 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
-      <Image
-        src="/home/socialhome.png"
-        alt="socialhome"
-        width={1728}
-        height={623}
-        className={styles.homeImage}
-      />
-      <div
-        className={styles.textContainer1}
-        style={{
-          whiteSpace: "pre-wrap" /* 단어별 줄바꿈 적용 */,
-          wordBreak: "keep-all" /* 한글의 경우 단어 단위로 줄바꿈 */,
-        }}
-      >
-        <h1>여러 사람들과 함께 식사 어떠세요?</h1>
-        <p>나이와 성별을 구분하지 않고 모두 식사를 나누며 대화해보세요.</p>
+      <div className={styles.homeBackground}>
+        <Image
+          src="/home/socialhome.png"
+          alt="socialhome"
+          width={4000}
+          height={2000}
+          className={styles.homeImage}
+        />
       </div>
-      <div
-        className={styles.textContainer2}
-        style={{
-          whiteSpace: "pre-wrap" /* 단어별 줄바꿈 적용 */,
-          wordBreak: "keep-all" /* 한글의 경우 단어 단위로 줄바꿈 */,
-        }}
-      >
-        <h1>일상에서 지쳤을 때, 새로운 일상을 만들어 보세요.</h1>
-        <p>새로움이 당신을 기다리고 있습니다.</p>
+      <div className={styles.textContainer1}>
+        <h1 className={`${styles.upContent} ${styles.delay1}`}>
+          여러 사람들과
+          <br />
+          함께 하는 식사 자리는 어떠세요?
+        </h1>
+        <p className={`${styles.upContent} ${styles.delay2}`}>
+          나이와 성별을 구분하지 않고 모두 식사를 나누며 대화해보세요.
+        </p>
       </div>
-      <div className={styles.popularSocialDiningContainer}>
-        <h1>인기 소셜다이닝 리스트</h1>
-        <ContentSlider contents={contents} />
+      <div className={styles.textContainer2}>
+        <h1 className={`${styles.upContent} ${styles.delay2}`}>
+          일상에서 지쳤을 때,
+          <br />
+          새로운 일상을 만들어 보세요.
+        </h1>
+        <p className={`${styles.upContent} ${styles.delay3}`}>
+          새로운 사람들과 새로운 장소에서의 만남이 당신을 기다리고 있습니다.
+        </p>
       </div>
-      <div className={styles.popularSocialDiningContainer}>
-        <h1>소셜다이닝 후기</h1>
-        <ImageSlider contents={reviews} />
+      <div className={styles.frontContainer}>
+        <div className={styles.popularSocialDiningContainer}>
+          <h1 className={`${styles.upContent} ${styles.delay4}`}>
+            인기 소셜다이닝 리스트
+          </h1>
+          <ContentSlider contents={contents} link={true} />
+        </div>
+        <div className={styles.popularSocialDiningContainer}>
+          <h1 className={`${styles.upContent} ${styles.delay5}`}>
+            소셜다이닝 후기
+          </h1>
+          <ImageSlider contents={reviews} />
+        </div>
+
+        <hr className={styles.hr} />
+        <footer>
+          <p>영진전문대학교 JI-A 5조</p>
+          <p>경상북도 칠곡군 지천면 금송로 60</p>
+          <p>cjhms002@g.yju.ac.kr</p>
+          <p>010-9278-1278</p>
+        </footer>
       </div>
-      <hr className={styles.hr} />
-      <footer>
-        <p>영진전문대학교 JI-A 5조</p>
-        <p>경상북도 칠곡군 지천면 금송로 60</p>
-        <p>cjhms002@g.yju.ac.kr</p>
-        <p>010-9278-1278</p>
-      </footer>
     </div>
   );
 }
