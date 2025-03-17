@@ -13,8 +13,6 @@ export default function ChatRoomPage() {
     return <div>Loading...</div>
   }
 
-  
-
   return (
     <div>
       <h1>Chat Room: {roomId}</h1>

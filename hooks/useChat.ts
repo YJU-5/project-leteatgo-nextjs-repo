@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const socket = io('http://localhost:3001/chat-room',{
+const socket = io('http://localhost:3001/chat-room/join',{
     transports:['websocket'], // WebSocket만 사용 (보안 Http 풀링방지)
     withCredentials:true,
     auth:{
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZHRqczEwMDRzZEBnbWFpbC5jb20iLCJuYW1lIjoi6rmA7ZiV7ISgIiwic29jaWFsSWQiOiIxMTM0NzU2MzQzODkxMjEyMTUyNTQiLCJkZWxldGVkIjpmYWxzZSwiaWF0IjoxNzQxNjU0MTgzLCJleHAiOjE3NDE5NTY1ODN9.axTgouLpEK_YQ57eVAD5X4HsK3o9ZWCQwnSfzzbTu5w' // localStorage.getItem('token')
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZHRqczEwMDRzZEBnbWFpbC5jb20iLCJuYW1lIjoi6rmA7ZiV7ISgIiwic29jaWFsSWQiOiIzOTM1MzI5NDc3IiwiZGVsZXRlZCI6ZmFsc2UsImlhdCI6MTc0MjA5NTQ1NiwiZXhwIjoxNzQyMzk3ODU2fQ.RZ8KFE3SeyjLC2ijeFdgqzNNj6k2eeDMStQeRxQh6VM' // localStorage.getItem('token')
     }
 })
 
