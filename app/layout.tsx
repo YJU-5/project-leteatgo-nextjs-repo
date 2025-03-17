@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ReduxProvider from "@/store/ReduxProvider";
 import MainHeader from "../components/MainHeader/MainHeader";
+import SearchUser from "../components/SearchUser/SearchUser";
 
 export const metadata: Metadata = {
   title: "Let Eat Go",
@@ -15,8 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <MainHeader />
-        <div style={{ marginTop: "10vh" }}>{children}</div>
+        <ReduxProvider>
+          <MainHeader />
+          <div style={{ marginTop: "10vh" }}>{children}</div>
+          <SearchUser />
+        </ReduxProvider>
       </body>
     </html>
   );

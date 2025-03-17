@@ -3,6 +3,7 @@ body {
   margin: 0;
   font-family: "Golos", sans-serif;
   color: white;
+  overflow-x: hidden;
 }
 
 h1 {

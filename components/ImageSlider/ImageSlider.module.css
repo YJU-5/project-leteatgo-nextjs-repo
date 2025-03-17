@@ -18,7 +18,7 @@
   gap: 20px;
   justify-content: center;
   align-items: stretch;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
 
 .imageSliderContainer .imageContainer.slidingNext {
@@ -38,7 +38,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   opacity: 0;
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.6s ease-out forwards;
+  transition: transform 0.1s cubic-bezier(0.75, 0.25, 0.25, 0.75);
 }
 
 @media (max-width: 1499px) {
