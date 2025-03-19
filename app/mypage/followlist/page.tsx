@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
-import styles from './FollowList.module.css';
+import styles from './page.module.css';
+import Image from 'next/image';
 
 interface Follow {
   name: string;
@@ -21,16 +22,22 @@ export default function FollowList() {
         <div className={styles.header}>
           <h1 className={styles.searchTitle}>팔로우 관리</h1>
           <div className={styles.searchContainer}>
-            <span>이름</span>
             <div className={styles.searchBar}>
               <input
                 type="text"
                 placeholder="이름"
                 className={styles.searchInput}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <button className={styles.searchButton}>
-                <img src="/FollowList/search.png" alt="search" className={styles.searchIcon} />
+              <Image
+                src="/FollowList/search.png" 
+                alt="Search"
+                width={16}
+                height={16}
+                className={styles.searchIcon}
+              />
               </button>
             </div>
           </div>
@@ -40,7 +47,11 @@ export default function FollowList() {
           {follows.map((follow, index) => (
             <div key={index} className={styles.followItem}>
               <div className={styles.img}>
-                <img src="/gitb.png" alt="icon" className={styles.followImg} />
+                <Image
+                 width={78}
+                 height={78}
+                 src="/gitb.png"
+                 alt="유저프로필사진"/>
               </div>
               <div className={styles.info}>
                 <span className={styles.followName}>{follow.name}</span>
@@ -51,6 +62,7 @@ export default function FollowList() {
           ))}
         </div>
       </div>
+
 
   );
 }

@@ -19,9 +19,6 @@ export default function MyPageSection() {
 
   return (
     <>
-      {section === 'follow' && <FollowList />}
-      {section === 'inquiries' && <InquiryList />}
-      {section === 'myreviews' && <MyReviews/>}
       {section === 'event-info' && <h1>내 개최정보 (미구현)</h1>}
     </>
   );  

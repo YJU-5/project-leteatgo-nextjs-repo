@@ -3,11 +3,9 @@ import Sidebar from './Sidebar/Sidebar';
 
 export default function Layout({ children}: { children: ReactNode }) {
   return (
-    <div>
+    <div style={{ display: 'flex', }}>
       <Sidebar />
-      <div style={{ marginLeft: '18%', padding: '20px' }}>
-        {children}
-      </div>
+      <div style={{ marginLeft: '30vh',width:"100%"}}>{children}</div>
     </div>
   );
 }

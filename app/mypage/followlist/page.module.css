@@ -1,0 +1,133 @@
+.container {
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0; 
+  box-sizing: border-box; 
+  padding: 7.5rem 3.125rem 0 3.125rem;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.searchTitle {
+  color: #fff;
+  margin: 0;
+  font-size: 2rem;
+  text-align: left;
+  padding-left: 0;
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  padding-right: 0;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  border: 0.5px solid #444;
+  overflow: hidden;
+  width: 300px;
+  height: 2.5rem;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px 12px;
+  background-color: transparent;
+  border: none;
+  color: #000;
+  outline: none;
+  font-size: 0.875rem;
+  height: 100%;
+}
+
+.searchButton {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.underLine {
+  border-top: 1px solid #bbb;
+  width: 100%;
+  margin: 0.625rem 0;
+}
+
+.itemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.followItem {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  margin: 10px 0; 
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.img {
+  margin-right: 0.625rem;
+}
+
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.followName {
+  margin: 0;
+  color: #fff;
+  font-size: 1.125rem;
+}
+
+.followDate {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 0.75rem;
+  margin-right: 0.625rem;
+}
+
+.cancelbutton{
+  background-color: #ff4d4f;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-left: auto;
+  border: none;
+  height: 30px;
+}

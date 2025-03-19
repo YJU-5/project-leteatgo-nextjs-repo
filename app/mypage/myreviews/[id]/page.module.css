@@ -1,0 +1,56 @@
+.reviewDetail{
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 100px 100px 0;
+}
+
+.container{
+  
+  display: flex;
+  gap: 26%;
+}
+
+.container h1{
+  font-size: 72px;
+  margin: 0 0 10px;
+}
+
+.date{
+  font-size: 32px;
+  margin: 10px 0;
+}
+
+.address {
+  font-size: 24px;
+  margin: 14px 0;
+}
+
+.tag{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.tag div {
+  border: 2px solid #FFFFFF;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.imageContainer {
+  display: flex;
+  margin-top: 20px;
+  gap: 4px;
+}
+
+.subImageContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+.reviewCard{
+  background-color: #2D2D2D;
+}

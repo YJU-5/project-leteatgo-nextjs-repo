@@ -1,19 +1,17 @@
 .sidebar {
-  width: 15%;
+  width: 30vh;
   background-color: #1a1a1a;
-  color: #a0a0a0;
-  padding: 20px;
-  height: 100vh;
+  color: #fff;
+  height: 100%;
   position: fixed;
-  white-space: nowrap;
-  justify-items: end;
-  font-size: 1.125rem;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
   margin-top: 70%;
+  margin-left: 40%;
+  white-space: nowrap;
 }
 
 .sidebar li {
@@ -23,5 +21,5 @@
 }
 
 .sidebar li:hover {
-  color: #fff;
+  color: #a0a0a0;
 }

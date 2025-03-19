@@ -43,7 +43,7 @@ export default function UserDropdown({
 
   const handleMypage=()=>{
     setShowDropdown(false)
-    router.push('/mypage/follow')
+    router.push('/mypage/followlist')
   }
 
 

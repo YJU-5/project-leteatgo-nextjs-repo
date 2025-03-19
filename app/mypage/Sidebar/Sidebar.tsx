@@ -8,8 +8,8 @@ export default function Sidebar() {
   const menuItems = [ 
     { name: '내 개최 조회', path: '/mypage/event-info' },
     { name: '내 후기 조회', path: '/mypage/myreviews' },
-    { name: '1:1 문의', path: '/mypage/inquiries' },
-    { name: '팔로우 관리', path: '/mypage/follow' },
+    { name: '1:1 문의', path: '/mypage/inquiry' },
+    { name: '팔로우 관리', path: '/mypage/followlist' },
   ];
 
   return (
