@@ -32,7 +32,6 @@ export default function MyReviews() {
     { id: 9, title: "리뷰 제목5", date: "2024.11.30", img: "/gitb.png", location: "서울특별시 어쩌구" },
     { id: 10, title: "리뷰 제목6", date: "2024.11.30", img: "/gitb.png", location: "서울특별시 어쩌구" },
     { id: 11, title: "리뷰 제목7", date: "2024.11.30", img: "/gitb.png", location: "서울특별시 어쩌구" },
-
   ];
 
 
@@ -77,7 +76,7 @@ export default function MyReviews() {
           {
             reviews.map((review) => (
               <div
-                onClick={()=>handleReviewsDetail(review.id,review.title)}
+                // onClick={()=>handleReviewsDetail(review.id,review.title)}
                 key={review.id}
                 className={styles.reviewCard}
               >

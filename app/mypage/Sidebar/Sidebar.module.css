@@ -23,3 +23,13 @@
 .sidebar li:hover {
   color: #a0a0a0;
 }
+
+.menuItem{
+  text-decoration: none;
+  color: #fff;
+}
+
+.blue{
+  text-decoration: none;
+  color: #4274FF;
+}
