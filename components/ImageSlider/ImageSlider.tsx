@@ -81,7 +81,12 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
           aria-label="이전 이미지"
           disabled={isAnimating}
         >
-          左
+          <Image
+            src="/arrowLeft.png"
+            alt="이전 이미지"
+            width={20}
+            height={20}
+          />
         </button>
         <div
           className={`${styles.imageContainer} ${
@@ -114,7 +119,12 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
           aria-label="다음 이미지"
           disabled={isAnimating}
         >
-          右
+          <Image
+            src="/arrowRight.png"
+            alt="다음 이미지"
+            width={20}
+            height={20}
+          />
         </button>
       </div>
       <div className={styles.dotsContainer}>

@@ -73,7 +73,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: 20px;
@@ -91,7 +91,8 @@
 }
 
 .imageSliderContainer .sliderButton:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: transparent;
+  transform: translateY(-50%) scale(1.5);
 }
 
 .imageSliderContainer .prevButton {

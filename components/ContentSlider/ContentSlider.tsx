@@ -100,7 +100,7 @@ export default function ContentSlider({ contents, link }: ContentSliderProps) {
           aria-label="이전 내용"
           disabled={isAnimating}
         >
-          左
+          <Image src="/arrowLeft.png" alt="이전 내용" width={20} height={20} />
         </button>
         <div
           className={`${styles.imageContainer} ${
@@ -146,7 +146,7 @@ export default function ContentSlider({ contents, link }: ContentSliderProps) {
           aria-label="다음 내용"
           disabled={isAnimating}
         >
-          右
+          <Image src="/arrowRight.png" alt="다음 내용" width={20} height={20} />
         </button>
       </div>
       <div className={styles.dotsContainer}>
