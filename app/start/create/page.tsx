@@ -9,9 +9,17 @@ import Tag from "@/components/Tag/Tag";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import { useRouter } from "next/navigation";
 
+interface Create {
+  title: string;
+  location: string;
+  date: string;
+  foodTag: string;
+  price: number;
+}
+
 // 상수는 컴포넌트 외부로 이동
-const FOOD_TAGS = ["한식", "중식", "일식", "양식"] as const;
-const GENDER_TAGS = ["남자", "여자", "무관"] as const;
+const FOOD_TAGS = ["한식", "중식", "일식", "양식"];
+const GENDER_TAGS = ["남자", "여자", "무관"];
 const MAX_PRICE = 100000;
 const MAX_PEOPLE = 20;
 const MAX_AGE = 100;

@@ -18,17 +18,17 @@ export default function MainHeader() {
               <Link href="/start">시작하기</Link>
             </li>
             <li>
-              <Link href="/album">사진첩</Link>
+              <Link href="/album">공유하기</Link>
             </li>
             <li>
-              <Link href="/map">MAP</Link>
+              <Link href="/map">근처 소셜다이닝</Link>
             </li>
             <li>
-              <Link href="/reviews">후기</Link>
+              <Link href="/reviews">후기 작성하기</Link>
             </li>
           </ul>
           <ul className={styles.navLogin}>
-            <NavLogin/>
+            <NavLogin />
           </ul>
         </nav>
       </div>
