@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Notification from "@/components/Notification/Notification";
+import UserMenu from "@/components/UserMenu/USerMenu"
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -91,6 +92,14 @@ export default function MainHeaderLogin() {
         )
       }
 
+      {/* 마이페이지이동 창 */}
+      <UserMenu
+        showDropdown={showDropdown}
+        setShowDropdown={setShowDropdown}
+        handleLogout={handleLogout}
+      />
+
+      {/* {알람} */}
       <Notification
         showNotifications={showNotifications}
         setShowNotifications={setShowNotifications}
