@@ -53,8 +53,8 @@ export default function FollowList() {
                  src="/gitb.png"
                  alt="유저프로필사진"/>
               </div>
-              <div className={styles.info}>
-                <span className={styles.followName}>{follow.name}</span>
+              <div className={styles.usercontainer}>
+                <p className={styles.userName}>{follow.name}</p>
                 <p className={styles.followDate}>{follow.date}</p>
               </div>
               <button className={styles.cancelbutton}>취소</button>
@@ -62,7 +62,5 @@ export default function FollowList() {
           ))}
         </div>
       </div>
-
-
   );
 }

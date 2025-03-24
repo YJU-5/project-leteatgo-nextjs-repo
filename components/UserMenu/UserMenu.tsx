@@ -1,9 +1,10 @@
 "use Client"
 import { useEffect, useRef } from 'react';
-import styles from './UserDropdown.module.css'
+import styles from './UserMenu.module.css'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/Store';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 interface UserDropdownProps {
@@ -17,9 +18,9 @@ export default function UserDropdown({
   showDropdown,
   setShowDropdown,
   handleLogout,
-}:UserDropdownProps){
+}: UserDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const user = useSelector((state:RootState)=> state.user.user);
+  const user = useSelector((state: RootState) => state.user.user);
   const router = useRouter();
 
   useEffect(() => {
@@ -41,18 +42,24 @@ export default function UserDropdown({
     };
   }, [showDropdown, setShowDropdown]);
 
-  const handleMypage=()=>{
+  const handleMypage = () => {
     setShowDropdown(false)
     router.push('/mypage/followlist')
   }
 
 
-  return(
-    showDropdown &&(
+  return (
+    showDropdown && (
       <div className={styles.dropdownMenu} ref={dropdownRef}>
         <div className={styles.profileSection}>
-            <img src="/gitb.png" alt="User Avatar" className={styles.userAvatar}/>
-            <p className={styles.userName}>{user?.name}</p>
+          <Image
+            width={80}
+            height={80}
+            src="/gitb.png"
+            alt="프로필"
+            className={styles.userImage}
+          />
+          <p className={styles.userName}>{user?.name}</p>
         </div>
         <div className={styles.underLine}></div>
         <div className={styles.buttonGroup}>
@@ -60,6 +67,6 @@ export default function UserDropdown({
           <button className={styles.menuButton} onClick={handleLogout}>로그아웃</button>
         </div>
       </div>
-      )
+    )
   )
 }

@@ -1,0 +1,151 @@
+.reviewDetail {
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 100%;
+}
+
+.container h1 {
+  font-size: 3.5rem;
+  margin: 0 0 1rem;
+}
+
+.date {
+  font-size: 1.75rem;
+  margin: 1rem 0;
+}
+
+.address {
+  font-size: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.tag {
+  display: flex;
+  gap: 1rem; 
+  font-size: 0.875rem;
+  align-items: center;
+}
+
+.tag div {
+  border: 0.125rem solid #FFFFFF; 
+  padding: 0.5rem 1rem; 
+  border-radius: 1rem; 
+}
+
+.imageContainer {
+  display: flex;
+  gap: 2%; 
+}
+
+.mainImg {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.subImageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2%; 
+}
+
+.subImage {
+  object-fit: cover;
+  width: 150px;
+  height: 146px;
+}
+
+
+/* 하단부 */
+
+.reviewCount {
+  font-size: 1.25rem; /* 20px */
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.itemsScroll {
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto; 
+  scrollbar-width: none; /* Firefox에서 스크롤 바 숨기기 */
+  -ms-overflow-style: none; /* IE, Edge에서 스크롤 바 숨기기 */
+}
+
+.itemsScroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari에서 스크롤 바 숨기기 */
+}
+
+.reviewContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem; 
+  margin-top: 2%;
+}
+
+.reviewCard {
+  width: 20rem; 
+  background-color: #2D2D2D;
+  padding: 1rem; 
+  border-radius: 0.75rem; 
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem; 
+}
+
+.user h1 {
+  font-size: 1.125rem; 
+  font-weight: bold;
+}
+
+.profileImg {
+  border-radius: 10%;
+}
+
+.reviewText {
+  font-size: 1rem; 
+  color: #e0e0e0;
+  margin-top: 1rem; 
+}
+
+.reviewImageContainer {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem; 
+  margin-top: 1rem; 
+}
+
+.reviewMainImg {
+  border-radius: 0.75rem; 
+  object-fit: cover;
+  width: 12.5rem;
+  height: 12.5rem;
+}
+
+.reviewSubImageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; 
+}
+
+.reviewSubImage {
+  border-radius: 0.75rem; 
+  object-fit: cover;
+  width: 6.25rem;
+  height: 5.75rem;
+}

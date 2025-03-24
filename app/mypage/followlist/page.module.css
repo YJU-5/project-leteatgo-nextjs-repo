@@ -1,26 +1,19 @@
 .container {
-  width: 100%;
-  height: 100%; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: 0; 
   box-sizing: border-box; 
-  padding: 7.5rem 3.125rem 0 3.125rem;
-}
+  padding: 6% 4% 3% 3%;
+} 
 
 .header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 0.625rem;
   padding: 0 10px;
   box-sizing: border-box;
 }
 
 .searchTitle {
-  color: #fff;
   margin: 0;
   font-size: 2rem;
   text-align: left;
@@ -41,20 +34,15 @@
   background-color: #d9d9d9;
   border-radius: 8px;
   border: 0.5px solid #444;
-  overflow: hidden;
-  width: 300px;
-  height: 2.5rem;
 }
 
 .searchInput {
-  flex: 1;
   padding: 8px 12px;
   background-color: transparent;
   border: none;
   color: #000;
   outline: none;
   font-size: 0.875rem;
-  height: 100%;
 }
 
 .searchButton {
@@ -66,6 +54,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:active {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .searchIcon {
@@ -81,9 +74,7 @@
 
 .itemsContainer {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
 
 .followItem {
@@ -91,43 +82,45 @@
   align-items: center;
   background-color: #2a2a2a;
   margin: 10px 0; 
-  padding: 10px;
-  border-radius: 4px;
-  width: 100%;
+  padding: 1% 2% 1% 1%;
+  border-radius: 10px;
 }
 
 .img {
-  margin-right: 0.625rem;
+  margin-right: 1%;
 }
 
 
-.info {
+.usercontainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex: 1;
 }
 
-.followName {
+.userName {
   margin: 0;
   color: #fff;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
 .followDate {
   margin: 0;
-  color: #a0a0a0;
-  font-size: 0.75rem;
-  margin-right: 0.625rem;
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 1.4%;
 }
 
 .cancelbutton{
   background-color: #ff4d4f;
   color: #fff;
-  padding: 4px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  margin-left: auto;
+  padding: 5px 17px;
+  border-radius: 10px;
+  font-size: 1rem;
   border: none;
-  height: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.cancelbutton:hover {
+  background-color: #ff1f23; /* 호버 시 배경색을 더 진하게 */
 }

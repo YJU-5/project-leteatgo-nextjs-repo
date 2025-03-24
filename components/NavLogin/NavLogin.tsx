@@ -7,7 +7,7 @@ import styles from "./NavLogin.module.css"
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Notification from "@/components/Notification/Notification";
-import UserDropdown from "@/components/UserDropdown/UserDropdown";
+import UserMenu from "@/components/UserMenu/UserMenu";
 
 export default function NavLogin(){
   const router = useRouter();
@@ -86,7 +86,7 @@ export default function NavLogin(){
     }
 
     {/* 마이페이지이동 창 */}
-    <UserDropdown
+    <UserMenu
       showDropdown={showDropdown}
       setShowDropdown={setShowDropdown}
       handleLogout={handleLogout}

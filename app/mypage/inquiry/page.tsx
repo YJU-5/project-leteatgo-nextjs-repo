@@ -12,10 +12,9 @@ export default function Inquiry() {
   const [content, setContent] = useState('');
 
   return (
-    <div className={styles.inquiry}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <span className={styles.title}>1:1 문의</span>
+          <h1 className={styles.title}>1:1 문의</h1>
         </div>
         <div className={styles.formGroup}>
           <span className={styles.author}>작성자: {user?.name} </span>
@@ -39,6 +38,5 @@ export default function Inquiry() {
           />
         </div>
       </div>
-    </div>
   )
 }
