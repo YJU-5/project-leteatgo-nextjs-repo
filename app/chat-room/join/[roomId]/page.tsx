@@ -6,7 +6,7 @@ import { useChat } from '@/hooks/useChat';
 
 export default function ChatRoomPage() {
   const { roomId } = useParams(); // 동적 라우트 값
-  const { messages, sendMessage } = useChat(roomId as string);
+  const { messages, sendMessage, leaveRoom } = useChat(roomId as string);
   const [input, setInput] = useState('');
 
   if(!roomId){
@@ -23,6 +23,7 @@ export default function ChatRoomPage() {
       </div>
       <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="메시지를 입력하세요" />
       <button onClick={() => { sendMessage(input); setInput(''); }}>전송</button>
+      <button onClick={()=>{ leaveRoom()}}>채팅방 나가기</button>
     </div>
   );
 }
