@@ -3,6 +3,7 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import ContentSlider from "@/components/ContentSlider/ContentSlider";
+import { useState, useEffect } from "react";
 
 interface Content {
   id: number;
@@ -17,52 +18,23 @@ interface Content {
 }
 
 export default function Start() {
-  const contents: Content[] = [
-    {
-      id: 1,
-      img: "/foods/cn-food.jpg",
-      profileImg: "/gitb.png",
-      username: "차승현",
-      name: "차승현의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-    {
-      id: 2,
-      img: "/foods/jp-food.jpg",
-      profileImg: "/gitb.png",
-      username: "홍태관",
-      name: "홍태관의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-    {
-      id: 3,
-      img: "/foods/kr-food.jpg",
-      profileImg: "/gitb.png",
-      username: "김형선",
-      name: "김형선의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-    {
-      id: 4,
-      img: "/foods/us-food.jpg",
-      profileImg: "/gitb.png",
-      username: "차승현",
-      name: "차승현의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-  ];
+  const [contents, setContents] = useState<Content[]>([]);
+
+  useEffect(() => {
+    const fetchContents = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/contents`
+        );
+        const data = await response.json();
+        setContents(data);
+      } catch (error) {
+        console.error("소셜다이닝 데이터를 가져오는데 실패했습니다.", error);
+      }
+    };
+
+    fetchContents();
+  }, []);
 
   return (
     <div className={styles.start}>

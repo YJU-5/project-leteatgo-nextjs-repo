@@ -17,7 +17,7 @@ interface Create {
   price: number;
 }
 
-// 상수는 컴포넌트 외부로 이동
+// 바뀔 수도 있는 값들은 따로 지정해줌.
 const FOOD_TAGS = ["한식", "중식", "일식", "양식"];
 const GENDER_TAGS = ["남자", "여자", "무관"];
 const MAX_PRICE = 100000;
@@ -33,6 +33,8 @@ const MemoizedImageUpload = memo(ImageUpload);
 export default function Create() {
   const router = useRouter();
 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [minAge, setMinAge] = useState(0);
   const [maxAge, setMaxAge] = useState(MAX_AGE);
@@ -42,10 +44,12 @@ export default function Create() {
   const [selectedFoodTag, setSelectedFoodTag] = useState<string>("");
   const [selectedGenderTag, setSelectedGenderTag] = useState<string>("");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // 이벤트 핸들러 메모이제이션
   const handlePostcodeComplete = useCallback(
-    (address: string, coordinates: any) => {
+    (address: string, coordinates?: { lat: number; lng: number }) => {
       setLocation(address);
       console.log(address, coordinates);
     },
@@ -88,13 +92,75 @@ export default function Create() {
     router.back();
   }, [router]);
 
+  const handleSubmit = async () => {
+    try {
+      setIsSubmitting(true);
+      setError(null);
+
+      // 채팅방 생성을 위한 데이터 구성
+      const chatRoomData = {
+        title: title,
+        location: location,
+        date: selectedDate,
+        foodTag: selectedFoodTag,
+        price: price,
+        maxPeople: people,
+        minAge: minAge,
+        maxAge: maxAge,
+        gender: selectedGenderTag,
+        description: description,
+        images: selectedFiles,
+      };
+
+      // FormData 생성
+      const formData = new FormData();
+      selectedFiles.forEach((file) => {
+        formData.append("images", file);
+      });
+      Object.entries(chatRoomData).forEach(([key, value]) => {
+        if (key !== "images") {
+          formData.append(key, String(value));
+        }
+      });
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/chat-room`,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "채팅방 생성에 실패했습니다.");
+      }
+
+      const data = await response.json();
+      router.push(`/chat/${data.id}`);
+    } catch (error) {
+      console.error("채팅방 생성 중 오류 발생:", error);
+      setError(
+        error instanceof Error ? error.message : "서버 연결에 실패했습니다."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className={styles.create}>
       <div className={styles.createContainer}>
         <h1 className={styles.upContent}>소셜다이닝 개최하기</h1>
         <div className={`${styles.upContent} ${styles.delay1}`}>
           <h2>제목</h2>
-          <input type="text" className={styles.input} />
+          <input
+            type="text"
+            className={styles.input}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         <div
           className={`${styles.halfContainerWrap} ${styles.upContent} ${styles.delay2}`}
@@ -186,7 +252,11 @@ export default function Create() {
         </div>
         <div className={`${styles.upContent} ${styles.delay9}`}>
           <h2>설명</h2>
-          <textarea className={styles.textarea} />
+          <textarea
+            className={styles.textarea}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
         <div className={`${styles.upContent} ${styles.delay10}`}>
           <h2>첨부 이미지</h2>
@@ -195,13 +265,21 @@ export default function Create() {
           />
         </div>
         <div className={styles.buttonContainer}>
+          {error && <div className={styles.error}>{error}</div>}
           <button
             className={styles.button + " " + styles.cancel}
             onClick={handleCancel}
+            disabled={isSubmitting}
           >
             취소
           </button>
-          <button className={styles.button}>등록</button>
+          <button
+            className={styles.button}
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "등록 중..." : "등록"}
+          </button>
         </div>
       </div>
     </div>

@@ -10,14 +10,24 @@ interface DescriptionProps {
 
 interface Content {
   id: number;
-  img: string;
+  title: string;
+  description: string;
+  pictureUrl: string;
   profileImg: string;
   username: string;
   name: string;
   address: string;
-  date: string;
-  tag: string[];
-  person: number;
+  startDate: string;
+  maxParticipants: number;
+  gender: string;
+  minAge: number;
+  maxAge: number;
+  latitube: string;
+  longitude: string;
+  maxPrice: number;
+  minPrice: number;
+  createdAt: string;
+  isActive: number;
 }
 
 interface DescriptionProps {
@@ -30,7 +40,11 @@ export default function Description({
   onClose,
   link,
 }: DescriptionProps) {
-  const defaultImage = "/default-image.jpg"; // 기본 이미지 경로 설정
+  const defaultImage = "/foods/kr-food.jpg"; // 기본 이미지 경로 설정
+
+  const handleJoin = () => {
+    console.log("참여");
+  };
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
@@ -39,15 +53,17 @@ export default function Description({
           ✕
         </button>
         <Image
-          src={content.img || defaultImage}
+          src={content.pictureUrl || defaultImage}
           alt={`${content.name}의 이미지`}
           width={1000}
           height={1000}
           className={styles.modalImage}
         />
         <div className={styles.modalContentContainer}>
-          <h2 className={styles.modalContentTitle}>{content.name}</h2>
-          <p className={styles.modalContentPerson}>{content.person}명</p>
+          <h2 className={styles.modalContentTitle}>{content.title}</h2>
+          <p className={styles.modalContentPerson}>
+            최대 {content.maxParticipants}명
+          </p>
           <div className={styles.modalContentProfileWrapper}>
             <Image
               src={content.profileImg || defaultImage}
@@ -57,20 +73,27 @@ export default function Description({
               className={styles.modalContentProfileImg}
             />
             <p className={styles.modalContentUsername}>{content.username}</p>
-            <p className={styles.modalContentDate}>{content.date}</p>
+            <p className={styles.modalContentDate}>{content.startDate}</p>
           </div>
           <div className={styles.modalContentWrapper}>
             <p className={styles.modalContentAddress}>{content.address}</p>
+            <p className={styles.modalContentDescription}>
+              {content.description}
+            </p>
           </div>
-          <div className={styles.modalTags}>
-            {content.tag.map((tag) => (
-              <span key={tag} className={styles.tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
+          {/* <div className={styles.modalTags}>
+            <p className={styles.contentTag}>
+              {(content.tag || []).map((tag) => (
+                <span key={tag} className={styles.tag}>
+                  {tag}
+                </span>
+              ))}
+            </p>
+          </div> */}
           {link ? (
-            <button className={styles.modalContentButton}>참여</button>
+            <button className={styles.modalContentButton} onClick={handleJoin}>
+              참여
+            </button>
           ) : (
             <button className={styles.modalContentButton}>확인</button>
           )}

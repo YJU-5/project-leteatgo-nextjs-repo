@@ -4,15 +4,26 @@ import Image from "next/image";
 import Description from "../Description/Description";
 
 interface Content {
-  id: number;
-  img: string;
-  profileImg: string;
-  username: string;
-  name: string;
-  address: string;
-  date: string;
-  tag: string[];
-  person: number;
+  id: number; // 아이디
+  title: string; // 제목
+  description: string; // 설명
+  pictureUrl: string; // 이미지
+  profileImg: string; // 프로필 이미지
+  username: string; // 유저 이름
+  name: string; // 이름
+  address: string; // 주소
+  startDate: string; // 시작일
+  // tag?: string[];
+  maxParticipants: number; // 최대 참여자 수
+  gender: string; // 성별
+  minAge: number; // 최소 나이
+  maxAge: number; // 최대 나이
+  latitube: string; // 위도
+  longitude: string; // 경도
+  maxPrice: number; // 최대 가격
+  minPrice: number; // 최소 가격
+  createdAt: string; // 생성일
+  isActive: number; // 활성화 여부
 }
 
 interface ContentSliderProps {
@@ -20,13 +31,17 @@ interface ContentSliderProps {
   link: boolean;
 }
 
-export default function ContentSlider({ contents, link }: ContentSliderProps) {
+export default function ContentSlider({
+  contents = [],
+  link,
+}: ContentSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedContent, setSelectedContent] = useState<Content | null>(null);
+  const defaultImage = "/foods/kr-food.jpg";
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,10 +94,19 @@ export default function ContentSlider({ contents, link }: ContentSliderProps) {
     setSelectedContent(content);
   };
 
-  const visibleContents = contents.slice(
-    currentIndex,
-    currentIndex + itemsPerPage
-  );
+  const visibleContents = Array.isArray(contents)
+    ? contents.slice(currentIndex, currentIndex + itemsPerPage)
+    : [];
+
+  if (!Array.isArray(contents) || contents.length === 0) {
+    return (
+      <div className={styles.emptyContainer}>
+        <p className={styles.emptyMessage}>
+          현재 진행 중인 소셜 다이닝이 없습니다.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.contentSliderContainer} ref={containerRef}>
@@ -118,24 +142,20 @@ export default function ContentSlider({ contents, link }: ContentSliderProps) {
               onClick={() => handleContentClick(content)}
             >
               <Image
-                src={content.img}
+                src={content.pictureUrl || defaultImage}
                 alt={`${content.name}의 이미지`}
                 width={300}
                 height={150}
                 className={styles.sliderImage}
               />
               <div className={styles.contentInfo}>
-                <h3 className={styles.contentName}>{content.name}</h3>
+                <h3 className={styles.contentName}>{content.title}</h3>
+                {/* <p className={styles.contentUserName}>{content.userName}</p> */}
                 <p className={styles.contentAddress}>{content.address}</p>
-                <p className={styles.contentDate}>{content.date}</p>
-                <p className={styles.contentTag}>
-                  {content.tag.map((tag) => (
-                    <span key={tag} className={styles.tag}>
-                      {tag}
-                    </span>
-                  ))}
+                <p className={styles.contentDate}>{content.startDate}</p>
+                <p className={styles.contentPerson}>
+                  최대 인원: {content.maxParticipants}
                 </p>
-                <p className={styles.contentPerson}>인원: {content.person}</p>
               </div>
             </div>
           ))}
