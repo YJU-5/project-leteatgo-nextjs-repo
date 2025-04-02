@@ -14,6 +14,23 @@ interface Review {
   comment: string;
 }
 
+interface Host {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string | null;
+  birthday: string | null;
+  gender: string | null;
+  pictureUrl: string;
+  description: string | null;
+  role: string;
+  socialProvider: string;
+  socialId: string;
+  createdAt: string;
+  updatedAt: string;
+  deleted: boolean;
+}
+
 interface Content {
   id: number; // 아이디
   title: string; // 제목
@@ -35,6 +52,7 @@ interface Content {
   minPrice: number; // 최소 가격
   createdAt: string; // 생성일
   isActive: number; // 활성화 여부
+  hostId: Host; // 호스트 아이디
 }
 
 export default function Home() {
@@ -57,12 +75,26 @@ export default function Home() {
     const fetchContents = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/chat-room`
+          `${process.env.NEXT_PUBLIC_API_URL}/chat-room`,
+          {
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
+        console.log("API 응답:", data); // 디버깅용 로그
         setContents(data);
       } catch (error) {
-        console.error("소셜다이닝 데이터를 가져오는데 실패했습니다.", error);
+        console.error("소셜다이닝 데이터를 가져오는데 실패했습니다:", error);
+        // 에러 발생 시 빈 배열 설정
+        setContents([]);
       }
     };
 

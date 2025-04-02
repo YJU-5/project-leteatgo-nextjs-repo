@@ -3,6 +3,23 @@ import styles from "./ContentSlider.module.css";
 import Image from "next/image";
 import Description from "../Description/Description";
 
+interface Host {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string | null;
+  birthday: string | null;
+  gender: string | null;
+  pictureUrl: string;
+  description: string | null;
+  role: string;
+  socialProvider: string;
+  socialId: string;
+  createdAt: string;
+  updatedAt: string;
+  deleted: boolean;
+}
+
 interface Content {
   id: number; // 아이디
   title: string; // 제목
@@ -24,8 +41,8 @@ interface Content {
   minPrice: number; // 최소 가격
   createdAt: string; // 생성일
   isActive: number; // 활성화 여부
+  hostId: Host; // 호스트 아이디
 }
-
 interface ContentSliderProps {
   contents: Content[];
   link: boolean;
@@ -143,14 +160,21 @@ export default function ContentSlider({
             >
               <Image
                 src={content.pictureUrl || defaultImage}
-                alt={`${content.name}의 이미지`}
+                alt={`${content.hostId.name}의 이미지`}
                 width={300}
                 height={150}
                 className={styles.sliderImage}
               />
               <div className={styles.contentInfo}>
                 <h3 className={styles.contentName}>{content.title}</h3>
-                {/* <p className={styles.contentUserName}>{content.userName}</p> */}
+                <Image
+                  src={content.hostId.pictureUrl || defaultImage}
+                  alt={`${content.hostId.name}의 프로필 이미지`}
+                  width={20}
+                  height={20}
+                  className={styles.contentProfileImg}
+                />
+                <p className={styles.contentUsername}>{content.hostId.name}</p>
                 <p className={styles.contentAddress}>{content.address}</p>
                 <p className={styles.contentDate}>{content.startDate}</p>
                 <p className={styles.contentPerson}>
