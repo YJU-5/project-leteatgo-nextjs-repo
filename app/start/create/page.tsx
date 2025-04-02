@@ -8,17 +8,27 @@ import Postcode from "@/components/Postcode/Postcode";
 import Tag from "@/components/Tag/Tag";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/Store";
 
 interface Create {
   title: string;
-  location: string;
-  date: string;
-  foodTag: string;
-  price: number;
+  description: string;
+  address: string;
+  latitube: string;
+  longitude: string;
+  startDate: string;
+  maxPrice: number;
+  minPrice: number;
+  gender: string;
+  minAge: number;
+  maxAge: number;
+  maxParticipants: number;
+  pictureUrl: string;
+  // foodTag: string;
 }
 
 // 바뀔 수도 있는 값들은 따로 지정해줌.
-const FOOD_TAGS = ["한식", "중식", "일식", "양식"];
 const GENDER_TAGS = ["남자", "여자", "무관"];
 const MAX_PRICE = 100000;
 const MAX_PEOPLE = 20;
@@ -32,6 +42,7 @@ const MemoizedImageUpload = memo(ImageUpload);
 
 export default function Create() {
   const router = useRouter();
+  const jwtToken = useSelector((state: RootState) => state.user.jwtToken);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -40,17 +51,20 @@ export default function Create() {
   const [maxAge, setMaxAge] = useState(MAX_AGE);
   const [people, setPeople] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [location, setLocation] = useState("");
-  const [selectedFoodTag, setSelectedFoodTag] = useState<string>("");
-  const [selectedGenderTag, setSelectedGenderTag] = useState<string>("");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [address, setAddress] = useState("");
+  const [latitube, setLatitube] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [selectedGenderTag, setSelectedGenderTag] = useState("");
 
   // 이벤트 핸들러 메모이제이션
   const handlePostcodeComplete = useCallback(
     (address: string, coordinates?: { lat: number; lng: number }) => {
-      setLocation(address);
+      setAddress(address);
+      setLatitube(coordinates?.lat.toString() || "");
+      setLongitude(coordinates?.lng.toString() || "");
       console.log(address, coordinates);
     },
     []
@@ -60,12 +74,13 @@ export default function Create() {
     setSelectedDate(newValue);
   }, []);
 
-  const handleFoodTagSelect = useCallback((tag: string) => {
-    setSelectedFoodTag(tag);
-  }, []);
-
   const handleGenderTagSelect = useCallback((tag: string) => {
-    setSelectedGenderTag(tag);
+    const genderMap: { [key: string]: string } = {
+      남자: "M",
+      여자: "F",
+      무관: "UNSPECIFIED",
+    };
+    setSelectedGenderTag(genderMap[tag] || "UNSPECIFIED");
   }, []);
 
   const handlePriceChange = useCallback(
@@ -97,53 +112,99 @@ export default function Create() {
       setIsSubmitting(true);
       setError(null);
 
-      // 채팅방 생성을 위한 데이터 구성
-      const chatRoomData = {
-        title: title,
-        location: location,
-        date: selectedDate,
-        foodTag: selectedFoodTag,
-        price: price,
-        maxPeople: people,
-        minAge: minAge,
-        maxAge: maxAge,
-        gender: selectedGenderTag,
-        description: description,
-        images: selectedFiles,
-      };
+      if (!selectedDate) {
+        throw new Error("날짜를 선택해주세요.");
+      }
 
-      // FormData 생성
+      if (!jwtToken) {
+        throw new Error("로그인이 필요합니다.");
+      }
+
+      // 날짜를 YYYY-MM-DD 형식으로 변환
+      const formattedDate = selectedDate
+        .toLocaleDateString("ko-KR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })
+        .replace(/\. /g, "-")
+        .replace(".", "");
+
       const formData = new FormData();
-      selectedFiles.forEach((file) => {
-        formData.append("images", file);
-      });
-      Object.entries(chatRoomData).forEach(([key, value]) => {
-        if (key !== "images") {
-          formData.append(key, String(value));
-        }
-      });
+
+      // 기본 데이터 추가
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("address", address);
+      formData.append("latitube", latitube);
+      formData.append("longitude", longitude);
+      formData.append("startDate", formattedDate);
+      formData.append("maxPrice", String(price));
+      formData.append("minPrice", String(price));
+      formData.append("minAge", String(minAge));
+      formData.append("maxAge", String(maxAge));
+      formData.append("gender", selectedGenderTag);
+      formData.append("maxParticipants", String(people));
+      formData.append("pictureUrl", ""); // 빈 문자열로 초기화
+
+      // 이미지 파일이 있는 경우 추가
+      if (selectedFiles.length > 0) {
+        formData.append("pictureUrl", selectedFiles[0]);
+      }
+
+      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL); // API URL 확인용
+      console.log("전송할 데이터:", Object.fromEntries(formData)); // 디버깅용
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/chat-room`,
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            Accept: "application/json",
+          },
           body: formData,
           credentials: "include",
+          mode: "cors",
         }
       );
 
+      // 204 응답 처리
+      if (response.status === 204) {
+        throw new Error(
+          "서버가 응답을 처리하지 못했습니다. 다시 시도해주세요."
+        );
+      }
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "채팅방 생성에 실패했습니다.");
+        throw new Error(errorData.message || `서버 오류: ${response.status}`);
       }
 
       const data = await response.json();
+
+      if (!data || !data.id) {
+        throw new Error("채팅방 생성에 실패했습니다. 다시 시도해주세요.");
+      }
+
       router.push(`/chat/${data.id}`);
     } catch (error) {
       console.error("채팅방 생성 중 오류 발생:", error);
-      setError(
-        error instanceof Error ? error.message : "서버 연결에 실패했습니다."
-      );
+      if (error instanceof Error) {
+        if (error.message.includes("Failed to fetch")) {
+          setError(
+            "서버에 연결할 수 없습니다. 서버가 실행 중인지 확인해주세요."
+          );
+        } else if (error.message.includes("NetworkError")) {
+          setError(
+            "네트워크 연결에 문제가 있습니다. 인터넷 연결을 확인해주세요."
+          );
+        } else {
+          setError(error.message);
+        }
+      } else {
+        setError("알 수 없는 오류가 발생했습니다.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -179,7 +240,7 @@ export default function Create() {
         </div>
         <div className={`${styles.upContent} ${styles.delay3}`}>
           <h2>음식 태그</h2>
-          <MemoizedTag tags={FOOD_TAGS} onSelect={handleFoodTagSelect} />
+          {/* <MemoizedTag tags={FOOD_TAGS} onSelect={handleFoodTagSelect} /> */}
         </div>
         <div className={`${styles.upContent} ${styles.delay4}`}>
           <div className={styles.h2Wrap}>
