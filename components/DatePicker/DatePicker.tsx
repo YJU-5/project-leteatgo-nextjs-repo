@@ -5,6 +5,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { styled } from "@mui/material/styles";
 import dayjs from "dayjs";
 
+const StyledDemoContainer = styled(DemoContainer)({
+  position: "relative",
+  width: "100%",
+  "& .MuiStack-root": {
+    width: "100%",
+  },
+});
+
 const StyledDatePicker = styled(DatePicker)({
   width: "100%",
   margin: "0",
@@ -30,8 +38,10 @@ const StyledDatePicker = styled(DatePicker)({
     },
   },
   "& .MuiPickersCalendarHeader-root": {
-    color: "#000000",
-    borderRadius: "10px",
+    position: "sticky",
+    top: 0,
+    backgroundColor: "#ffffff",
+    zIndex: 1,
   },
   "& .MuiPickersCalendarHeader-label": {
     color: "#000000",
@@ -48,6 +58,26 @@ const StyledDatePicker = styled(DatePicker)({
     color: "#666666",
     borderRadius: "10px",
   },
+  "& .MuiPaper-root": {
+    position: "fixed",
+    zIndex: 9999,
+    maxHeight: "400px",
+    overflow: "hidden",
+    "& .MuiPickersCalendarHeader-root": {
+      position: "sticky",
+      top: 0,
+      backgroundColor: "#ffffff",
+      zIndex: 1,
+    },
+  },
+  "& .MuiPickersCalendarHeader-switchViewButton": {
+    position: "relative",
+    zIndex: 2,
+  },
+  "& .MuiPickersCalendarHeader-switchViewIcon": {
+    position: "relative",
+    zIndex: 2,
+  },
 });
 
 interface DatePickerProps {
@@ -61,7 +91,7 @@ export default function DatePickerComponent({
 }: DatePickerProps) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={["DatePicker", "DatePicker"]}>
+      <StyledDemoContainer components={["DatePicker", "DatePicker"]}>
         <StyledDatePicker
           format="YYYY.MM.DD"
           showDaysOutsideCurrentMonth
@@ -75,18 +105,18 @@ export default function DatePickerComponent({
             },
             popper: {
               placement: "bottom-end",
-              modifiers: [
-                {
-                  name: "offset",
-                  options: {
-                    offset: [0, 8],
-                  },
-                },
-              ],
+            },
+            calendarHeader: {
+              sx: {
+                position: "sticky",
+                top: 0,
+                backgroundColor: "#ffffff",
+                zIndex: 1,
+              },
             },
           }}
         />
-      </DemoContainer>
+      </StyledDemoContainer>
     </LocalizationProvider>
   );
 }
