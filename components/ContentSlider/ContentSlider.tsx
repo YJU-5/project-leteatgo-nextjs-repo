@@ -180,6 +180,19 @@ export default function ContentSlider({
                 <p className={styles.contentPerson}>
                   최대 인원: {content.maxParticipants}
                 </p>
+                <div className={styles.contentTag}>
+                  <p className={styles.tag}>
+                    {content.gender === "M"
+                      ? "남자"
+                      : content.gender === "F"
+                      ? "여자"
+                      : "무관"}
+                  </p>
+                  <p className={styles.tag}>
+                    {content.minAge}~{content.maxAge}대
+                  </p>
+                  <p className={styles.tag}>{content.minPrice}원</p>
+                </div>
               </div>
             </div>
           ))}

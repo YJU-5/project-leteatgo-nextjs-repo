@@ -97,17 +97,19 @@ export default function Description({
               {content.description}
             </p>
           </div>
-          {content.gender === "M" ? (
-            <p>남자</p>
-          ) : content.gender === "F" ? (
-            <p>여자</p>
-          ) : (
-            <p>무관</p>
-          )}
-          <p>
-            {content.minAge} ~ {content.maxAge}세
-          </p>
-          <p>{content.minPrice}원</p>
+          <div className={styles.modalTags}>
+            <p className={styles.tag}>
+              {content.gender === "M"
+                ? "남자"
+                : content.gender === "F"
+                ? "여자"
+                : "무관"}
+            </p>
+            <p className={styles.tag}>
+              {content.minAge} ~ {content.maxAge}세
+            </p>
+            <p className={styles.tag}>{content.minPrice}원</p>
+          </div>
           {link ? (
             <button className={styles.modalContentButton} onClick={handleJoin}>
               참여
