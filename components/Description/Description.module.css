@@ -44,7 +44,7 @@
 
 .modalImage {
   width: 100%;
-  height: 40vh;
+  height: 25vh;
   object-fit: cover;
   border-radius: 4px;
 }
@@ -64,6 +64,13 @@
 .modalContentContainer .modalContentTitle {
   display: inline-block;
   font-size: 2rem;
+  font-weight: 600;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.modalContentDescriptionTitle {
+  font-size: 1.5rem;
   font-weight: 600;
   margin: 0 auto;
 }
@@ -105,6 +112,7 @@
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
 .modalContentContainer .modalContentAddress {
