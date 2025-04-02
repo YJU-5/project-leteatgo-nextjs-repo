@@ -2,11 +2,12 @@ import { Configuration } from "webpack";
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
     styledComponents: true,
     emotion: true,
-    reactRemoveProperties: true,
+    reactRemoveProperties: false,
   },
   webpack: (config: Configuration) => {
     if (!config.optimization) {
