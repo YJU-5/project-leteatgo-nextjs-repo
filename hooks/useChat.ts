@@ -11,10 +11,14 @@ const socket = io('http://localhost:3001/chat-room/join', {
     }
 })
 export const useChat = (roomId: string) => {
+    // 메세지 목록 
     const [messages, setMessages] = useState<string[]>([])
+    // 채팅 참여자 목록 
     const [participants, setParticipants] = useState([])
+    // 개최자인지 아닌지 저장 
+    const [host, setHost] = useState('') 
 
-    console.log(participants);
+    console.log(host);
 
     useEffect(() => {
         // 채팅방 참여 
@@ -28,9 +32,14 @@ export const useChat = (roomId: string) => {
 
         // 서버에서 응답받은 참여자 목록 
         // 이름, 역할, 사진, 자기소개, id 
-        // @@@@@@@@@@@@@@@@@@@@
+        // 배열로 저장할 필요가 있음
         socket.on('roomParticipants',(users)=>{
             console.log(users);
+        })
+
+        // 유저 역할 저장 
+        socket.on('hosted',(host)=>{
+            setHost(host)
         })
 
         socket.on('messages',(msg)=>{
@@ -55,6 +64,6 @@ export const useChat = (roomId: string) => {
         socket.emit('leaveRoom',{ roomId })
     }
 
-    return { messages, sendMessage, leaveRoom }
+    return { messages, host, sendMessage, leaveRoom }
 
 }
