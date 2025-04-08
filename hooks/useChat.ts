@@ -18,6 +18,8 @@ export const useChat = (roomId: string) => {
     // 개최자인지 아닌지 저장 
     const [role, setRole] = useState('') 
 
+    console.log(role);
+
     useEffect(() => {
         // 채팅방 참여 
         socket.emit('joinRoom', roomId)
@@ -36,8 +38,8 @@ export const useChat = (roomId: string) => {
         })
 
         // 유저 역할 저장 
-        socket.on('role',(host)=>{
-            setRole(host)
+        socket.on('role',(role)=>{
+            setRole(role)
         })
 
         socket.on('messages',(msg)=>{
