@@ -5,6 +5,9 @@ import styles from "./page.module.css";
 import ImageSlider from "@/components/ImageSlider/ImageSlider";
 import ContentSlider from "@/components/ContentSlider/ContentSlider";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store/Store";
+import { login } from "@/store/UserSlice";
 
 // 별점도 있어야할 듯
 interface Review {
@@ -55,8 +58,26 @@ interface Content {
 }
 
 export default function Home() {
+  const userState = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [contents, setContents] = useState<Content[]>([]);
+
+  // 로컬 스토리지에서 사용자 정보를 가져와 Redux 스토어에 저장
+  useEffect(() => {
+    const storedToken = localStorage.getItem("jwtToken");
+    const storedUser = localStorage.getItem("user");
+
+    if (storedToken && storedUser && !userState.jwtToken) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        dispatch(login({ jwtToken: storedToken, user: parsedUser }));
+        console.log("로컬 스토리지에서 사용자 정보를 복원했습니다.");
+      } catch (error) {
+        console.error("사용자 정보 파싱 오류:", error);
+      }
+    }
+  }, [dispatch, userState.jwtToken]);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -88,7 +109,6 @@ export default function Home() {
         }
 
         const data = await response.json();
-        console.log("API 응답:", data); // 디버깅용 로그
         setContents(data);
       } catch (error) {
         console.error("소셜다이닝 데이터를 가져오는데 실패했습니다:", error);
@@ -97,9 +117,41 @@ export default function Home() {
       }
     };
 
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user`,
+          {
+            credentials: "include",
+            headers: {
+              Authorization: `Bearer ${userState.jwtToken}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const userData = await response.json();
+
+        // API에서 가져온 사용자 정보로 Redux 스토어 업데이트
+        if (userData && userState.jwtToken) {
+          dispatch(login({ jwtToken: userState.jwtToken, user: userData }));
+        }
+      } catch (error) {
+        console.error("유저 데이터를 가져오는데 실패했습니다:", error);
+      }
+    };
+
     fetchReviews();
     fetchContents();
-  }, []);
+
+    // 토큰이 있을 때만 사용자 정보 가져오기
+    if (userState.jwtToken) {
+      fetchUser();
+    }
+  }, [dispatch, userState.jwtToken]);
 
   return (
     <div className={styles.home}>
