@@ -53,11 +53,30 @@ export default function Description({
   onClose,
   link,
 }: DescriptionProps) {
-  const defaultImage = "/foods/kr-food.jpg"; // 기본 이미지 경로 설정
+  const defaultImage = "/favicon.png"; // 기본 이미지 경로 설정
 
   const handleJoin = () => {
     console.log("참여");
   };
+
+  if (!content.hostId) {
+    content.hostId = {
+      id: "",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      birthday: "",
+      gender: "",
+      pictureUrl: "",
+      description: "",
+      role: "",
+      socialProvider: "",
+      socialId: "",
+      createdAt: "",
+      updatedAt: "",
+      deleted: false,
+    };
+  }
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
@@ -80,12 +99,14 @@ export default function Description({
           <div className={styles.modalContentProfileWrapper}>
             <Image
               src={content.hostId.pictureUrl || defaultImage}
-              alt={`${content.hostId.name}의 프로필 이미지`}
+              alt={`${content.hostId.name || "익명"}의 프로필 이미지`}
               width={100}
               height={100}
               className={styles.modalContentProfileImg}
             />
-            <p className={styles.modalContentUsername}>{content.hostId.name}</p>
+            <p className={styles.modalContentUsername}>
+              {content.hostId.name || "익명"}
+            </p>
             <p className={styles.modalContentDate}>{content.startDate}</p>
           </div>
           <div className={styles.modalContentWrapper}>
