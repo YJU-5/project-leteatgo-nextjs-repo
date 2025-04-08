@@ -11,21 +11,38 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/Store";
 
+interface Host {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string | null;
+  birthday: string | null;
+  gender: string | null;
+  pictureUrl: string;
+  description: string | null;
+  role: string;
+  socialProvider: string;
+  socialId: string;
+  createdAt: string;
+  updatedAt: string;
+  deleted: boolean;
+}
+
 interface Create {
   title: string;
   description: string;
   address: string;
-  latitube: string;
+  latitude: string;
   longitude: string;
   startDate: string;
-  maxPrice: number;
-  minPrice: number;
+  price: number;
   gender: string;
   minAge: number;
   maxAge: number;
   maxParticipants: number;
   pictureUrl: string;
   // foodTag: string;
+  hostId: Host;
 }
 
 // 바뀔 수도 있는 값들은 따로 지정해줌.
@@ -43,6 +60,7 @@ const MemoizedImageUpload = memo(ImageUpload);
 export default function Create() {
   const router = useRouter();
   const jwtToken = useSelector((state: RootState) => state.user.jwtToken);
+  const user = useSelector((state: RootState) => state.user.user);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -55,7 +73,7 @@ export default function Create() {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [address, setAddress] = useState("");
-  const [latitube, setLatitube] = useState("");
+  const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [selectedGenderTag, setSelectedGenderTag] = useState("");
 
@@ -63,7 +81,7 @@ export default function Create() {
   const handlePostcodeComplete = useCallback(
     (address: string, coordinates?: { lat: number; lng: number }) => {
       setAddress(address);
-      setLatitube(coordinates?.lat.toString() || "");
+      setLatitude(coordinates?.lat.toString() || "");
       setLongitude(coordinates?.lng.toString() || "");
       console.log(address, coordinates);
     },
@@ -120,6 +138,10 @@ export default function Create() {
         throw new Error("로그인이 필요합니다.");
       }
 
+      if (!user) {
+        throw new Error("사용자 정보를 찾을 수 없습니다.");
+      }
+
       // 날짜를 YYYY-MM-DD 형식으로 변환
       const formattedDate = selectedDate
         .toLocaleDateString("ko-KR", {
@@ -130,30 +152,61 @@ export default function Create() {
         .replace(/\. /g, "-")
         .replace(".", "");
 
+      // hostId 객체 구성
+      const hostId = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        birthday: user.birthday,
+        gender: user.gender,
+        pictureUrl: user.pictureUrl,
+        description: user.description,
+        role: user.role,
+        socialProvider: user.socialProvider,
+        socialId: user.socialId,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        deleted: user.deleted,
+      };
+
+      // 요청 데이터 구성
+      const requestData = {
+        title: title,
+        description: description,
+        status: "IN_PROGRESS",
+        startDate: formattedDate,
+        maxParticipants: people.toString(),
+        gender: selectedGenderTag,
+        pictureUrl: "", // 이미지 URL은 서버에서 처리 후 반환됨
+        minAge: minAge.toString(),
+        maxAge: maxAge.toString(),
+        latitude: latitude,
+        longitude: longitude,
+        address: address,
+        price: price.toString(),
+        hostId: hostId, // 구성된 hostId 객체 전달
+      };
+
+      // FormData 생성
       const formData = new FormData();
 
-      // 기본 데이터 추가
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("address", address);
-      formData.append("latitube", latitube);
-      formData.append("longitude", longitude);
-      formData.append("startDate", formattedDate);
-      formData.append("maxPrice", String(price));
-      formData.append("minPrice", String(price));
-      formData.append("minAge", String(minAge));
-      formData.append("maxAge", String(maxAge));
-      formData.append("gender", selectedGenderTag);
-      formData.append("maxParticipants", String(people));
-      formData.append("pictureUrl", ""); // 빈 문자열로 초기화
+      // JSON 데이터 추가
+      Object.entries(requestData).forEach(([key, value]) => {
+        if (key === "hostId") {
+          // hostId는 객체이므로 JSON 문자열로 변환
+          formData.append(key, JSON.stringify(value));
+        } else {
+          formData.append(key, value as string);
+        }
+      });
 
-      // 이미지 파일이 있는 경우 추가
+      // 이미지 파일이 있는 경우 추가 - 서버에서 기대하는 필드명으로 변경
       if (selectedFiles.length > 0) {
-        formData.append("pictureUrl", selectedFiles[0]);
+        formData.append("pictureUrl", selectedFiles[0]); // 'image' 대신 'pictureUrl'로 변경
       }
 
-      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL); // API URL 확인용
-      console.log("전송할 데이터:", Object.fromEntries(formData)); // 디버깅용
+      console.log("전송할 데이터:", requestData);
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/chat-room`,

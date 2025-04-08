@@ -34,10 +34,9 @@ interface Content {
   gender: string; // 성별
   minAge: number; // 최소 나이
   maxAge: number; // 최대 나이
-  latitube: string; // 위도
+  latitude: string; // 위도
   longitude: string; // 경도
-  maxPrice: number; // 최대 가격
-  minPrice: number; // 최소 가격
+  price: number; // 가격
   createdAt: string; // 생성일
   isActive: number; // 활성화 여부
   hostId: Host; // 호스트 아이디
@@ -108,7 +107,7 @@ export default function Description({
             <p className={styles.tag}>
               {content.minAge} ~ {content.maxAge}세
             </p>
-            <p className={styles.tag}>{content.minPrice}원</p>
+            <p className={styles.tag}>{content.price}원</p>
           </div>
           {link ? (
             <button className={styles.modalContentButton} onClick={handleJoin}>

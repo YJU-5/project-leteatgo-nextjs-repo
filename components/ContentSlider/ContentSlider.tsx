@@ -35,10 +35,9 @@ interface Content {
   gender: string; // 성별
   minAge: number; // 최소 나이
   maxAge: number; // 최대 나이
-  latitube: string; // 위도
+  latitude: string; // 위도
   longitude: string; // 경도
-  maxPrice: number; // 최대 가격
-  minPrice: number; // 최소 가격
+  price: number; // 가격
   createdAt: string; // 생성일
   isActive: number; // 활성화 여부
   hostId: Host; // 호스트 아이디
@@ -160,21 +159,27 @@ export default function ContentSlider({
             >
               <Image
                 src={content.pictureUrl || defaultImage}
-                alt={`${content.hostId.name}의 이미지`}
+                alt={content.title}
                 width={300}
                 height={150}
                 className={styles.sliderImage}
               />
               <div className={styles.contentInfo}>
                 <h3 className={styles.contentName}>{content.title}</h3>
-                <Image
-                  src={content.hostId.pictureUrl || defaultImage}
-                  alt={`${content.hostId.name}의 프로필 이미지`}
-                  width={20}
-                  height={20}
-                  className={styles.contentProfileImg}
-                />
-                <p className={styles.contentUsername}>{content.hostId.name}</p>
+                {content.hostId && (
+                  <>
+                    <Image
+                      src={content.hostId.pictureUrl || defaultImage}
+                      alt={`${content.hostId.name || "사용자"}의 프로필 이미지`}
+                      width={20}
+                      height={20}
+                      className={styles.contentProfileImg}
+                    />
+                    <p className={styles.contentUsername}>
+                      {content.hostId.name || "사용자"}
+                    </p>
+                  </>
+                )}
                 <p className={styles.contentAddress}>{content.address}</p>
                 <p className={styles.contentDate}>{content.startDate}</p>
                 <p className={styles.contentPerson}>
@@ -191,7 +196,7 @@ export default function ContentSlider({
                   <p className={styles.tag}>
                     {content.minAge}~{content.maxAge}대
                   </p>
-                  <p className={styles.tag}>{content.minPrice}원</p>
+                  <p className={styles.tag}>{content.price}원</p>
                 </div>
               </div>
             </div>
