@@ -1,15 +1,16 @@
-"use client"
-import {  store } from "./Store";
-import { Provider, useDispatch} from "react-redux";
-import userProvider from "./UserCheck";
+"use client";
+import { store } from "./Store";
+import { Provider } from "react-redux";
 import AuthCheck from "./UserCheck";
 
-export default function ReduxProvider({ children }: {children:React.ReactNode}) {
+export default function ReduxProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Provider store={store}>
-      <AuthCheck>
-          {children}
-      </AuthCheck>
+      <AuthCheck>{children}</AuthCheck>
     </Provider>
-  )
+  );
 }

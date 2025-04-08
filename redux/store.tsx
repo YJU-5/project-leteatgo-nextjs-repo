@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import modalSlice from "./modal/modalSlice";
 import { authReducer } from "./auth/authSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import sessionStorageMiddleware from "./sessionStorageMiddleware";
@@ -24,7 +23,6 @@ const preloadedState = loadState();
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  modal: modalSlice,
 });
 
 export const store = configureStore({
