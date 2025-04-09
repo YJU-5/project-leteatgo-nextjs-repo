@@ -220,6 +220,34 @@
   outline: none;
 }
 
+.create .errorContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.create .error {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #ff0000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .upContent {
   position: relative;
   opacity: 0;

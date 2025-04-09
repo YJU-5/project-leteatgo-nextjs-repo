@@ -130,12 +130,20 @@ export default function Create() {
       setIsSubmitting(true);
       setError(null);
 
-      if (!selectedDate) {
-        throw new Error("날짜를 선택해주세요.");
-      }
-
       if (!jwtToken) {
         throw new Error("로그인이 필요합니다.");
+      }
+
+      if (title === "") {
+        throw new Error("제목을 입력해주세요.");
+      }
+
+      if (address === "") {
+        throw new Error("주소를 입력해주세요.");
+      }
+
+      if (!selectedDate) {
+        throw new Error("날짜를 선택해주세요.");
       }
 
       if (!user) {
@@ -240,7 +248,7 @@ export default function Create() {
         throw new Error("채팅방 생성에 실패했습니다. 다시 시도해주세요.");
       }
 
-      router.push(`/chat/${data.id}`);
+      router.push(`/chat-room/${data.id}`);
     } catch (error) {
       console.error("채팅방 생성 중 오류 발생:", error);
       if (error instanceof Error) {
@@ -379,7 +387,6 @@ export default function Create() {
           />
         </div>
         <div className={styles.buttonContainer}>
-          {error && <div className={styles.error}>{error}</div>}
           <button
             className={styles.button + " " + styles.cancel}
             onClick={handleCancel}
@@ -395,6 +402,9 @@ export default function Create() {
             {isSubmitting ? "등록 중..." : "등록"}
           </button>
         </div>
+      </div>
+      <div className={styles.errorContainer}>
+        {error && <div className={styles.error}>{error}</div>}
       </div>
     </div>
   );
