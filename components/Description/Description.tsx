@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./Description.module.css";
+import { useRouter } from "next/navigation";
 
 interface Host {
   id: string;
@@ -54,9 +55,10 @@ export default function Description({
   link,
 }: DescriptionProps) {
   const defaultImage = "/favicon.png"; // 기본 이미지 경로 설정
+  const router = useRouter();
 
   const handleJoin = () => {
-    console.log("참여");
+    router.push(`/chat-room/${content.id}`);
   };
 
   if (!content.hostId) {
