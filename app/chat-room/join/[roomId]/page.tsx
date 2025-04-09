@@ -6,7 +6,7 @@ import { useChat } from '@/hooks/useChat';
 
 export default function ChatRoomPage() {
   const { roomId } = useParams(); // 동적 라우트 값
-  const { messages, role, sendMessage, leaveRoom } = useChat(roomId as string);
+  const { messages, role, sendMessage, leaveRoom, requestReview } = useChat(roomId as string);
   const [input, setInput] = useState('');
 
   if(!roomId){
@@ -25,7 +25,8 @@ export default function ChatRoomPage() {
       <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="메시지를 입력하세요" />
       <button onClick={() => { sendMessage(input); setInput(''); }}>전송</button>
       <button onClick={()=>{ leaveRoom()}}>채팅방 나가기</button>
-      {role === 'HOST' ? <button>리뷰요청하기</button> : ""}
+      {/* 유저의 역할이 HOST일 경우 리뷰요청 버튼이 나타나고 USER일 경우 안나타남 */}
+      {role === 'HOST' ? <button onClick={()=>{requestReview()}}>리뷰요청하기</button> : ""}
     </div>
   );
 }
