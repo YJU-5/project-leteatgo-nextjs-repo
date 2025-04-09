@@ -37,3 +37,7 @@
 .googleButton:hover {
   background-color: #dbd9d9;
 }
+
+.kakaoButton:hover .kakaoIcon rect {
+  fill: #ebc932;
+}

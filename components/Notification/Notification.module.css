@@ -75,3 +75,9 @@
 .notificationButton:hover {
   background: #aba6a6;
 }
+
+.noNotifications {
+  color: #fdfdfd;
+  text-align: center;
+  padding: 10px;
+}
