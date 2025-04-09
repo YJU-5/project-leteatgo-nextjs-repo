@@ -22,6 +22,12 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  images: {
+    domains: [
+      "lh3.googleusercontent.com",
+      "nestjs-image-bucket.s3.ap-northeast-2.amazonaws.com",
+    ],
+  },
 };
 
 export default nextConfig;

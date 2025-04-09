@@ -1,12 +1,12 @@
 "use client"; // Next.js 환경
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "./UserSlice";
 import { jwtDecode } from "jwt-decode";
-import { RootState } from "@/store/Store";
+import { User } from "./UserSlice";
 
-export default function UserCheck({ children }: { children: React.ReactNode }){
+export default function UserCheck({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true); //  로딩 상태 추가
 
@@ -15,7 +15,7 @@ export default function UserCheck({ children }: { children: React.ReactNode }){
 
     if (token) {
       try {
-        const userInfo = jwtDecode(token); //  토큰에서 유저 정보 추출
+        const userInfo = jwtDecode(token) as User; // 타입 단언 추가
         dispatch(login({ jwtToken: token, user: userInfo })); //  Redux에 저장
       } catch (error) {
         console.error("토큰 디코딩 오류:", error);
@@ -28,6 +28,4 @@ export default function UserCheck({ children }: { children: React.ReactNode }){
   if (isLoading) return; // Redux 상태 복구 전까지 로딩 UI 표시
 
   return children;
-};
-
-
+}

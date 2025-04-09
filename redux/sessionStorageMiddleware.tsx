@@ -5,6 +5,7 @@ const sessionStorageMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
   const state = store.getState();
   sessionStorage.setItem("auth", JSON.stringify(state.auth));
+  sessionStorage.setItem("user", JSON.stringify(state.user));
   return result;
 };
 
