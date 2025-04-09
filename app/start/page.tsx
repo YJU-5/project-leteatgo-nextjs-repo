@@ -3,66 +3,66 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import ContentSlider from "@/components/ContentSlider/ContentSlider";
+import { useState, useEffect } from "react";
+
+interface Host {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string | null;
+  birthday: string | null;
+  gender: string | null;
+  pictureUrl: string;
+  description: string | null;
+  role: string;
+  socialProvider: string;
+  socialId: string;
+  createdAt: string;
+  updatedAt: string;
+  deleted: boolean;
+}
 
 interface Content {
-  id: number;
-  img: string;
-  profileImg: string;
-  username: string;
-  name: string;
-  address: string;
-  date: string;
-  tag: string[];
-  person: number;
+  id: number; // 아이디
+  title: string; // 제목
+  description: string; // 설명
+  pictureUrl: string; // 이미지
+  profileImg: string; // 프로필 이미지
+  username: string; // 유저 이름
+  name: string; // 이름
+  address: string; // 주소
+  startDate: string; // 시작일
+  // tag?: string[];
+  maxParticipants: number; // 최대 참여자 수
+  gender: string; // 성별
+  minAge: number; // 최소 나이
+  maxAge: number; // 최대 나이
+  latitude: string; // 위도
+  longitude: string; // 경도
+  price: number; // 가격
+  createdAt: string; // 생성일
+  isActive: number; // 활성화 여부
+  hostId: Host; // 호스트 아이디
 }
 
 export default function Start() {
-  const contents: Content[] = [
-    {
-      id: 1,
-      img: "/foods/cn-food.jpg",
-      profileImg: "/gitb.png",
-      username: "차승현",
-      name: "차승현의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-    {
-      id: 2,
-      img: "/foods/jp-food.jpg",
-      profileImg: "/gitb.png",
-      username: "홍태관",
-      name: "홍태관의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-    {
-      id: 3,
-      img: "/foods/kr-food.jpg",
-      profileImg: "/gitb.png",
-      username: "김형선",
-      name: "김형선의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-    {
-      id: 4,
-      img: "/foods/us-food.jpg",
-      profileImg: "/gitb.png",
-      username: "차승현",
-      name: "차승현의 소셜다이닝",
-      address: "서울특별시 강남구 테헤란로 14길 6 남도빌딩 2층",
-      date: "2025-03-04",
-      tag: ["한식", "요리 교실", "3만원", "28~35세"],
-      person: 4,
-    },
-  ];
+  const [contents, setContents] = useState<Content[]>([]);
+
+  useEffect(() => {
+    const fetchContents = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/chat-room`
+        );
+        const data = await response.json();
+        setContents(data);
+      } catch (error) {
+        console.error("소셜다이닝 데이터를 가져오는데 실패했습니다.", error);
+      }
+    };
+
+    fetchContents();
+  }, []);
 
   return (
     <div className={styles.start}>
