@@ -4,7 +4,7 @@ import { login } from "@/store/UserSlice";
 import { AppDispatch } from "@/store/Store";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 export default function KakaoCallback() {
