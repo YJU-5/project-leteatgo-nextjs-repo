@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./MainHeader.module.css";
-import NavLogin from "../NavLogin/NavLogin";
+import MainHeaderLogin from "./MainHeaderLogin/MainHeaderLogin";
 
 export default function MainHeader() {
   return (
@@ -18,18 +18,16 @@ export default function MainHeader() {
               <Link href="/start">시작하기</Link>
             </li>
             <li>
-              <Link href="/album">공유하기</Link>
+              <Link href="/album">사진첩</Link>
             </li>
             <li>
-              <Link href="/map">근처 소셜다이닝</Link>
+              <Link href="/map">MAP</Link>
             </li>
             <li>
-              <Link href="/reviews">후기 작성하기</Link>
+              <Link href="/reviews">후기</Link>
             </li>
           </ul>
-          <ul className={styles.navLogin}>
-            <NavLogin />
-          </ul>
+          <MainHeaderLogin />
         </nav>
       </div>
       <div className={styles.gradient}></div>
