@@ -21,7 +21,9 @@ export default function UserDropdown({
 }: UserDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const user = useSelector((state: RootState) => state.user.user);
+  const token = localStorage.getItem('jwtToken')
   const router = useRouter();
+
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -44,21 +46,29 @@ export default function UserDropdown({
 
   const handleMypage = () => {
     setShowDropdown(false)
-    router.push('/mypage/followlist')
+    router.push(`/mypage/myeventlist`)
+  }
+
+  const handleMyeProfile = () => {
+    setShowDropdown(false)
+    router.push('/profile')
   }
 
 
   return (
     showDropdown && (
       <div className={styles.dropdownMenu} ref={dropdownRef}>
-        <div className={styles.profileSection}>
-          <Image
-            width={80}
-            height={80}
-            src="/gitb.png"
-            alt="프로필"
-            className={styles.userImage}
-          />
+        <div
+          className={styles.profileSection}
+          onClick={handleMyeProfile}
+        >
+            <Image
+              width={80}
+              height={80}
+              src="/gitb.png"
+              alt="프로필"
+              className={styles.userImage}
+            />
           <p className={styles.userName}>{user?.name}</p>
         </div>
         <div className={styles.underLine}></div>
