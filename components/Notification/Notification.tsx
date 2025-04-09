@@ -26,7 +26,6 @@ export default function Notification({ showNotifications, setShowNotifications, 
       message: "홍태관 님이 새로운 게시글을 올렸습니다.",
       date: "2024.11.30",
     },
-
   ];
 
   useEffect(() => {

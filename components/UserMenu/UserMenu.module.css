@@ -16,6 +16,31 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 12px;
+}
+
+
+.profileSection:hover {
+  background-color: rgba(0, 0, 0, 0.05); 
+  transform: scale(1.02); 
+}
+
+
+.profileSection:hover .userImage {
+  transform: scale(1.05); 
+  transition: transform 0.2s ease;
+}
+
+.profileSection:hover .userName {
+  color: rgba(0, 0, 0, 0.8); 
+  transition: color 0.2s ease;
+}
+
+/* 클릭 시 */
+.profileSection:active {
+  background-color: rgba(0, 0, 0, 0.08); 
+  transform: scale(0.97);
+  transition: background-color 0.1s ease, transform 0.1s ease;
 }
 
 .userImage{
@@ -24,10 +49,14 @@
   border-radius: 50%;
 }
 
+
 .userName{
-  font-size: 16px;
+  font-size: 26px;
+  margin: 3%;
   font-weight: bold;
 }
+
+
 
 .underLine{
   margin: 8px 0;
@@ -41,7 +70,7 @@
 
 .menuButton{
   text-align: left;
-  padding: 8px 0;
+  padding: 8px ;
   background: none;
   border: none;
   cursor: pointer;
@@ -50,11 +79,6 @@
 }
 
 .menuButton:hover{
-  background: #f5f5f5;
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.noNotifications {
-  color: #fdfdfd;
-  text-align: center;
-  padding: 10px;
-}
