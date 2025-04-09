@@ -27,7 +27,7 @@ export default function MainHeader() {
               <Link href="/reviews">후기</Link>
             </li>
           </ul>
-            <MainHeaderLogin/>
+          <MainHeaderLogin />
         </nav>
       </div>
       <div className={styles.gradient}></div>
