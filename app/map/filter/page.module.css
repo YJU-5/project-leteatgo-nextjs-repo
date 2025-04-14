@@ -1,0 +1,232 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #1a1a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.filterSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 24px;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filterLabel {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.rangeContainer {
+  position: relative;
+  width: 100%;
+  padding: 15px 0;
+}
+
+.rangeSlider {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+}
+
+.rangeSlider::before {
+  content: '';
+  position: absolute;
+  left: var(--range-min, 0%);
+  right: calc(100% - var(--range-max, 100%));
+  height: 100%;
+  background: #007AFF;
+  border-radius: 2px;
+}
+
+/* Range Input Styles */
+.rangeSlider input[type="range"] {
+  -webkit-appearance: none;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: none;
+  top: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rangeSlider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007AFF;
+  cursor: pointer;
+  pointer-events: auto;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.rangeSlider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007AFF;
+  cursor: pointer;
+  pointer-events: auto;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.rangeValues {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  color: #888;
+  font-size: 14px;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 8px 20px;
+  border-radius: 20px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag.active {
+  background-color: #007aff;
+  border-color: #007aff;
+  color: white;
+}
+
+.buttonContainer {
+  padding: 24px;
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+.confirmButton {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirmButton:hover {
+  background-color: #0056b3;
+}
+
+.resetButton {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #888;
+  border: 1px solid #333;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+}
+
+.resetButton:hover {
+  border-color: #555;
+  color: white;
+}
+
+/* Hide default range input track */
+.rangeSlider input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 4px;
+  background: transparent;
+}
+
+.rangeSlider input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: transparent;
+}
+
+.resultContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.resultCard {
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 16px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #888;
+  font-size: 14px;
+}
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.cardTag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #333;
+  font-size: 12px;
+}
