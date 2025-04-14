@@ -21,9 +21,17 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": [] 
+    "types": []
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "global.d.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "global.d.ts"
+  ],
+  "exclude": ["node_modules"],
+  "incremental": true,
+  "skipLibCheck": true,
+  "isolatedModules": true
 }
-

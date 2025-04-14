@@ -1,0 +1,14 @@
+.input2 {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  height: 3rem;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.input2:hover {
+  border-color: #564b9a;
+}
