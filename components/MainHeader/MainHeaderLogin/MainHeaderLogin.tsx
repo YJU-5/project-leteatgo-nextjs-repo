@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./MainHeaderLogin.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+<<<<<<< HEAD
 import Image from "next/image";
+=======
+>>>>>>> f3710f4f (feat: Add album feature)
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -26,7 +29,10 @@ export default function MainHeaderLogin() {
 
   const CheckLogout = () => {
     dispatch(logout());
+<<<<<<< HEAD
     localStorage.removeItem("userInfo");
+=======
+>>>>>>> f3710f4f (feat: Add album feature)
     router.push("/");
     setShowModal(false);
   };
@@ -56,11 +62,16 @@ export default function MainHeaderLogin() {
       {token ? (
         <div>
           <li>
+<<<<<<< HEAD
             <Image
               src="/login/notification.png"
               alt="알림"
               width={24}
               height={24}
+=======
+            <img
+              src="/login/notification.png"
+>>>>>>> f3710f4f (feat: Add album feature)
               onClick={() => setShowNotifications(!showNotifications)}
             />
           </li>

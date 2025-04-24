@@ -1,11 +1,16 @@
 "use client";
 
+<<<<<<< HEAD
 import { login, User } from "@/store/UserSlice";
 import { AppDispatch } from "@/store/Store";
+=======
+import { login } from "@/store/UserSlice";
+>>>>>>> f3710f4f (feat: Add album feature)
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { JwtPayload } from "jwt-decode";
 
 interface ExtendedJwtPayload extends JwtPayload {
@@ -18,6 +23,12 @@ interface ExtendedJwtPayload extends JwtPayload {
 export default function GoogleCallback() {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+=======
+
+export default function GoogleCallback() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+>>>>>>> f3710f4f (feat: Add album feature)
 
   useEffect(() => {
     const getGoogleToken = async () => {
@@ -28,6 +39,7 @@ export default function GoogleCallback() {
       if (!accessToken) return;
 
       try {
+<<<<<<< HEAD
         // 환경 변수에서 API URL 가져오기
         const apiUrl =
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -81,4 +93,30 @@ export default function GoogleCallback() {
   }, [dispatch, router]);
 
   return <p>로그인 처리 중...</p>;
+=======
+        //백엔드로 accessToken 보내주기
+        const response = await fetch(
+          "http://localhost:3001/user/google/login",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ access_token: accessToken }),
+          }
+        );
+
+        const userData = await response.json();
+        const userInfo = jwtDecode(userData.token);
+        //redux store로 토큰과 유저정보 보내주기
+        dispatch(login({ jwtToken: userData.token, user: userInfo }));
+
+        router.push("/");
+      } catch (error) {
+        console.log("구글 로그인 에러:", error);
+      }
+    };
+    getGoogleToken();
+  }, []);
+
+  return <p></p>;
+>>>>>>> f3710f4f (feat: Add album feature)
 }
