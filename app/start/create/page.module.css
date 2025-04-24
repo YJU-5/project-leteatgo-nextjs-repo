@@ -1,0 +1,306 @@
+.create {
+  box-sizing: border-box;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.create .createContainer h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.create .createContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: visible;
+}
+
+.create .createContainer .input {
+  width: 100%;
+  height: 3rem;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.create .createContainer .h2Wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.create .createContainer .h2Wrap h2 {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.create .createContainer .halfContainerWrap {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+}
+
+.create .createContainer .input2Container {
+  display: inline-block;
+  width: 49%;
+  position: relative;
+  overflow: visible;
+}
+
+.create .createContainer .input2 {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  height: 3rem;
+  margin-top: 8px;
+}
+
+.create .createContainer .slider {
+  width: 100%;
+  height: 18px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.create .createContainer .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #564b9a;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-top: -7px;
+  border-radius: 50%;
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+
+.create .createContainer .slider::-webkit-slider-thumb:hover {
+  background: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.create .createContainer .slider::-webkit-slider-thumb:active {
+  background: #f0f0f0;
+  transform: scale(1.2);
+}
+
+.create .createContainer .slider::-moz-range-thumb {
+  background: #f0f0f0;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  transition: all 0.1s ease;
+  transform: scale(1);
+}
+
+.create .createContainer .slider::-moz-range-thumb:hover {
+  background: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.create .createContainer .slider::-moz-range-thumb:active {
+  background: #f0f0f0;
+  transform: scale(1.2);
+}
+
+.create .createContainer .slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    #f2f4f6 0,
+    #f2f4f6 6px,
+    transparent 6px,
+    transparent 10px
+  );
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.create .createContainer .slider::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    #f2f4f6 0,
+    #f2f4f6 19.5%,
+    transparent 19.5%,
+    transparent 20%
+  );
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.create .createContainer .slider:focus::-webkit-slider-runnable-track {
+  background: #f2f4f6;
+}
+
+.create .createContainer input {
+  font-size: 1.4rem;
+}
+
+.create .createContainer .textarea {
+  width: 100%;
+  height: 10rem;
+  padding: 1%;
+  border: 1px solid #ccc;
+  resize: none;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.create .createContainer .buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.create .createContainer .buttonContainer .button {
+  width: 15%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  font-size: 1.4rem;
+  font-weight: bold;
+  transition: all 0.1s ease;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  transform: scale(1);
+}
+
+.create .createContainer .buttonContainer .button:hover {
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+  color: #121212;
+  transform: scale(1.05);
+}
+
+.create .createContainer .buttonContainer .button.cancel {
+  background-color: #ff7575;
+}
+
+.create .createContainer .buttonContainer .button.cancel:hover {
+  background-color: #ff6060;
+}
+
+.create .createContainer .noneInput {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  color: #f0f0f0;
+  text-align: right;
+  width: auto;
+  margin-left: auto;
+  padding: 0;
+  padding-right: 5px;
+}
+
+.create .createContainer .noneInput:focus {
+  outline: none;
+}
+
+.create .errorContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.create .error {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #ff0000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.upContent {
+  position: relative;
+  opacity: 0;
+  animation: fade_up 0.8s ease-out forwards;
+}
+
+.delay1 {
+  animation-delay: 0.2s;
+}
+
+.delay2 {
+  animation-delay: 0.4s;
+}
+
+.delay3 {
+  animation-delay: 0.6s;
+}
+
+.delay4 {
+  animation-delay: 0.8s;
+}
+
+.delay5 {
+  animation-delay: 1s;
+}
+
+.delay6 {
+  animation-delay: 1.2s;
+}
+
+.delay7 {
+  animation-delay: 1.4s;
+}
+
+.delay8 {
+  animation-delay: 1.6s;
+}
+
+.delay9 {
+  animation-delay: 1.8s;
+}
+
+.delay10 {
+  animation-delay: 2s;
+}
+
+@keyframes fade_up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

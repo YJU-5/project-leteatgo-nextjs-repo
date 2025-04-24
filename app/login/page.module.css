@@ -1,0 +1,21 @@
+.login {
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+}
+
+.login .loginTitle {
+  color: #fff;
+  text-align: center;
+  font-size: 3rem;
+  margin: 0 auto;
+  margin-top: 20%;
+  margin-bottom: 2%;
+}
+
+.loginButton{
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+}
