@@ -1,0 +1,100 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./app/what-is-social-dining/page.module.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+.page_whatIsSocialDining__Kg77W {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page_whatIsSocialDining__Kg77W .page_whatIsSocialDiningTextContainer__JP7DQ {
+  width: 100%;
+  height: 100%;
+  padding: 7%;
+  margin: 0 auto;
+  position: relative;
+  overflow-y: auto;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.page_whatIsSocialDining__Kg77W .page_whatIsSocialDiningImage__hvgpj {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  filter: blur(5px);
+}
+
+.page_whatIsSocialDining__Kg77W .page_whatIsSocialDiningTitle__mLxRv {
+  color: #fff;
+  text-align: start;
+  font-size: 3rem;
+  margin: 0 auto;
+}
+
+.page_whatIsSocialDining__Kg77W .page_whatIsSocialDiningText__BzNJ5 {
+  color: #fff;
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+.page_whatIsSocialDining__Kg77W ul {
+  color: #fff;
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
+
+.page_whatIsSocialDining__Kg77W ul li {
+  color: #fff;
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.page_upContent___FDHV {
+  position: relative;
+  opacity: 0;
+  animation: page_fade_up___O5Yf 0.8s ease-out forwards;
+}
+
+.page_delay1__qt9ai {
+  animation-delay: 0.2s;
+}
+
+.page_delay2__CI2Ko {
+  animation-delay: 0.4s;
+}
+
+.page_delay3__X4v8G {
+  animation-delay: 0.6s;
+}
+
+.page_delay4__HfmHC {
+  animation-delay: 0.8s;
+}
+
+.page_delay5__dGZHL {
+  animation-delay: 1s;
+}
+
+@keyframes page_fade_up___O5Yf {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

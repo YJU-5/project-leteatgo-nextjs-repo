@@ -1,0 +1,101 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.backgroundWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.backgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #12121250;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.backgroundWrapper:hover .backgroundOverlay {
+  opacity: 1;
+}
+
+.backgroundOverlay span {
+  color: #f0f0f0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.profileSection {
+  position: relative;
+  margin-top: -75px;
+  z-index: 1;
+}
+
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 4px solid #121212;
+  box-shadow: 0 2px 4px #12121210;
+  background-color: #121212;
+}
+
+.imageWrapper:hover .overlay {
+  opacity: 1;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #12121250;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay span {
+  color: #f0f0f0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fileInput {
+  display: none;
+}
