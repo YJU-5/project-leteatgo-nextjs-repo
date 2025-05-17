@@ -1,4 +1,4 @@
-"use client"
+
 import EventList from "@/components/MyPage/EventList/EventList";
 import styles from "./page.module.css"
 import { useState } from "react";
