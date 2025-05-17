@@ -141,6 +141,7 @@
   color: white;
   border: none;
   border-radius: 8px;
+  font-size: 20px;
 }
 
 .submitButton {
@@ -149,4 +150,5 @@
   color: white;
   border: none;
   border-radius: 8px;
+  font-size: 20px;
 }
