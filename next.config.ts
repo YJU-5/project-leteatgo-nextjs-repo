@@ -3,6 +3,7 @@ import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
+  output: "standalone",
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
     styledComponents: true,
