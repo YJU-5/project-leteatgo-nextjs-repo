@@ -8,8 +8,9 @@ interface event {
   id: number;
   title: string;
   date: string;
-  img: string;
+  pictureUrl: string;
   address: string;
+  createdAt:string;
 }
 
 
