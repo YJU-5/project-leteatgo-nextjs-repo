@@ -41,16 +41,7 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
       if (!res.ok) throw new Error("Failed to fetch events");
       const data = await res.json();
       setEvents(data);
-      setTagList([`${data.minAge}~${data.maxAge}세`,])
-      // 여기서 price 변환 예시
-      if (data.price !== undefined) {
-        // 간단하게 한 줄로 변환
-        const displayPrice =
-          data.price >= 10000
-            ? `${Math.floor(data.price / 10000)}만원`
-            : `${data.price}원`;
-        setTagList((prev) => [...prev, displayPrice]);
-      }
+      setTagList([`${data.minAge}~${data.maxAge}세`,`${data.price}원`])
       if (data.reviews) {
         setReviews(data.reviews);
       }
