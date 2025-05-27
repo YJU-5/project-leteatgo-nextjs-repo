@@ -128,7 +128,7 @@ export default function EventList({ list, total}: EventListProps) {
               <Image
                 width={100}
                 height={100}
-                src={review.img}
+                src={review.img ? review.img: "/restaurant.jpg"}
                 className={styles.reviewImage}
                 alt="후기사진"
               />
