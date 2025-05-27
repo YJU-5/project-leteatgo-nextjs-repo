@@ -9,8 +9,9 @@ interface List {
   id: number;
   title: string;
   date: string;
-  img: string;
+  pictureUrl: string;
   address: string;
+  createdAt: string;
 }
 
 interface EventListProps {
@@ -18,7 +19,7 @@ interface EventListProps {
   total: number;
 }
 
-export default function EventList({ list, total}: EventListProps) {
+export default function EventList({ list, total }: EventListProps) {
   const router = useRouter();
   const [page, setPage] = useState(1); //현재 페이지 번호
   const [prevPage, setPrevPage] = useState(1); // 이전페이지 번호
@@ -33,44 +34,44 @@ export default function EventList({ list, total}: EventListProps) {
 
   useEffect(() => {
     if (page > prevPage) {
-      setSlideClass(styles.slideFromRight) ; // 오른쪽으로 슬라이드
-    }else if (page < prevPage){
+      setSlideClass(styles.slideFromRight); // 오른쪽으로 슬라이드
+    } else if (page < prevPage) {
       setSlideClass(styles.slideFromLeft);
     }
 
     setPrevPage(page);
 
-  // 0.4초 뒤 슬라이드 클래스 초기화
-  const timeout = setTimeout(() => setSlideClass(""), 400);
-  return () => clearTimeout(timeout);
-}, [page]);
+    // 0.4초 뒤 슬라이드 클래스 초기화
+    const timeout = setTimeout(() => setSlideClass(""), 400);
+    return () => clearTimeout(timeout);
+  }, [page]);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       let newLimit = 9;
-  
+
       if (width <= 640) newLimit = 4;
       else if (width <= 1115) newLimit = 4;
-  
+
       setLimit((prevLimit) => {
         if (prevLimit !== newLimit) {
           const firstIndex = (page - 1) * prevLimit;
           const newPage = Math.floor(firstIndex / newLimit) + 1;
-  
+
           // limit이 바뀐 후에 setPage를 호출할 수 있도록
           setTimeout(() => {
             setPage(newPage);
           }, 0);
         }
-  
+
         return newLimit;
       });
     };
-  
+
     handleResize(); // 초기 실행
     window.addEventListener("resize", handleResize);
-  
+
     return () => window.removeEventListener("resize", handleResize);
   }, [page]);
 
@@ -81,7 +82,7 @@ export default function EventList({ list, total}: EventListProps) {
 
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    
+
     if (!isDragging.current || startX.current === null) return;
     const moveX = e.clientX - startX.current //클릭한 지점에서 얼마나 이동했는지 확인
 
@@ -98,7 +99,7 @@ export default function EventList({ list, total}: EventListProps) {
   };
 
   const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
-    
+
     isDragging.current = false;
     startX.current = null;
   }
@@ -107,6 +108,7 @@ export default function EventList({ list, total}: EventListProps) {
   const handleReviewsDetail = (id: number) => {
     router.push(`/mypage/evendetail/${id}`);
   };
+  console.log(slicePageData);
 
   return (
     <div>
@@ -128,7 +130,7 @@ export default function EventList({ list, total}: EventListProps) {
               <Image
                 width={100}
                 height={100}
-                src={review.img ? review.img: "/restaurant.jpg"}
+                src={review.pictureUrl ? review.pictureUrl : "/restaurant.jpg"}
                 className={styles.reviewImage}
                 alt="후기사진"
               />
@@ -136,7 +138,9 @@ export default function EventList({ list, total}: EventListProps) {
                 <h3 className={styles.reviewTitle}>{review.title}</h3>
                 <p className={styles.reviewAddress}>{review.address}</p>
               </div>
-              <span className={styles.reviewDate}>{review.date}</span>
+              <span className={styles.reviewDate}>
+                {review.createdAt.split('T')[0].split('-').join('.')}
+              </span>
             </div>
           ))}
         </div>
