@@ -66,15 +66,34 @@
   color: #333;
 }
 
+.contentSliderContainer .contentProfileImg {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.contentSliderContainer .contentUsername {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #333;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  vertical-align: middle;
+}
+
 .contentSliderContainer .contentAddress {
   font-size: 0.8rem;
   color: #666;
+  margin-top: 0;
   margin-bottom: 8px;
 }
 
 .contentSliderContainer .contentDate {
   font-size: 0.9rem;
   color: #666;
+  margin-top: 0;
   margin-bottom: 8px;
 }
 
@@ -91,6 +110,7 @@
   border-radius: 6px;
   font-size: 0.8rem;
   color: #fff;
+  margin: auto 0;
 }
 
 .contentSliderContainer .contentPerson {
@@ -100,6 +120,7 @@
   align-items: center;
   gap: 4px;
   margin: 0 auto;
+  margin-bottom: 8px;
 }
 
 .contentSliderContainer .sliderButton {
@@ -108,8 +129,7 @@
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: 20px;
@@ -127,8 +147,7 @@
 }
 
 .contentSliderContainer .sliderButton:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 1);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.5);
 }
 
 .contentSliderContainer .prevButton {
@@ -184,4 +203,20 @@
   .contentSliderContainer .imageWrapper {
     max-width: calc(33.333% - 14px); /* 1500px 미만일 때 3개 표시 */
   }
+}
+
+.emptyContainer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.emptyMessage {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
 }

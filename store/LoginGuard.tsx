@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "./modal.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "./Store";
 
 export default function LoginGuard({
   children,
@@ -9,7 +11,7 @@ export default function LoginGuard({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const jwtToken = localStorage.getItem("jwtToken"); //localStorage 에서 jwtToken 가지고오기
+  const jwtToken = useSelector((state: RootState) => state.user.jwtToken);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -17,7 +19,7 @@ export default function LoginGuard({
       //토큰이 없으면 모달창 열기
       setShowModal(true);
     }
-  }, [jwtToken, router]);
+  }, [jwtToken]);
 
   return (
     <>

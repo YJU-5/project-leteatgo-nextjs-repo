@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { RootState } from "@/store/Store";
 import { logout } from "@/store/UserSlice";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./MainHeaderLogin.module.css"
+import styles from "./MainHeaderLogin.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -22,20 +22,23 @@ export default function MainHeaderLogin() {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
-    setShowModal(true)
+    setShowModal(true);
     setShowDropdown(false);
-  }
+  };
 
   const CheckLogout = () => {
     dispatch(logout());
-    router.push('/');
+    router.push("/");
     setShowModal(false);
-  }
+  };
 
   //모달창 바깥쪽 클릭시 모달창 닫침
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         setShowModal(false);
       }
     }
@@ -48,8 +51,6 @@ export default function MainHeaderLogin() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showModal]);
-
-
 
   return (
     <ul className={styles.navLogin}>
@@ -105,5 +106,5 @@ export default function MainHeaderLogin() {
         setShowNotifications={setShowNotifications}
       />
     </ul>
-  )
+  );
 }

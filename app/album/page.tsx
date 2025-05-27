@@ -4,6 +4,24 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import Image from "next/image";
 
+interface Album {
+  id: string;
+  content: string;
+  profileImage: string;
+  profileName: string;
+  images: string[];
+  likeNumber: number;
+  commentNumber: number;
+}
+
+interface Comment {
+  boardId: string;
+  id: string;
+  profileImage: string;
+  name: string;
+  content: string;
+}
+
 export default function Album() {
   // const [user, setUser] = useState({
   //   name: "차승현",
@@ -25,7 +43,7 @@ export default function Album() {
     image: "/gitb.png",
   };
 
-  const albumBoard = [
+  const albumBoard: Album[] = [
     {
       id: "1",
       content:
@@ -63,7 +81,7 @@ export default function Album() {
     },
   ];
 
-  const albumComment = [
+  const albumComment: Comment[] = [
     {
       boardId: "1",
       id: "1",
