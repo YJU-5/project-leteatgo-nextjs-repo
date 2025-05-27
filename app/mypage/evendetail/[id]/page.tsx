@@ -1,13 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useParams, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
-
-interface ReviewDetailProps {
-  params: { id: string };
-}
 
 interface Review {
   id: number;
@@ -17,8 +12,56 @@ interface Review {
   img: string[];
 }
 
-export default function MyReviewsDetail({ params }: ReviewDetailProps) {
-  const searchParams = useSearchParams();
+interface ChatRoom {
+  address: string;
+  createdAt: string;
+  description: string;
+  gender:string;
+  id: string;
+  title: string;
+  pictureUrl: string;
+  minAge: number;
+  maxAge: number;
+  latitude: string;
+  longitude: string;
+  price: number;
+  updatedAt: string;
+  isActive: number;
+}
+
+export default function MyReviewsDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params);
+  const [events, setEvents] = useState<ChatRoom | null>(null);
+  const [tagList, setTagList] = useState([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  useEffect(() => {
+    async function getEvents() {
+      const res = await fetch(`http://localhost:3001/review/room/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+        },
+      });
+      if (!res.ok) throw new Error("Failed to fetch events");
+      const data = await res.json();
+      setEvents(data);
+      if (data.review) {
+        const mappedReviews:Review = data.reviews.map((review) => ({
+          id: review.id,
+          name: review.reviewer?.name || "익명",
+          profile: review.reviewer?.profile || "/default-profile.png",
+          content: review.description,
+          img: review.pictureUrl || [],
+        }))
+      }
+    }
+    getEvents();
+  }, []);
+
+  console.log('이벤트',events);
+
 
   const startX = useRef<number | null>(null);
   const isDragging = useRef(false);
@@ -29,15 +72,15 @@ export default function MyReviewsDetail({ params }: ReviewDetailProps) {
   const offset = (page - 1) * limit; //현재 페이지에서 표시할 데이터의 시작위치
 
 
-  const tagList = ["양식", "요리교실", "3만원"];
+  // const tagList = ["양식", "요리교실", "3만원"];
 
-  const reviews: Review[] = Array.from({ length: 10 }, (_, index) => ({
-    id: index + 1,
-    name: "구**",
-    content: "아 너무 좋았어용 처음인데도 너무 잘 대해주시고, 다음에 또 기회가 된다면 가보고 싶어용",
-    profile: "/gitb.png",
-    img: ["/gitb.png", "/restaurant.jpg", "/gitb.png"],
-  }));
+  // const reviews: Review[] = Array.from({ length: 10 }, (_, index) => ({
+  //   id: index + 1,
+  //   name: "구**",
+  //   content: "아 너무 좋았어용 처음인데도 너무 잘 대해주시고, 다음에 또 기회가 된다면 가보고 싶어용",
+  //   profile: "/gitb.png",
+  //   img: ["/gitb.png", "/restaurant.jpg", "/gitb.png"],
+  // }));
 
   const total = reviews.length;
   const pageNum = Math.ceil(total / limit) // 전체 페이지 개수
@@ -45,13 +88,13 @@ export default function MyReviewsDetail({ params }: ReviewDetailProps) {
 
 
   useEffect(() => {
-      if (page > prevPage) {
-        setSlideClass(styles.slideFromRight) ; // 오른쪽으로 슬라이드
-      }else if (page < prevPage){
-        setSlideClass(styles.slideFromLeft);
-      }
+    if (page > prevPage) {
+      setSlideClass(styles.slideFromRight); // 오른쪽으로 슬라이드
+    } else if (page < prevPage) {
+      setSlideClass(styles.slideFromLeft);
+    }
 
-      setPrevPage(page);
+    setPrevPage(page);
 
     // 0.4초 뒤 슬라이드 클래스 초기화
     const timeout = setTimeout(() => setSlideClass(""), 400);
@@ -92,7 +135,7 @@ export default function MyReviewsDetail({ params }: ReviewDetailProps) {
     <div className={styles.reviewDetail}>
       <div className={styles.container}>
         <div className={styles.textContainer}>
-          <h1 className={styles.title}>김형선의 파티</h1>
+          <h1 className={styles.title}>{events?.title}</h1>
           <p className={styles.date}>2024.11.30</p>
           <p className={styles.address}>서울특별시 마포구</p>
           <div className={styles.tag}>
