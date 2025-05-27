@@ -13,7 +13,7 @@ interface ImageSliderProps {
   contents: Content[];
 }
 
-export default function ImageSlider({ contents }: ImageSliderProps) {
+export default function ImageSlider({ contents = [] }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
@@ -67,10 +67,17 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
     [isAnimating, currentIndex, itemsPerPage]
   );
 
-  const visibleContents = contents.slice(
-    currentIndex,
-    currentIndex + itemsPerPage
-  );
+  const visibleContents = Array.isArray(contents)
+    ? contents.slice(currentIndex, currentIndex + itemsPerPage)
+    : [];
+
+  if (!Array.isArray(contents) || contents.length === 0) {
+    return (
+      <div className={styles.emptyContainer}>
+        <p className={styles.emptyMessage}>현재 등록된 후기가 없습니다.</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.imageSliderContainer} ref={containerRef}>
@@ -81,7 +88,12 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
           aria-label="이전 이미지"
           disabled={isAnimating}
         >
-          左
+          <Image
+            src="/arrowLeft.png"
+            alt="이전 이미지"
+            width={20}
+            height={20}
+          />
         </button>
         <div
           className={`${styles.imageContainer} ${
@@ -114,7 +126,12 @@ export default function ImageSlider({ contents }: ImageSliderProps) {
           aria-label="다음 이미지"
           disabled={isAnimating}
         >
-          右
+          <Image
+            src="/arrowRight.png"
+            alt="다음 이미지"
+            width={20}
+            height={20}
+          />
         </button>
       </div>
       <div className={styles.dotsContainer}>
