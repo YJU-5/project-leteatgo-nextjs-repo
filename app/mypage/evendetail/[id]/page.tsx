@@ -9,30 +9,24 @@ interface Review {
   name: string;
   content: string;
   profile: string;
-  img: string[];
+  reviewUrl: string[];
 }
 
 interface ChatRoom {
   address: string;
   createdAt: string;
-  description: string;
-  gender:string;
   id: string;
   title: string;
   pictureUrl: string;
   minAge: number;
   maxAge: number;
-  latitude: string;
-  longitude: string;
   price: number;
-  updatedAt: string;
-  isActive: number;
 }
 
 export default function MyReviewsDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = React.use(params);
   const [events, setEvents] = useState<ChatRoom | null>(null);
-  const [tagList, setTagList] = useState([]);
+  const [tagList, setTagList] = useState<string[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
@@ -47,20 +41,24 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
       if (!res.ok) throw new Error("Failed to fetch events");
       const data = await res.json();
       setEvents(data);
-      if (data.review) {
-        const mappedReviews:Review = data.reviews.map((review) => ({
-          id: review.id,
-          name: review.reviewer?.name || "익명",
-          profile: review.reviewer?.profile || "/default-profile.png",
-          content: review.description,
-          img: review.pictureUrl || [],
-        }))
+      setTagList([`${data.minAge}~${data.maxAge}세`,])
+      // 여기서 price 변환 예시
+      if (data.price !== undefined) {
+        // 간단하게 한 줄로 변환
+        const displayPrice =
+          data.price >= 10000
+            ? `${Math.floor(data.price / 10000)}만원`
+            : `${data.price}원`;
+        setTagList((prev) => [...prev, displayPrice]);
+      }
+      if (data.reviews) {
+        setReviews(data.reviews);
       }
     }
     getEvents();
   }, []);
 
-  console.log('이벤트',events);
+  console.log(events);
 
 
   const startX = useRef<number | null>(null);
@@ -72,20 +70,10 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
   const offset = (page - 1) * limit; //현재 페이지에서 표시할 데이터의 시작위치
 
 
-  // const tagList = ["양식", "요리교실", "3만원"];
-
-  // const reviews: Review[] = Array.from({ length: 10 }, (_, index) => ({
-  //   id: index + 1,
-  //   name: "구**",
-  //   content: "아 너무 좋았어용 처음인데도 너무 잘 대해주시고, 다음에 또 기회가 된다면 가보고 싶어용",
-  //   profile: "/gitb.png",
-  //   img: ["/gitb.png", "/restaurant.jpg", "/gitb.png"],
-  // }));
-
   const total = reviews.length;
   const pageNum = Math.ceil(total / limit) // 전체 페이지 개수
   const slicePageData = reviews.slice(offset, offset + limit); //현재 페이지의 데이터만 가지고오기
-
+  console.log(slicePageData);
 
   useEffect(() => {
     if (page > prevPage) {
@@ -136,8 +124,8 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
       <div className={styles.container}>
         <div className={styles.textContainer}>
           <h1 className={styles.title}>{events?.title}</h1>
-          <p className={styles.date}>2024.11.30</p>
-          <p className={styles.address}>서울특별시 마포구</p>
+          <p className={styles.date}>{events?.createdAt.split('T')[0].split('-').join('.')}</p>
+          <p className={styles.address}>{events?.address}</p>
           <div className={styles.tag}>
             <Image width={30} height={30} src="/Tag.png" alt="태그 아이콘" />
             {tagList.map((tag, index) => (
@@ -147,11 +135,41 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
         </div>
 
         <div className={styles.imageContainer}>
-          <Image width={300} height={300} src="/gitb.png" alt="메인 이미지" className={styles.mainImg} />
-          <div className={styles.subImageContainer}>
-            <Image width={150} height={146} src="/restaurant.jpg" alt="서브 이미지 1" className={styles.subImage} />
-            <Image width={150} height={146} src="/favicon.png" alt="서브 이미지 2" className={styles.subImage} />
-          </div>
+          <Image
+            width={300}
+            height={300}
+            src={events?.pictureUrl || "/restaurant.jpg"}
+            alt="메인 이미지"
+            className={styles.mainImg}
+          />
+          {/* <div className={styles.subImageContainer}>
+            <Image
+              width={150}
+              height={146}
+              src={
+              events?.pictureUrl?.[1] && (
+                events.pictureUrl[1].startsWith('/')
+              )
+                ? events.pictureUrl[1]
+                : '/restaurant.jpg'
+            }
+              alt="서브 이미지 1"
+              className={styles.subImage}
+            />
+            <Image
+              width={150}
+              height={146}
+              src={
+                events?.pictureUrl?.[0] && (
+                  events.pictureUrl[0].startsWith('/')
+                )
+                  ? events.pictureUrl[0]
+                  : '/restaurant.jpg'
+              }
+              alt="서브 이미지 2"
+              className={styles.subImage}
+            />
+          </div> */}
         </div>
       </div>
 
@@ -173,12 +191,37 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
               </div>
               <p className={styles.reviewText}>{review.content}</p>
               <div className={styles.reviewImageContainer}>
-                <Image width={200} height={200} src={review.img[0]} alt="메인 이미지" className={styles.reviewMainImg} />
+                {review.reviewUrl?.[0] && (
+                  <Image
+                    width={200}
+                    height={200}
+                    src={review.reviewUrl[0]}
+                    alt="메인 이미지"
+                    className={styles.reviewMainImg}
+                  />
+                )}
                 <div className={styles.reviewSubImageContainer}>
-                  <Image width={100} height={92} src={review.img[1]} alt="서브 이미지 1" className={styles.reviewSubImage} />
-                  <Image width={100} height={92} src={review.img[2]} alt="서브 이미지 2" className={styles.reviewSubImage} />
+                  {review.reviewUrl?.[1] && (
+                    <Image
+                      width={100}
+                      height={92}
+                      src={review.reviewUrl[1]}
+                      alt="서브 이미지 1"
+                      className={styles.reviewSubImage}
+                    />
+                  )}
+                  {review.reviewUrl?.[2] && (
+                    <Image
+                      width={100}
+                      height={92}
+                      src={review.reviewUrl[2]}
+                      alt="서브 이미지 2"
+                      className={styles.reviewSubImage}
+                    />
+                  )}
                 </div>
               </div>
+
             </div>
           ))}
         </div>
