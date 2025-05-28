@@ -129,8 +129,12 @@ export const useChat = (roomId: string): UseChatReturn => {
         const currentUser = userInfo ? JSON.parse(userInfo) : null;
 
         // 서버에서 오는 메시지 형식을 ChatMessage 형식으로 변환
-        const formattedMessages = messageList.map((message) => ({
-          id: message.id || Date.now().toString(),
+        const formattedMessages = messageList.map((message, index) => ({
+          id:
+            message.id ||
+            `msg_${Date.now()}_${index}_${Math.random()
+              .toString(36)
+              .substring(2, 9)}`,
           userName: message.userName || "알 수 없음",
           message: message.message || "",
           createdAt: message.createdAt || new Date().toISOString(),
@@ -154,7 +158,7 @@ export const useChat = (roomId: string): UseChatReturn => {
             ? {
                 id: `system_${Date.now()}_${Math.random()
                   .toString(36)
-                  .substr(2, 9)}`,
+                  .substring(2, 9)}`,
                 userName: "System",
                 message: message,
                 createdAt: new Date().toISOString(),
@@ -166,7 +170,7 @@ export const useChat = (roomId: string): UseChatReturn => {
                   message.id ||
                   `msg_${Date.now()}_${Math.random()
                     .toString(36)
-                    .substr(2, 9)}`,
+                    .substring(2, 9)}`,
                 userName: message.userName || "알 수 없음",
                 message: message.message || "",
                 createdAt: message.createdAt || new Date().toISOString(),
