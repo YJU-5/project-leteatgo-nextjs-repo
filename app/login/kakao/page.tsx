@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { refreshUserInfo } from "@/app/album/components/authUtils";
 
 export default function KakaoCallback() {
   const router = useRouter();
@@ -43,10 +44,8 @@ export default function KakaoCallback() {
         );
 
         const userData = await userResponse.json();
-        const userInfo = jwtDecode(userData.token);
-        //redux store로 토큰과 유저정보 보내주기
-        dispatch(login({ jwtToken: userData.token, user: userInfo }));
-
+        localStorage.setItem("jwtToken", userData.token);
+        await refreshUserInfo(); // 서버에서 내 정보 받아와서 user 저장
         router.push("/");
       } catch (error) {
         console.log("카카오 로그인 에러:", error);
