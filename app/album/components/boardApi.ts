@@ -17,6 +17,7 @@ export interface Board {
     name: string;
     pictureUrl: string;
     email: string;
+    socialId?: string;
   };
 }
 
