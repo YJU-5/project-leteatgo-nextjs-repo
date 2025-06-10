@@ -19,7 +19,12 @@ import {
   updateComment,
   deleteComment,
 } from "./components/commentApi";
-import { isOwner, checkAuth, getCurrentUser } from "./components/authUtils";
+import {
+  isOwner,
+  checkAuth,
+  getCurrentUser,
+  refreshUserInfo,
+} from "./components/authUtils";
 
 interface CommentState {
   data: Comment[];
@@ -74,6 +79,7 @@ export default function Album() {
     {}
   );
   const [editCommentId, setEditCommentId] = useState<number | null>(null);
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
 
   useEffect(() => {
     const fetchBoards = async () => {
@@ -94,6 +100,16 @@ export default function Album() {
     };
 
     fetchBoards();
+  }, []);
+
+  useEffect(() => {
+    const refreshUser = async () => {
+      const updatedUser = await refreshUserInfo();
+      if (updatedUser) {
+        setCurrentUser(updatedUser);
+      }
+    };
+    refreshUser();
   }, []);
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
@@ -179,6 +195,12 @@ export default function Album() {
     }
 
     try {
+      // 게시글 작성 전 사용자 정보 갱신
+      const updatedUser = await refreshUserInfo();
+      if (updatedUser) {
+        setCurrentUser(updatedUser);
+      }
+
       const formData = {
         title: title.trim(),
         content: content.trim(),
@@ -303,6 +325,12 @@ export default function Album() {
       if (!content?.trim()) {
         alert("댓글 내용을 입력해주세요.");
         return;
+      }
+
+      // 댓글 작성 전 사용자 정보 갱신
+      const updatedUser = await refreshUserInfo();
+      if (updatedUser) {
+        setCurrentUser(updatedUser);
       }
 
       setLoading(true);
@@ -435,20 +463,14 @@ export default function Album() {
     <div className={styles.album}>
       <div className={styles.profile}>
         <div className={styles.profileContainer}>
-          {(() => {
-            const currentUser = getCurrentUser();
-            console.log("Current user in profile:", currentUser);
-            return (
-              <Image
-                className={styles.profileImage}
-                src={currentUser?.pictureUrl || "/default-profile.png"}
-                alt="profile"
-                width={150}
-                height={150}
-              />
-            );
-          })()}
-          <h1 className={styles.profileName}>{getCurrentUser()?.name}</h1>
+          <Image
+            className={styles.profileImage}
+            src={currentUser?.pictureUrl || "/default-profile.png"}
+            alt="profile"
+            width={150}
+            height={150}
+          />
+          <h1 className={styles.profileName}>{currentUser?.name}</h1>
         </div>
       </div>
 

@@ -1,3 +1,5 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 // 토큰을 로컬 스토리지에서 가져오기
 export const getToken = () => {
   const token = localStorage.getItem("jwtToken");
@@ -9,8 +11,13 @@ export const getToken = () => {
 export const getCurrentUser = () => {
   try {
     const userStr = localStorage.getItem("user");
-    console.log("Current user info from localStorage:", userStr);
-    if (!userStr) return null;
+    console.log("=== getCurrentUser Debug Info ===");
+    console.log("Raw user string from localStorage:", userStr);
+
+    if (!userStr) {
+      console.log("No user data in localStorage");
+      return null;
+    }
 
     const user = JSON.parse(userStr);
     console.log("Parsed user object:", user);
@@ -24,6 +31,8 @@ export const getCurrentUser = () => {
         user.pictureUrl = "/default-profile.png";
       }
     }
+    console.log("Final user object:", user);
+    console.log("=== End Debug Info ===");
     return user;
   } catch (error) {
     console.error("Failed to parse user info:", error);
@@ -34,19 +43,26 @@ export const getCurrentUser = () => {
 // 사용자가 리소스의 소유자인지 확인
 export const isOwner = (resourceUserId: string | number) => {
   const userInfo = getCurrentUser();
-  console.log("Checking ownership - Current user:", userInfo);
-  console.log("Checking ownership - Resource user ID:", resourceUserId);
+  console.log("=== isOwner Debug Info ===");
+  console.log("Current user full info:", userInfo);
+  console.log("Resource user ID:", resourceUserId);
 
-  if (!userInfo || !resourceUserId) return false;
+  if (!userInfo || !resourceUserId) {
+    console.log("Missing user info or resource ID");
+    return false;
+  }
 
-  // 현재 사용자의 socialId와 리소스 사용자의 id를 비교
-  const currentUserSocialId = userInfo.socialId?.toString();
+  // 현재 사용자의 id만 확인
+  const currentUserId = userInfo.id?.toString();
   const resourceId = resourceUserId?.toString();
 
-  console.log("Current user socialId:", currentUserSocialId);
+  console.log("Current user id:", currentUserId);
   console.log("Resource user id:", resourceId);
+  console.log("ID match:", currentUserId === resourceId);
+  console.log("=== End Debug Info ===");
 
-  return currentUserSocialId === resourceId;
+  // id가 일치하는 경우에만 소유자로 인정
+  return currentUserId === resourceId;
 };
 
 // 로그인 상태 확인
@@ -106,9 +122,60 @@ export const handleApiError = async (error: any) => {
 
 // 로그인 상태 변경 시 호출할 함수
 export const handleAuthStateChange = () => {
+  console.log("=== handleAuthStateChange Debug Info ===");
+  console.log(
+    "Before clear - localStorage user:",
+    localStorage.getItem("user")
+  );
+  console.log(
+    "Before clear - localStorage jwtToken:",
+    localStorage.getItem("jwtToken")
+  );
+
   // 로컬 스토리지 초기화
   localStorage.clear();
 
+  console.log("After clear - localStorage user:", localStorage.getItem("user"));
+  console.log(
+    "After clear - localStorage jwtToken:",
+    localStorage.getItem("jwtToken")
+  );
+  console.log("=== End Debug Info ===");
+
   // 페이지 새로고침
   window.location.reload();
+};
+
+// 로그아웃 함수에 추가
+const handleLogout = () => {
+  localStorage.removeItem("user"); // 기존 코드
+  localStorage.clear(); // 추가: 모든 localStorage 데이터 정리
+};
+
+// 로그인 성공 후
+const handleLoginSuccess = (userData: {
+  id: string;
+  name: string;
+  email: string;
+  pictureUrl?: string;
+  socialId?: string;
+}) => {
+  localStorage.setItem("user", JSON.stringify(userData));
+};
+
+export const refreshUserInfo = async () => {
+  try {
+    const response = await fetch(`${API_URL}/auth/me`, {
+      headers: getAuthHeaders(),
+    });
+    if (response.ok) {
+      const userData = await response.json();
+      localStorage.setItem("user", JSON.stringify(userData));
+      return userData;
+    }
+    return null;
+  } catch (error) {
+    console.error("Failed to refresh user info:", error);
+    return null;
+  }
 };
