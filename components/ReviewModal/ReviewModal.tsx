@@ -4,7 +4,7 @@ import { useState } from "react";
 
 interface Review {
   id: string;
-  image: string;
+  pictureUrl: string;
   title: string;
   date: string;
   reviews: number;
@@ -103,6 +103,9 @@ export default function ReviewModal({ review, onClose }: ReviewModalProps) {
       if (res.ok) {
         alert("리뷰가 성공적으로 등록되었습니다!");
         onClose();
+        setTimeout(() => {
+          window.location.reload();
+        }, 300);
       } else {
         alert("리뷰 등록에 실패했습니다.");
       }

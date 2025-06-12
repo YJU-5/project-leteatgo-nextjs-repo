@@ -27,7 +27,11 @@ const nextConfig: NextConfig = {
     domains: [
       "lh3.googleusercontent.com",
       "nestjs-image-bucket.s3.ap-northeast-2.amazonaws.com",
+<<<<<<< HEAD
       "leteatgo-s3-bucket.s3.ap-northeast-2.amazonaws.com",
+=======
+      'img1.kakaocdn.net'
+>>>>>>> eb9a5092 (팔로우관리  백엔드 연결)
     ],
   },
 };
