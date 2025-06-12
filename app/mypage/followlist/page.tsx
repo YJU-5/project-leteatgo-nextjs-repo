@@ -1,28 +1,54 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
 
 interface Follow {
+  id: string;
   name: string;
-  date: string;
+  profileImage: string;
+  followedAt: string;
 }
 
 export default function FollowList() {
-  const follows: Follow[] = [
-    { name: '구진모', date: '2024.11.30 부터 팔로우 중' },
-    { name: '차승현', date: '2024.11.28 부터 팔로우 중' },
-    { name: '김형선', date: '2024.11.27 부터 팔로우 중' },
-    { name: '홍태관', date: '2024.11.26 부터 팔로우 중' },
-  ];
-  const [name, setName] = useState('')
+  const [follows, setFollows] = useState<Follow[]>([]);
+  const [name, setName] = useState('');
 
-  const filteredData = follows.filter(item =>
-    item.name.toLowerCase().includes(name.toLowerCase())
-  );
+  useEffect(() => {
+    async function getFollowings() {
+      const res = await fetch("http://localhost:3001/subscription", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+        },
+      });
+      if (!res.ok) throw new Error("정보를가지고오지못했습니다.");
+      const data = await res.json();
+      setFollows(data);
+    }
+    getFollowings();
+  }, []);
 
+  const filteredData = name
+    ? follows.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
+    : follows;
 
-
+  const Unfollow = async(userId: string) => {
+    const res = await fetch(`http://localhost:3001/subscription/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    });
+    if (res.ok) {
+      // 성공적으로 삭제된 경우, 리스트에서 해당 유저를 제거
+      setFollows(prev => prev.filter(user => user.id !== userId));
+    } else {
+      alert("언팔로우에 실패했습니다.");
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -51,68 +77,28 @@ export default function FollowList() {
       </div>
       <div className={styles.underLine}></div>
       <div className={styles.itemsContainer}>
-
-        {
-          filteredData && filteredData.length > 0 ? (
-            filteredData.map((follow, index) => (
-              <div key={index} className={styles.followItem}>
-                <div className={styles.img}>
-                  <Image
-                    width={78}
-                    height={78}
-                    src="/gitb.png"
-                    alt="유저프로필사진" />
-                </div>
-                <div className={styles.usercontainer}>
-                  <p className={styles.userName}>{follow.name}</p>
-                  <p className={styles.followDate}>{follow.date}</p>
-                </div>
-                <button className={styles.cancelbutton}>취소</button>
+        {filteredData.length > 0 ? (
+          filteredData.map((follow, index) => (
+            <div key={index} className={styles.followItem}>
+              <div className={styles.img}>
+                <Image
+                  width={78}
+                  height={78}
+                  src={follow.profileImage || "/gitb.png"}
+                  alt="유저프로필사진"
+                />
               </div>
-            ))
-          ) : filteredData && filteredData.length === 0 ?(
-              <div>검색된 결과가 없습니다.</div>
-          ) :(
-            follows.map((follow, index) => (
-              <div key={index} className={styles.followItem}>
-                <div className={styles.img}>
-                  <Image
-                    width={78}
-                    height={78}
-                    src="/gitb.png"
-                    alt="유저프로필사진" />
-                </div>
-                <div className={styles.usercontainer}>
-                  <p className={styles.userName}>{follow.name}</p>
-                  <p className={styles.followDate}>{follow.date}</p>
-                </div>
-                <button className={styles.cancelbutton}>취소</button>
+              <div className={styles.usercontainer}>
+                <p className={styles.userName}>{follow.name}</p>
+                <p className={styles.followDate}>{follow.followedAt} 부터 팔로우 중</p>
               </div>
-            ))
-          )
-        }
-
-        {/* {follows.map((follow, index) => (
-          <div key={index} className={styles.followItem}>
-            <div className={styles.img}>
-              <Image
-                width={78}
-                height={78}
-                src="/gitb.png"
-                alt="유저프로필사진" />
+              <button className={styles.cancelbutton} onClick={() => Unfollow(follow.id)}>취소</button>
             </div>
-            <div className={styles.usercontainer}>
-              <p className={styles.userName}>{follow.name}</p>
-              <p className={styles.followDate}>{follow.date}</p>
-            </div>
-            <button className={styles.cancelbutton}>취소</button>
-          </div>
-        ))} */}
+          ))
+        ) : (
+          <div>검색된 결과가 없습니다.</div>
+        )}
       </div>
     </div>
   );
 }
-
-// text에 적은게 없으면 전체 아니면 검색한 이름들
-
-

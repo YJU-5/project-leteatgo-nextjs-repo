@@ -3,17 +3,20 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import ReviewModal from "@/components/ReviewModal/ReviewModal"
+import { useRouter } from "next/navigation";
 
 interface Review {
   id: string;
-  image: string;
+  pictureUrl: string;
   title: string;
   date: string;
   reviews: number;
   completed: boolean;
+  createdAt: string;
 }
 
 export default function Reviews() {
+  const router = useRouter();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedReview, setSelectedReview] = useState<Review | null>(null);
@@ -41,7 +44,9 @@ export default function Reviews() {
     fetchReviews();
   }, []);
 
-  const handleOpenModal = (reviews:Review) =>{
+  console.log(reviews);
+
+  const handleOpenModal = (reviews: Review) => {
     setSelectedReview(reviews);
     setShowModal(true)
   }
@@ -51,6 +56,10 @@ export default function Reviews() {
     setShowModal(false);
   };
 
+  const eventdetail = (id: string) => {
+    router.push(`/mypage/eventdetail/${id}`);
+  }
+
   return (
     <div className={styles.reviews}>
       <h1 className={styles.reviewsTitle}>방문한 곳 목록</h1>
@@ -59,15 +68,16 @@ export default function Reviews() {
           <div className={styles.reviewsListItem} key={review.id}>
             <div className={styles.reviewsListItemImage}>
               <Image
-                src={review.image || '/foods/cn-food.jpg'}
+                src={review.pictureUrl || '/foods/cn-food.jpg'}
                 alt={review.title}
+                onClick={() => eventdetail(review.id)}
                 width={400}
                 height={200}
               />
             </div>
             <div className={styles.reviewsListItemContent}>
               <h1 className={styles.reviewsListItemTitle}>{review.title}</h1>
-              <p className={styles.reviewsListItemDate}>{review.date}</p>
+              <p className={styles.reviewsListItemDate}>{review.createdAt.split('T')[0].split('-').join('.')}</p>
               <p className={styles.reviewsListItemReviews}>
                 {review.reviews}개의 후기
               </p>
@@ -75,7 +85,7 @@ export default function Reviews() {
                 {review.completed ? (
                   <p>후기 작성을 완료하였습니다.</p>
                 ) : (
-                  <button onClick={()=> handleOpenModal(review)}>후기 작성하기</button>
+                  <button onClick={() => handleOpenModal(review)}>후기 작성하기</button>
                 )}
               </div>
             </div>
@@ -83,7 +93,7 @@ export default function Reviews() {
         ))}
 
         {showModal && selectedReview && (
-          <ReviewModal onClose={handleCloseModal} review={selectedReview}/>
+          <ReviewModal onClose={handleCloseModal} review={selectedReview} />
         )}
       </div>
     </div>
