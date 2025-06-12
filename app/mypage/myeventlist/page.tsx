@@ -11,6 +11,7 @@ interface event {
   pictureUrl: string;
   address: string;
   createdAt:string;
+  chatRoomId:string;
 }
 
 
