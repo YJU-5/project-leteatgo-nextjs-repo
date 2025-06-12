@@ -83,7 +83,7 @@ export default function Home() {
     const fetchReviews = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/reviews`
+          `${process.env.NEXT_PUBLIC_API_URL}/review`
         );
         const data = await response.json();
         setReviews(data);

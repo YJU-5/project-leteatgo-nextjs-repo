@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { Dispatch, useEffect, useRef, useState } from "react";
 import styles from './EventList.module.css'
-import { start } from "repl";
 
 interface List {
   id: number;
@@ -11,6 +10,7 @@ interface List {
   date: string;
   pictureUrl: string;
   address: string;
+  chatRoomId:string;
   createdAt: string;
 }
 
@@ -105,8 +105,12 @@ export default function EventList({ list, total }: EventListProps) {
   }
 
   // 상세 페이지 이동
-  const handleReviewsDetail = (id: number) => {
-    router.push(`/mypage/evendetail/${id}`);
+  const handleReviewsDetail = (id: number, chatRoomId:string) => {
+    if (chatRoomId) {
+      router.push(`/mypage/eventdetail/${chatRoomId}`);
+    } else {
+      router.push(`/mypage/eventdetail/${id}`);
+    }
   };
   console.log(slicePageData);
 
@@ -123,14 +127,17 @@ export default function EventList({ list, total }: EventListProps) {
         <div className={`${styles.itemsContainer} ${slideClass}`}>
           {slicePageData.map((review) => (
             <div
-              onClick={() => handleReviewsDetail(review.id)}
+              onClick={() => handleReviewsDetail(review.id,review.chatRoomId)}
               key={review.id}
               className={styles.reviewCard}
             >
               <Image
                 width={100}
                 height={100}
-                src={review.pictureUrl ? review.pictureUrl : "/restaurant.jpg"}
+                src={
+                  Array.isArray(review.pictureUrl)
+                  ? review.pictureUrl[0] || "/restaurant.jpg"
+                  :review.pictureUrl|| "/restaurant.jpg"}
                 className={styles.reviewImage}
                 alt="후기사진"
               />
