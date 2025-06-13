@@ -16,7 +16,7 @@ export default function FollowList() {
 
   useEffect(() => {
     async function getFollowings() {
-      const res = await fetch("http://localhost:3001/subscription", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscription`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export default function FollowList() {
     : follows;
 
   const Unfollow = async(userId: string) => {
-    const res = await fetch(`http://localhost:3001/subscription/${userId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscription/${userId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
