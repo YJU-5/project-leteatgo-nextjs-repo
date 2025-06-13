@@ -31,7 +31,7 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
 
   useEffect(() => {
     async function getEvents() {
-      const res = await fetch(`http://localhost:3001/review/room/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/room/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

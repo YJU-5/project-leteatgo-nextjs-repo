@@ -92,7 +92,7 @@ export default function ReviewModal({ review, onClose }: ReviewModalProps) {
 
     // fetch로 전송 (리뷰 ID를 path param에 사용)
     try {
-      const res = await fetch(`http://localhost:3001/review/${review.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/${review.id}`, {
         method: "POST",
         body: formData,
         headers: {
