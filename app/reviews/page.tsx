@@ -24,7 +24,7 @@ export default function Reviews() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch("http://localhost:3001/user/joined", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/joined`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

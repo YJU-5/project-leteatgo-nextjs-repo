@@ -21,7 +21,7 @@ export default function MyeventHistory() {
 
   useEffect(() => {
     async function getEvents() {
-      const res = await fetch("http://localhost:3001/user/hosted", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/hosted`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
