@@ -44,9 +44,7 @@ export default function KakaoCallback() {
 
         const userData = await userResponse.json();
         const userInfo = jwtDecode(userData.token);
-        //redux store로 토큰과 유저정보 보내주기
         dispatch(login({ jwtToken: userData.token, user: userInfo }));
-
         router.push("/");
       } catch (error) {
         console.log("카카오 로그인 에러:", error);
