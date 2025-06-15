@@ -1,0 +1,88 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./app/reviews/page.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+.page_reviews__RKzqY {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  padding-top: 3%;
+  box-sizing: border-box;
+}
+
+.page_reviews__RKzqY .page_reviewsList__oCnAt {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.page_reviews__RKzqY .page_reviewsListItem___psIe {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemImage__UzLLx {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemImage__UzLLx img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemContent__BVMYE {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 2%;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemTitle__8OJiK {
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemDate__WI1I2 {
+  vertical-align: top;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemReviews__mCs2D {
+  vertical-align: top;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemCompleted__WjDyJ {
+  position: absolute;
+  width: 100%;
+  vertical-align: top;
+  margin: 0 auto;
+  bottom: 10px;
+  left: 224px;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemCompleted__WjDyJ p {
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: #f0f0f0af;
+}
+
+.page_reviews__RKzqY .page_reviewsListItemCompleted__WjDyJ button {
+  margin: 0 auto;
+  font-size: 1.4rem;
+  font-weight: bold;
+  background-color: transparent;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
