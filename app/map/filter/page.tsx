@@ -94,16 +94,15 @@ export default function FilterPage() {
   };
 
   const handleConfirm = () => {
-    const params = new URLSearchParams({
-      minDistance: filters.distance[0].toString(),
-      maxDistance: filters.distance[1].toString(),
-      minPrice: filters.price[0].toString(),
-      maxPrice: filters.price[1].toString(),
-      minAge: filters.age[0].toString(),
-      maxAge: filters.age[1].toString(),
-      categories: filters.categories.join(","),
-    });
-
+    const params = new URLSearchParams();
+    if (filters.price[0])
+      params.append("minPrice", filters.price[0].toString());
+    if (filters.price[1])
+      params.append("maxPrice", filters.price[1].toString());
+    if (filters.age[0]) params.append("minAge", filters.age[0].toString());
+    if (filters.age[1]) params.append("maxAge", filters.age[1].toString());
+    if (filters.categories.length > 0)
+      params.append("categories", filters.categories.join(","));
     router.push(`/map/filter/results?${params.toString()}`);
   };
 

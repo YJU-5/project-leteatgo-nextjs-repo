@@ -29,6 +29,7 @@ export default function KakaoMapPage() {
   });
   const [hoveredMarkerId, setHoveredMarkerId] = useState<string | null>(null);
   const [selectedRoom, setSelectedRoom] = useState<ChatRoom | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -50,38 +51,58 @@ export default function KakaoMapPage() {
         const apiUrl =
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
         const params = new URLSearchParams({
-          latitude: currentLocation.latitude.toString(),
-          longitude: currentLocation.longitude.toString(),
+          latitude: String(currentLocation.latitude),
+          longitude: String(currentLocation.longitude),
+          ...(searchParams.get("minDistance") && {
+            minDistance: searchParams.get("minDistance"),
+          }),
+          ...(searchParams.get("maxDistance") && {
+            maxDistance: searchParams.get("maxDistance"),
+          }),
+          ...(searchParams.get("minPrice") && {
+            minPrice: searchParams.get("minPrice"),
+          }),
+          ...(searchParams.get("maxPrice") && {
+            maxPrice: searchParams.get("maxPrice"),
+          }),
+          ...(searchParams.get("minAge") && {
+            minAge: searchParams.get("minAge"),
+          }),
+          ...(searchParams.get("maxAge") && {
+            maxAge: searchParams.get("maxAge"),
+          }),
+          ...(searchParams.get("categories") && {
+            category: searchParams.get("categories"),
+          }),
+          ...(searchParams.get("maxParticipants") && {
+            maxParticipants: searchParams.get("maxParticipants"),
+          }),
+        }).toString();
+
+        const accessToken = localStorage.getItem("accessToken");
+        const headers: HeadersInit = {
+          "Content-Type": "application/json",
+        };
+        if (accessToken) {
+          headers["Authorization"] = `Bearer ${accessToken}`;
+        }
+
+        const response = await fetch(`${apiUrl}/chat-room/map?${params}`, {
+          credentials: "include",
+          headers,
         });
 
-        // Add filter parameters if they exist
-        const filterParams = [
-          "minDistance",
-          "maxDistance",
-          "minPrice",
-          "maxPrice",
-          "minAge",
-          "maxAge",
-          "categories",
-        ];
-        filterParams.forEach((param) => {
-          const value = searchParams.get(param);
-          if (value) {
-            params.append(param, value);
-          }
-        });
-
-        const response = await fetch(`${apiUrl}/api/chat-room/map?${params}`);
         if (!response.ok) {
-          throw new Error(`API 요청 실패: ${response.status}`);
+          console.error("Server response:", await response.text());
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        if (Array.isArray(data)) {
-          setChatRooms(data);
-        }
-      } catch (err) {
-        console.error("API 요청 실패:", err);
+        console.log("Fetched chat rooms:", data);
+        setChatRooms(data);
+      } catch (error) {
+        console.error("Error fetching chat rooms:", error);
+        setError("채팅방 정보를 불러오는데 실패했습니다.");
       }
     };
 

@@ -4,7 +4,7 @@ const API_URL = "http://localhost:3001"; // 백엔드 서버 URL
 
 // Helper function to get headers with token
 const getHeaders = (isFormData = false) => {
-  const token = localStorage.getItem("jwtToken");
+  const token = localStorage.getItem("accessToken"); // jwtToken -> accessToken으로 변경
   const headers: Record<string, string> = {};
 
   if (token) {
@@ -21,18 +21,21 @@ const getHeaders = (isFormData = false) => {
 // 모든 게시물 조회
 export const getAllBoards = async (): Promise<Board[]> => {
   try {
-    console.log("Fetching boards from:", `${API_URL}/api/board`);
-    const response = await fetch(`${API_URL}/api/board`, {
+    console.log("Fetching boards from:", `${API_URL}/board`);
+    const response = await fetch(`${API_URL}/board`, {
       method: "GET",
-      credentials: "include",
       headers: getHeaders(),
+      credentials: "include",
     });
 
     if (!response.ok) {
+      const errorData = await response.text();
+      console.error("Server response:", errorData);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log("Received boards:", data);
     return data;
   } catch (error) {
     console.error("Error in getAllBoards:", error);
@@ -42,7 +45,7 @@ export const getAllBoards = async (): Promise<Board[]> => {
 
 // 게시물 생성
 export const createBoard = async (data: CreateBoardDto): Promise<Board> => {
-  const token = localStorage.getItem("jwtToken");
+  const token = localStorage.getItem("accessToken");
   if (!token) {
     throw new Error("로그인이 필요합니다.");
   }
@@ -58,16 +61,17 @@ export const createBoard = async (data: CreateBoardDto): Promise<Board> => {
   }
 
   try {
-    const response = await fetch(`${API_URL}/api/board`, {
+    const response = await fetch(`${API_URL}/board`, {
       method: "POST",
       body: formData,
-      credentials: "include",
       headers: getHeaders(true),
+      credentials: "include",
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      throw new Error(errorData?.message || "Failed to create board");
+      const errorData = await response.text();
+      console.error("Server response:", errorData);
+      throw new Error("Failed to create board");
     }
 
     return response.json();
@@ -79,12 +83,15 @@ export const createBoard = async (data: CreateBoardDto): Promise<Board> => {
 
 // 특정 게시물 조회
 export const getBoard = async (id: number): Promise<Board> => {
-  const response = await fetch(`${API_URL}/api/board/${id}`, {
+  const response = await fetch(`${API_URL}/board/${id}`, {
     method: "GET",
     credentials: "include",
     headers: getHeaders(),
   });
+
   if (!response.ok) {
+    const errorData = await response.text();
+    console.error("Server response:", errorData);
     throw new Error("Failed to fetch board");
   }
   return response.json();
@@ -105,14 +112,16 @@ export const updateBoard = async (
     formData.append("file", data.file);
   }
 
-  const response = await fetch(`${API_URL}/api/board/${id}`, {
+  const response = await fetch(`${API_URL}/board/${id}`, {
     method: "PUT",
     body: formData,
     credentials: "include",
-    headers: getHeaders("multipart/form-data"),
+    headers: getHeaders(true),
   });
 
   if (!response.ok) {
+    const errorData = await response.text();
+    console.error("Server response:", errorData);
     throw new Error("Failed to update board");
   }
 
@@ -121,13 +130,15 @@ export const updateBoard = async (
 
 // 게시물 삭제
 export const deleteBoard = async (id: number): Promise<void> => {
-  const response = await fetch(`${API_URL}/api/board/${id}`, {
+  const response = await fetch(`${API_URL}/board/${id}`, {
     method: "DELETE",
     credentials: "include",
     headers: getHeaders(),
   });
 
   if (!response.ok) {
+    const errorData = await response.text();
+    console.error("Server response:", errorData);
     throw new Error("Failed to delete board");
   }
 };
@@ -136,7 +147,7 @@ export const deleteBoard = async (id: number): Promise<void> => {
 export const createComment = async (
   data: CreateCommentDto
 ): Promise<Comment> => {
-  const response = await fetch(`${API_URL}/api/comment`, {
+  const response = await fetch(`${API_URL}/comment`, {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify(data),
@@ -144,6 +155,8 @@ export const createComment = async (
   });
 
   if (!response.ok) {
+    const errorData = await response.text();
+    console.error("Server response:", errorData);
     throw new Error("Failed to create comment");
   }
 

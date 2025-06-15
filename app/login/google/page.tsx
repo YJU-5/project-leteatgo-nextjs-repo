@@ -2,7 +2,7 @@
 
 import { login } from "@/store/UserSlice";
 import { jwtDecode } from "jwt-decode";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -10,53 +10,50 @@ export default function GoogleCallback() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const getGoogleToken = async () => {
+    const handleGoogleCallback = async () => {
       try {
-        const hashParams = new URLSearchParams(
-          window.location.hash.substring(1)
-        );
-        const accessToken = hashParams.get("access_token");
+        // URL 쿼리 파라미터에서 code 가져오기
+        const code = searchParams.get("code");
 
-        if (!accessToken) {
-          setError("액세스 토큰을 찾을 수 없습니다.");
+        if (!code) {
+          const errorMsg = searchParams.get("error");
+          setError(errorMsg || "인증 코드를 찾을 수 없습니다.");
           return;
         }
 
-        console.log("Access token obtained:", accessToken);
+        console.log("Authorization code received");
 
-        // 백엔드로 accessToken 보내주기
+        // 백엔드로 인증 코드 전송
         const response = await fetch(
-          "http://localhost:3001/user/google/login",
+          "http://localhost:3005/auth/google/callback",
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
             },
-            body: JSON.stringify({ access_token: accessToken }),
+            body: JSON.stringify({ code }),
           }
         );
 
         if (!response.ok) {
-          const errorData = await response.json().catch(() => null);
-          throw new Error(
-            errorData?.message || `서버 오류: ${response.status}`
-          );
+          const errorData = await response.text();
+          console.error("Server error response:", errorData);
+          throw new Error(`로그인 실패: ${response.status}`);
         }
 
         const userData = await response.json();
-        console.log("User data received:", userData);
+        console.log("Login successful");
 
-        if (!userData.token) {
+        if (!userData.accessToken) {
           throw new Error("토큰이 없습니다");
         }
 
         // redux store로 토큰과 유저정보 보내주기
-        const userInfo = jwtDecode(userData.token);
-        dispatch(login({ jwtToken: userData.token, user: userInfo }));
-
+        const userInfo = jwtDecode(userData.accessToken);
+        dispatch(login({ jwtToken: userData.accessToken, user: userInfo }));
         router.push("/");
       } catch (error) {
         console.error("구글 로그인 에러:", error);
@@ -64,8 +61,10 @@ export default function GoogleCallback() {
       }
     };
 
-    getGoogleToken();
-  }, [dispatch, router]);
+    if (searchParams.get("code") || searchParams.get("error")) {
+      handleGoogleCallback();
+    }
+  }, [dispatch, router, searchParams]);
 
   if (error) {
     return (
