@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./MainHeaderLogin.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function MainHeaderLogin() {
 
   const CheckLogout = () => {
     dispatch(logout());
+    localStorage.removeItem("userInfo");
     router.push("/");
     setShowModal(false);
   };
@@ -54,8 +56,11 @@ export default function MainHeaderLogin() {
       {token ? (
         <div>
           <li>
-            <img
+            <Image
               src="/login/notification.png"
+              alt="알림"
+              width={24}
+              height={24}
               onClick={() => setShowNotifications(!showNotifications)}
             />
           </li>

@@ -1,0 +1,96 @@
+{
+  "family": "leteatgo-frontend-task",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::654654145004:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "leteatgo-frontend",
+      "image": "654654145004.dkr.ecr.ap-northeast-2.amazonaws.com/leteatgo-frontend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "NEXT_PUBLIC_ENV",
+          "value": "production"
+        },
+        {
+          "name": "NEXT_PUBLIC_API_URL",
+          "value": "https://matchash.shop/api"
+        },
+        {
+          "name": "NEXT_PUBLIC_KAKAO_REDIRECT_URI",
+          "value": "https://matchash.shop/login/kakao"
+        },
+        {
+          "name": "NEXT_PUBLIC_GOOGLE_REDIRECT_URI",
+          "value": "https://matchash.shop/login/google"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DB_USER",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/DB_USERNAME"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/DB_PASSWORD"
+        },
+        {
+          "name": "JWT_SECRET",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/JWT_SECRET"
+        },
+        {
+          "name": "NEXT_PUBLIC_KAKAO_REST_API_KEY",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/KAKAO_REST_API_KEY"
+        },
+        {
+          "name": "NEXT_PUBLIC_KAKAO_CLIENT_ID",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/KAKAO_CLIENT_ID"
+        },
+        {
+          "name": "NEXT_PUBLIC_GOOGLE_ID",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/GOOGLE_CLIENT_ID"
+        },
+        {
+          "name": "DB_HOST",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/DB_HOST"
+        },
+        {
+          "name": "DB_USERNAME",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/DB_USERNAME"
+        },
+        {
+          "name": "DB_DATABASE_NAME",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/DB_DATABASE_NAME"
+        },
+        {
+          "name": "DB_PORT",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/DB_PORT"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/leteatgo-frontend",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "memory": 1024,
+      "cpu": 256
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "2048"
+}

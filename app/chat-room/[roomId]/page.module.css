@@ -1,0 +1,361 @@
+.chatRoom {
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.chatRoomHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+}
+
+.chatRoomTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.chatRoomHeaderButton {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.chatRoomMessages {
+  width: 60%;
+  height: 67vh;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #f0f0f0 transparent; /* 파이어폭스 스크롤바 색상 (thumb track) */
+}
+
+.chatRoomMessages::-webkit-scrollbar {
+  width: 8px; /* Chrome, Safari, Opera 스크롤바 너비 */
+}
+
+.chatRoomMessages::-webkit-scrollbar-track {
+  background: transparent; /* Chrome, Safari, Opera 스크롤바 트랙 색상 */
+  border-radius: 4px;
+}
+
+.chatRoomMessages::-webkit-scrollbar-thumb {
+  background: #f0f0f0; /* Chrome, Safari, Opera 스크롤바 썸네일 색상 */
+  border-radius: 4px;
+}
+
+.chatRoomMessages::-webkit-scrollbar-thumb:hover {
+  background: #f0f0f0; /* Chrome, Safari, Opera 스크롤바 썸네일 호버 색상 */
+}
+
+.messageContainer {
+  display: flex;
+  width: 100%;
+  margin: 8px 0;
+}
+
+.systemMessage {
+  justify-content: center;
+}
+
+.myMessage {
+  justify-content: flex-end;
+}
+
+.otherMessage {
+  justify-content: flex-start;
+}
+
+.messageContent {
+  padding: 8px 16px;
+  border-radius: 16px;
+  max-width: 70%;
+}
+
+.systemMessage .messageContent {
+  background-color: #f0f0f0;
+  color: #666;
+  text-align: center;
+}
+
+.myMessage .messageContent {
+  background-color: #2196f3;
+  color: white;
+}
+
+.otherMessage .messageContent {
+  background-color: #e3f2fd;
+  color: #000;
+}
+
+.messageName {
+  font-size: 0.8em;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.myMessage .messageName {
+  text-align: right;
+}
+
+.messageText {
+  word-break: break-word;
+}
+
+.messageTime {
+  font-size: 0.7em;
+  color: #999;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.myMessage .messageTime {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.chatRoomInputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  padding: 10px;
+}
+
+.chatRoomInput {
+  width: 88%;
+  height: 30px;
+  border: 1px solid #111;
+  background-color: #ddd;
+  border-radius: 15px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.chatRoomInput:focus {
+  outline: none;
+  background-color: #fff;
+  transform: scale(1.005);
+}
+
+.sendButton {
+  width: 10%;
+  height: 30px;
+  background-color: #ddd;
+  border: 1px solid #111;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.sendButton:hover {
+  background-color: #fff;
+  transform: scale(1.005);
+}
+
+/* 사이드 패널 스타일 */
+.sidePanel {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  width: 17%;
+  height: 100vh;
+  background-color: transparent;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  overflow-y: auto;
+  z-index: 1000;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* 사이드 패널이 숨겨질 때 */
+.sidePanel.hidden {
+  transform: translateX(100%);
+}
+
+/* 사이드 패널 닫기 버튼 */
+.sidePanelClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.sidePanelContent {
+}
+
+.sidePanel .sidePanelProfile {
+  margin-bottom: 10px;
+}
+
+.sidePanel .sidePanelProfileImg {
+  display: inline-block;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+.sidePanel .sidePanelProfileName {
+  display: inline-block;
+  width: auto;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 20px auto;
+  vertical-align: top;
+}
+
+.sidePanelInfo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .chatRoom {
+    width: 100%;
+  }
+
+  .chatRoomHeader {
+    width: 100%;
+  }
+
+  .chatRoomMessages {
+    width: 100%;
+    height: 67vh;
+  }
+
+  .chatRoomInputContainer {
+    width: 100%;
+  }
+
+  .sidePanel {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chatRoomHeader {
+    width: 100%;
+  }
+
+  .chatRoomTitle {
+    font-size: 1.5rem;
+  }
+
+  .chatRoomMessages {
+    width: 90%;
+    height: 67vh;
+  }
+
+  .chatRoomInputContainer {
+    width: 90%;
+  }
+
+  .sidePanel {
+    width: 30%;
+  }
+
+  .messageContent {
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chatRoom {
+    width: 100%;
+  }
+
+  .chatRoomHeader {
+    width: 100%;
+  }
+
+  .chatRoomTitle {
+    font-size: 1.2rem;
+  }
+
+  .chatRoomHeaderButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .chatRoomMessages {
+    width: 100%;
+    height: 67vh;
+    padding: 10px;
+  }
+
+  .chatRoomInputContainer {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .chatRoomInput {
+    width: 85%;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .sendButton {
+    width: 15%;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .messageContent {
+    max-width: 90%;
+    padding: 6px 12px;
+  }
+
+  .messageName {
+    font-size: 0.7em;
+  }
+
+  .messageText {
+    font-size: 0.9rem;
+  }
+
+  .messageTime {
+    font-size: 0.6em;
+  }
+
+  .sidePanel {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .sidePanelContent {
+    padding: 15px;
+  }
+
+  .sidePanelInfo {
+    font-size: 1rem;
+  }
+
+  .sidePanelProfile {
+    margin: 10px 0;
+  }
+
+  .sidePanelProfileImg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .sidePanelProfileName {
+    font-size: 0.9rem;
+  }
+}
