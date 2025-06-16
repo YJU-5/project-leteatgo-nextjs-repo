@@ -1,4 +1,5 @@
 .chatRoom {
+  overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,4 +223,139 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: #fff;
+}
+
+@media screen and (max-width: 1024px) {
+  .chatRoom {
+    width: 100%;
+  }
+
+  .chatRoomHeader {
+    width: 100%;
+  }
+
+  .chatRoomMessages {
+    width: 100%;
+    height: 67vh;
+  }
+
+  .chatRoomInputContainer {
+    width: 100%;
+  }
+
+  .sidePanel {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .chatRoomHeader {
+    width: 100%;
+  }
+
+  .chatRoomTitle {
+    font-size: 1.5rem;
+  }
+
+  .chatRoomMessages {
+    width: 90%;
+    height: 67vh;
+  }
+
+  .chatRoomInputContainer {
+    width: 90%;
+  }
+
+  .sidePanel {
+    width: 30%;
+  }
+
+  .messageContent {
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .chatRoom {
+    width: 100%;
+  }
+
+  .chatRoomHeader {
+    width: 100%;
+  }
+
+  .chatRoomTitle {
+    font-size: 1.2rem;
+  }
+
+  .chatRoomHeaderButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .chatRoomMessages {
+    width: 100%;
+    height: 67vh;
+    padding: 10px;
+  }
+
+  .chatRoomInputContainer {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .chatRoomInput {
+    width: 85%;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .sendButton {
+    width: 15%;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .messageContent {
+    max-width: 90%;
+    padding: 6px 12px;
+  }
+
+  .messageName {
+    font-size: 0.7em;
+  }
+
+  .messageText {
+    font-size: 0.9rem;
+  }
+
+  .messageTime {
+    font-size: 0.6em;
+  }
+
+  .sidePanel {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .sidePanelContent {
+    padding: 15px;
+  }
+
+  .sidePanelInfo {
+    font-size: 1rem;
+  }
+
+  .sidePanelProfile {
+    margin: 10px 0;
+  }
+
+  .sidePanelProfileImg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .sidePanelProfileName {
+    font-size: 0.9rem;
+  }
 }
