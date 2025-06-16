@@ -16,7 +16,7 @@ export default function SearchUser() {
   const [searchValue, setSearchValue] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const [searchedUserList, setSearchedUserList] = useState<User[]>([]);
-  const [userList, setUserList] = useState<User[]>([
+  const [userList /* setUserList */] = useState<User[]>([
     {
       id: 1,
       name: "차승현",

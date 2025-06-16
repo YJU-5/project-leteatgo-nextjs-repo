@@ -51,7 +51,7 @@
   width: 49px;
   height: 49px;
   background-color: #f0f0f0;
-  border: 1px solid #121212;
+  border: 2px solid #f0f0f0;
   border-radius: 50%;
   cursor: pointer;
   pointer-events: auto;
@@ -63,7 +63,7 @@
   width: 46px;
   height: 46px;
   background-color: #f0f0f0;
-  border: 1px solid #121212;
+  border: 2px solid #f0f0f0;
   border-radius: 50%;
   cursor: pointer;
   pointer-events: auto;
@@ -74,13 +74,13 @@
 .thumb:active::-webkit-slider-thumb {
   background-color: #121212; /* 배경색 유지 */
   border: 3px solid #f0f0f0; /* 테두리 두께만 증가 */
-  width: 49px; /* 크기 유지 */
-  height: 49px;
+  width: 48px; /* 크기 유지 */
+  height: 48px;
 }
 
 .thumb:active::-moz-range-thumb {
   background-color: #121212;
-  border: 3px solid #f0f0f0;
+  border: 2px solid #f0f0f0;
   width: 46px;
   height: 46px;
 }
