@@ -1,10 +1,1 @@
-{
-  "/album/page": "app/album/page.js",
-  "/login/page": "app/login/page.js",
-  "/reviews/page": "app/reviews/page.js",
-  "/login/google/page": "app/login/google/page.js",
-  "/start/page": "app/start/page.js",
-  "/what-is-social-dining/page": "app/what-is-social-dining/page.js",
-  "/map/page": "app/map/page.js",
-  "/page": "app/page.js"
-}
+{}
