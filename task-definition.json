@@ -21,7 +21,7 @@
         },
         {
           "name": "NEXT_PUBLIC_ENV",
-          "value": "development"
+          "value": "production"
         },
         {
           "name": "NEXT_PUBLIC_API_URL",
@@ -86,11 +86,11 @@
           "awslogs-stream-prefix": "ecs"
         }
       },
-      "memory": 512,
+      "memory": 1024,
       "cpu": 256
     }
   ],
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "512",
-  "memory": "1024"
+  "memory": "2048"
 }
