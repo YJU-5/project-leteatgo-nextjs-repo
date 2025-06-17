@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import RadarChart from "@/components/RadarChart/RadarChart";
 import Chart from "@/components/Chart/Chart";
@@ -49,6 +49,47 @@ export default function ProfilePage() {
       },
     ],
   });
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/review/averagesreview`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+          },
+        }
+        );
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error("리뷰 데이터를 가져오는데 실패했습니다.", error);
+      }
+    }
+
+    const fetchuser = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+          },
+        }
+        );
+        const user = await response.json()
+        setUser(user)
+      } catch (error) {
+        console.error("유저 정보를 가져오는데 실패했습니다.", error);
+      }
+    }
+
+    fetchdata()
+    fetchuser()
+  }, [])
+
+
 
   const calculateAverage = (numbers: number[]): number => {
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
