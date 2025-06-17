@@ -23,6 +23,13 @@ interface ChatUser {
     pictureUrl: string;
   };
 }
+const socket = io(`${process.env.NEXT_PUBLIC_API_URL}/chat-room/join`, {
+  transports: ["websocket"], // WebSocket만 사용 (보안 Http 풀링방지)
+  withCredentials: true,
+  auth: {
+    token: token,
+  },
+});
 
 interface UseChatReturn {
   messages: ChatMessage[];
@@ -191,106 +198,34 @@ export const useChat = (roomId: string): UseChatReturn => {
         }
       });
 
-      socket.on("connect_error", (error) => {
-        console.error("Socket connection error:", error);
-        // 토큰이 만료되었거나 유효하지 않은 경우 처리
-        if (error.message.includes("JWT")) {
-          console.error("JWT authentication error:", error.message);
-          // 토큰 갱신 로직 또는 로그인 페이지로 리다이렉트
-        }
-      });
-
-      // 소켓 연결 해제 이벤트
-      socket.on("disconnect", (reason) => {
-        console.log("Socket disconnected:", reason);
-      });
-
-      // 컴포넌트 언마운트 시 이벤트 리스너 제거 및 소켓 연결 해제
+      // 소켓 연결 해제
       return () => {
-        console.log("Cleaning up socket connection...");
-        socket.off("roomParticipants");
-        socket.off("role");
-        socket.off("messages");
-        socket.off("message");
-        socket.off("typing");
         socket.disconnect();
-        socketRef.current = null;
       };
     }
-  }, [roomId]);
-
-  useEffect(() => {
-    if (role && userList.length > 0) {
-      // localStorage에서 사용자 정보가 없는 경우에만 소켓에서 가져온 정보 사용
-      const userInfo = localStorage.getItem("userInfo");
-      if (!userInfo) {
-        const currentUser = userList.find(
-          (user: ChatUser) => user.role === role
-        );
-        if (currentUser) {
-          setCurrentUserId(currentUser.id);
-          setCurrentUserName(currentUser.userId.name);
-        }
-      }
-    }
-  }, [role, userList]);
+  }, [roomId, role]);
 
   // 타이핑 상태 설정
   const setTyping = (isTyping: boolean) => {
     if (socketRef.current) {
       socketRef.current.emit("typing", { roomId, isTyping });
-
-      // 타이핑 상태가 true인 경우 3초 후에 자동으로 false로 변경
-      if (isTyping) {
-        if (typingTimeoutRef.current) {
-          clearTimeout(typingTimeoutRef.current);
-        }
-
-        typingTimeoutRef.current = setTimeout(() => {
-          if (socketRef.current) {
-            socketRef.current.emit("typing", { roomId, isTyping: false });
-          }
-        }, 3000);
-      }
     }
   };
 
-  // 메세지 보내기
+  // 메시지 전송
   const sendMessage = (msg: string) => {
-    if (!msg.trim()) return; // 빈 메시지 체크 추가
-
     if (socketRef.current) {
-      console.log("Sending message:", msg);
-      // 타이핑 상태 해제
-      socketRef.current.emit("typing", { roomId, isTyping: false });
-
-      // 메시지 전송
-      socketRef.current.emit("message", { roomId, message: msg.trim() });
+      socketRef.current.emit("message", { roomId, message: msg });
     }
   };
 
   // 채팅방 나가기
   const leaveRoom = () => {
     if (socketRef.current) {
-      console.log("Leaving room:", roomId);
-      // 서버에 나가기 알림
-      socketRef.current.emit("leaveRoom", { roomId });
-
-      // 소켓 연결 해제
+      socketRef.current.emit("leaveRoom", roomId);
       socketRef.current.disconnect();
-      socketRef.current = null;
+      router.push("/");
     }
-
-    // 상태 초기화
-    setMessages([]);
-    setUserList([]);
-    setRole("");
-    setCurrentUserId("");
-    setCurrentUserName("");
-    setTypingUsers([]);
-
-    // 메인 페이지로 이동
-    router.push("/");
   };
 
   return {

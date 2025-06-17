@@ -22,9 +22,7 @@ export default function GoogleCallback() {
   useEffect(() => {
     const getGoogleToken = async () => {
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      //URL에서 window.location.hash.substring(1) = #이후로 나오는 부분을 URLSerchParams 객체로 변환해서 가지고오겠다. 그리고 #를 제거하겠다.
       const accessToken = hashParams.get("access_token");
-      //가지고온 URL에서 access_token의 값을 가지고 오겠다.
       if (!accessToken) return;
 
       try {

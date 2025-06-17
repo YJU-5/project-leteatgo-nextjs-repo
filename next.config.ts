@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
       "lh3.googleusercontent.com",
       "nestjs-image-bucket.s3.ap-northeast-2.amazonaws.com",
       "leteatgo-s3-bucket.s3.ap-northeast-2.amazonaws.com",
+      "img1.kakaocdn.net",
     ],
   },
 };

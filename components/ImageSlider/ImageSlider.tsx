@@ -4,8 +4,8 @@ import Image from "next/image";
 
 interface Content {
   id: number;
-  img: string;
-  name: string;
+  pictureUrl: string;
+  description: string;
   comment: string;
 }
 
@@ -107,14 +107,14 @@ export default function ImageSlider({ contents = [] }: ImageSliderProps) {
           {visibleContents.map((content) => (
             <div key={content.id} className={styles.imageWrapper}>
               <Image
-                src={content.img}
-                alt={`${content.name}의 이미지`}
+                src={content.pictureUrl || "/foods/cn-food.jpg"}
+                alt={`${content.description}의 이미지`}
                 width={300}
                 height={200}
                 className={styles.sliderImage}
               />
               <div className={styles.contentInfo}>
-                <h3 className={styles.userName}>{content.name}</h3>
+                <h3 className={styles.userName}>{content.description}</h3>
                 <p className={styles.userComment}>{content.comment}</p>
               </div>
             </div>

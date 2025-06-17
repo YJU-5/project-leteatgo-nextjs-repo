@@ -7,6 +7,8 @@ import styles from "./MainHeaderLogin.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Notification from "@/components/Notification/Notification";
+import UserMenu from "@/components/UserMenu/UserMenu";
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -58,10 +60,11 @@ export default function MainHeaderLogin() {
           <li>
             <Image
               src="/login/notification.png"
-              alt="알림"
+              onClick={() => setShowNotifications(!showNotifications)}
+              className={styles.notificationIcon}
+              alt="알림 아이콘"
               width={24}
               height={24}
-              onClick={() => setShowNotifications(!showNotifications)}
             />
           </li>
           <li>
@@ -86,6 +89,19 @@ export default function MainHeaderLogin() {
           </div>
         </div>
       )}
+
+      {/* 마이페이지이동 창 */}
+      <UserMenu
+        showDropdown={showDropdown}
+        setShowDropdown={setShowDropdown}
+        handleLogout={handleLogout}
+      />
+
+      {/* {알람} */}
+      <Notification
+        showNotifications={showNotifications}
+        setShowNotifications={setShowNotifications}
+      />
     </ul>
   );
 }

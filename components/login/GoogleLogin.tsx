@@ -22,16 +22,15 @@ export default function GoogleLogin() {
 
   return (
     <div>
-      {/* 구글로그인 버튼 */}
       <button className={styles.googleButton} onClick={handleGoogleLogin}>
         <Image
           src="/login/google-logo.png"
           alt="Google Logo"
-          width={20}
-          height={20}
-          priority
+          width={24}
+          height={24}
+          className={styles.googleIcon}
         />
-        Google로 시작하기
+        <span>Google로 시작하기</span>
       </button>
     </div>
   );
