@@ -35,7 +35,7 @@ export default function KakaoCallback() {
         const data = await response.json();
         //백엔드로 코드 보내주고 jwt토큰 받기
         const userResponse = await fetch(
-          "http://localhost:3001/user/kakao/login",
+          `${process.env.NEXT_PUBLIC_API_URL}/user/kakao/login`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
