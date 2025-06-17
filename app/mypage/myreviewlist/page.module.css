@@ -1,0 +1,15 @@
+.container{
+  padding: 6% 2% 2% 2%;
+  box-sizing: border-box;
+}
+
+.header{
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+.title{
+  margin: 0;
+  font-size: 2rem;
+  white-space: nowrap;
+}

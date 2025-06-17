@@ -1,0 +1,264 @@
+.reviewDetail {
+  width: 100%;
+  height: 100%;
+  color: white;
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 100%;
+}
+
+.container h1 {
+  font-size: 3.5rem;
+  margin: 0 0 1rem;
+}
+
+.date {
+  font-size: 1.75rem;
+  margin: 1rem 0;
+}
+
+.address {
+  font-size: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.tag {
+  display: flex;
+  gap: 1rem; 
+  font-size: 0.875rem;
+  align-items: center;
+}
+
+.tag div {
+  border: 0.125rem solid #FFFFFF; 
+  padding: 0.5rem 1rem; 
+  border-radius: 1rem; 
+}
+
+.imageContainer {
+  display: flex;
+  gap: 2%; 
+}
+
+.mainImg {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.subImageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2%; 
+}
+
+.subImage {
+  object-fit: cover;
+  width: 150px;
+  height: 146px;
+}
+
+
+/* 하단부 */
+
+.reviewCount {
+  font-size: 1.25rem; /* 20px */
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.itemsScroll {
+  width: 100%;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pageButton {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.pageButton:hover {
+  transform: scale(1.2);
+  background-color: #bbb;
+}
+
+.whiteButton {
+  background-color: white;
+  transform: scale(1.3);
+}
+
+.blackButton{
+  background-color: #666;
+}
+
+
+.reviewContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem; 
+  margin-top: 2%;
+}
+
+.reviewCard {
+  width: 20rem; 
+  background-color: #2D2D2D;
+  padding: 1rem; 
+  border-radius: 0.75rem; 
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem; 
+}
+
+.user h1 {
+  font-size: 1.125rem; 
+  font-weight: bold;
+}
+
+.profileImg {
+  border-radius: 10%;
+}
+
+.reviewText {
+  font-size: 1rem; 
+  color: #e0e0e0;
+  margin-top: 1rem; 
+}
+
+.reviewImageContainer {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem; 
+  margin-top: 1rem; 
+}
+
+.reviewMainImg {
+  border-radius: 0.75rem; 
+  object-fit: cover;
+  width: 12.5rem;
+  height: 12.5rem;
+}
+
+.reviewSubImageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; 
+}
+
+.reviewSubImage {
+  border-radius: 0.75rem; 
+  object-fit: cover;
+  width: 6.25rem;
+  height: 5.75rem;
+}
+
+
+@media (max-width: 1200px) {
+
+
+  .container{
+    min-width: 600px;
+  }
+
+  .container h1 {
+    font-size: 3.25rem;
+    min-width: 300px;
+  }
+
+  .date, .address {
+    font-size: 1.25rem;
+  }
+
+  .tag {
+    gap: 10px; 
+    font-size: 12px;
+    align-items: center;
+  }
+
+  .imageContainer {
+    padding-top: 0.375rem;
+    gap: 1rem;
+  }
+
+  .mainImg {
+    width: 250px;
+    height: 250px;
+  }
+
+  .subImage {
+    width: 120px;
+    height: 120px;
+  }
+
+
+  .reviewCard {
+    width: 18rem;
+  }
+
+  .reviewImageContainer{
+    justify-content: center;
+  }
+
+  .reviewMainImg {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .reviewSubImage {
+    width: 5rem;
+    height: 4.5rem;
+  }
+} 
+
+
+.slideFromRight {
+  animation: slideFromRight 0.4s ease;
+}
+
+.slideFromLeft {
+  animation: slideFromLeft 0.4s ease;
+}
+
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
