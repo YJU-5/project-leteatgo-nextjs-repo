@@ -1,17 +1,11 @@
 "use client";
 
-<<<<<<< HEAD
 import { login, User } from "@/store/UserSlice";
 import { AppDispatch } from "@/store/Store";
-=======
-import { login } from "@/store/UserSlice";
->>>>>>> f3710f4f (feat: Add album feature)
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { JwtPayload } from "jwt-decode";
 
 interface ExtendedJwtPayload extends JwtPayload {
@@ -24,15 +18,6 @@ interface ExtendedJwtPayload extends JwtPayload {
 export default function GoogleCallback() {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-=======
-=======
-import { refreshUserInfo } from "@/app/album/components/authUtils";
->>>>>>> 810523c1 (feat: Update album feature and login pages)
-
-export default function GoogleCallback() {
-  const router = useRouter();
-  const dispatch = useDispatch();
->>>>>>> f3710f4f (feat: Add album feature)
 
   useEffect(() => {
     const getGoogleToken = async () => {
@@ -43,7 +28,6 @@ export default function GoogleCallback() {
       if (!accessToken) return;
 
       try {
-<<<<<<< HEAD
         // 환경 변수에서 API URL 가져오기
         const apiUrl =
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -96,29 +80,5 @@ export default function GoogleCallback() {
     getGoogleToken();
   }, [dispatch, router]);
 
-  return <p>로그인 처리 중...</p>;
-=======
-        //백엔드로 accessToken 보내주기
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/google/login`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ access_token: accessToken }),
-          }
-        );
-
-        const userData = await response.json();
-        localStorage.setItem("jwtToken", userData.token);
-        await refreshUserInfo(); // 서버에서 내 정보 받아와서 user 저장
-        router.push("/");
-      } catch (error) {
-        console.log("구글 로그인 에러:", error);
-      }
-    };
-    getGoogleToken();
-  }, []);
-
-  return <p></p>;
->>>>>>> f3710f4f (feat: Add album feature)
+  return <p>로그인 처리 중…</p>;
 }
