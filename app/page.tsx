@@ -12,8 +12,8 @@ import { login } from "@/store/UserSlice";
 // 별점도 있어야할 듯
 interface Review {
   id: number;
-  img: string;
-  name: string;
+  pictureUrl: string;
+  description: string;
   comment: string;
 }
 
@@ -83,7 +83,7 @@ export default function Home() {
     const fetchReviews = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/reviews`
+          `${process.env.NEXT_PUBLIC_API_URL}/review`
         );
         const data = await response.json();
         setReviews(data);

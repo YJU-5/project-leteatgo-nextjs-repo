@@ -1,42 +1,64 @@
+"use client"
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
+import ReviewModal from "@/components/ReviewModal/ReviewModal"
+import { useRouter } from "next/navigation";
 
 interface Review {
   id: string;
-  image: string;
+  pictureUrl: string;
   title: string;
   date: string;
   reviews: number;
   completed: boolean;
+  createdAt: string;
 }
 
 export default function Reviews() {
-  const reviews: Review[] = [
-    {
-      id: "1",
-      image: "/foods/kr-food.jpg",
-      title: "차승현님의 소셜다이닝",
-      date: "2025-02-27",
-      reviews: 0,
-      completed: false,
-    },
-    {
-      id: "2",
-      image: "/foods/jp-food.jpg",
-      title: "김형선님의 소셜다이닝",
-      date: "2025-02-27",
-      reviews: 1,
-      completed: true,
-    },
-    {
-      id: "3",
-      image: "/foods/us-food.jpg",
-      title: "홍태관님의 소셜다이닝",
-      date: "2025-02-27",
-      reviews: 2,
-      completed: true,
-    },
-  ];
+  const router = useRouter();
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedReview, setSelectedReview] = useState<Review | null>(null);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/joined`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`, // 또는 cookie
+          },
+        });
+
+        if (!res.ok) throw new Error("데이터 불러오기 실패");
+
+        const data = await res.json();
+        setReviews(data);
+      } catch (err) {
+        console.error("채팅방 목록을 불러오지 못했습니다.", err);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
+  console.log(reviews);
+
+  const handleOpenModal = (reviews: Review) => {
+    setSelectedReview(reviews);
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setSelectedReview(null);
+    setShowModal(false);
+  };
+
+  const eventdetail = (id: string) => {
+    router.push(`/mypage/eventdetail/${id}`);
+  }
 
   return (
     <div className={styles.reviews}>
@@ -46,15 +68,16 @@ export default function Reviews() {
           <div className={styles.reviewsListItem} key={review.id}>
             <div className={styles.reviewsListItemImage}>
               <Image
-                src={review.image}
+                src={review.pictureUrl || '/foods/cn-food.jpg'}
                 alt={review.title}
+                onClick={() => eventdetail(review.id)}
                 width={400}
                 height={200}
               />
             </div>
             <div className={styles.reviewsListItemContent}>
               <h1 className={styles.reviewsListItemTitle}>{review.title}</h1>
-              <p className={styles.reviewsListItemDate}>{review.date}</p>
+              <p className={styles.reviewsListItemDate}>{review.createdAt.split('T')[0].split('-').join('.')}</p>
               <p className={styles.reviewsListItemReviews}>
                 {review.reviews}개의 후기
               </p>
@@ -62,12 +85,16 @@ export default function Reviews() {
                 {review.completed ? (
                   <p>후기 작성을 완료하였습니다.</p>
                 ) : (
-                  <button>후기 작성하기</button>
+                  <button onClick={() => handleOpenModal(review)}>후기 작성하기</button>
                 )}
               </div>
             </div>
           </div>
         ))}
+
+        {showModal && selectedReview && (
+          <ReviewModal onClose={handleCloseModal} review={selectedReview} />
+        )}
       </div>
     </div>
   );
