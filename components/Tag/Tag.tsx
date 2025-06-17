@@ -7,12 +7,12 @@ interface TagProps {
 }
 
 export default function Tag({ tags, onSelect }: TagProps) {
-  const [activeTag, setActiveTag] = useState<string>("UNSPECIFIED");
+  const [activeTag, setActiveTag] = useState<string>("");
 
   const handleClick = (tag: string) => {
     if (activeTag === tag) {
-      setActiveTag("UNSPECIFIED");
-      onSelect("UNSPECIFIED");
+      setActiveTag("");
+      onSelect("");
     } else {
       setActiveTag(tag);
       onSelect(tag);

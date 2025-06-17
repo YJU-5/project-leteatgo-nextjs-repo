@@ -15,14 +15,30 @@ export default function UserCheck({ children }: { children: React.ReactNode }) {
 
     if (token) {
       try {
-        const userInfo = jwtDecode(token) as User; // 타입 단언 추가
-        dispatch(login({ jwtToken: token, user: userInfo })); //  Redux에 저장
+        const decoded = jwtDecode(token) as any;
+        const userInfo: User = {
+          id: decoded.socialId,
+          name: decoded.name,
+          email: decoded.email,
+          pictureUrl: decoded.pictureUrl || "/default-profile.png",
+          phoneNumber: null,
+          birthday: null,
+          gender: null,
+          description: null,
+          role: "USER",
+          socialProvider: "GOOGLE",
+          socialId: decoded.socialId,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          deleted: decoded.deleted,
+        };
+        dispatch(login({ jwtToken: token, user: userInfo }));
       } catch (error) {
         console.error("토큰 디코딩 오류:", error);
       }
     }
 
-    setIsLoading(false); // 로딩 완료
+    setIsLoading(false);
   }, [dispatch]);
 
   if (isLoading) return; // Redux 상태 복구 전까지 로딩 UI 표시

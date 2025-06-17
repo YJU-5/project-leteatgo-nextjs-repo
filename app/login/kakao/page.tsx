@@ -15,44 +15,31 @@ interface ExtendedJwtPayload extends JwtPayload {
   role?: string;
 }
 
-export default function KakaoCallback() {
+export default function GoogleCallback() {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const getKakaoToken = async () => {
-      const code = new URL(window.location.href).searchParams.get("code");
-      if (!code) return;
+    const getGoogleToken = async () => {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      //URL에서 window.location.hash.substring(1) = #이후로 나오는 부분을 URLSerchParams 객체로 변환해서 가지고오겠다. 그리고 #를 제거하겠다.
+      const accessToken = hashParams.get("access_token");
+      //가지고온 URL에서 access_token의 값을 가지고 오겠다.
+      if (!accessToken) return;
 
       try {
-        // 토큰가지고오기
-        const response = await fetch("https://kauth.kakao.com/oauth/token", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-          },
-          body: new URLSearchParams({
-            grant_type: "authorization_code",
-            client_id: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || "",
-            redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || "",
-            code,
-          }),
-        });
-
-        const data = await response.json();
-
         // 환경 변수에서 API URL 가져오기
         const apiUrl =
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-        //백엔드로 코드 보내주고 jwt토큰 받기
-        const userResponse = await fetch(`${apiUrl}/user/kakao/login`, {
+        const response = await fetch(`${apiUrl}/user/google/login`, {
+          credentials: "include", // 쿠키 포함
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ access_token: data.access_token }),
+          body: JSON.stringify({ access_token: accessToken }),
         });
 
-        const userData = await userResponse.json();
+        const userData = await response.json();
         const decodedToken = jwtDecode(userData.token) as ExtendedJwtPayload;
         const userInfo: User = {
           id: decodedToken.sub || "",
@@ -64,12 +51,13 @@ export default function KakaoCallback() {
           pictureUrl: decodedToken.picture || "",
           description: null,
           role: decodedToken.role || "",
-          socialProvider: "kakao",
+          socialProvider: "google",
           socialId: decodedToken.sub || "",
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           deleted: false,
         };
+        //redux store로 토큰과 유저정보 보내주기
         dispatch(login({ jwtToken: userData.token, user: userInfo }));
 
         // localStorage에 사용자 정보 저장
@@ -84,14 +72,13 @@ export default function KakaoCallback() {
         // 로그인 성공 후 메인 페이지로 리다이렉트
         router.push("/");
       } catch (error) {
-        console.log("카카오 로그인 에러:", error);
+        console.log("구글 로그인 에러:", error);
         // 에러 발생 시 로그인 페이지로 리다이렉트
         router.push("/login");
       }
     };
-
-    getKakaoToken();
+    getGoogleToken();
   }, [dispatch, router]);
 
-  return <p>로그인 처리 중...</p>;
+  return <p>로그인 처리 중…</p>;
 }
