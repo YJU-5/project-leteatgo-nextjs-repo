@@ -18,7 +18,7 @@ export default function GoogleCallback() {
 
       try {
         const response = await fetch(
-          "http://localhost:3001/user/google/login",
+          `${process.env.NEXT_PUBLIC_API_URL}/user/google/login`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 
 const token = localStorage.getItem("jwtToken");
 
-const socket = io("http://localhost:3001/chat-room/join", {
+const socket = io(`${process.env.NEXT_PUBLIC_API_URL}/chat-room/join`, {
   transports: ["websocket"], // WebSocket만 사용 (보안 Http 풀링방지)
   withCredentials: true,
   auth: {

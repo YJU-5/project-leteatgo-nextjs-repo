@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./MainHeaderLogin.module.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Notification from "@/components/Notification/Notification";
+import UserMenu from "@/components/UserMenu/UserMenu"
 
 export default function MainHeaderLogin() {
   const router = useRouter();
@@ -51,36 +54,57 @@ export default function MainHeaderLogin() {
 
   return (
     <ul className={styles.navLogin}>
-      {token ? (
-        <div>
-          <li>
-            <img
-              src="/login/notification.png"
-              onClick={() => setShowNotifications(!showNotifications)}
-            />
-          </li>
-          <li>
-            <p onClick={() => setShowDropdown(!showDropdown)}>{user?.name}님</p>
-          </li>
-          <li>
-            <p onClick={handleLogout}>로그아웃</p>
-          </li>
-        </div>
-      ) : (
-        <li>
-          <Link href="/login">소셜 로그인</Link>
-        </li>
-      )}
-
-      {showModal && (
-        <div className={styles.modalContainer}>
-          <div className={styles.modalContent} ref={modalRef}>
-            <h3>로그아웃 하시겠습니까.</h3>
-            <button onClick={CheckLogout}>yes</button>
-            <button onClick={() => setShowModal(false)}>no</button>
+      {
+        token ? (
+          <div>
+            <li>
+              <Image
+                src="/login/notification.png"
+                onClick={() => setShowNotifications(!showNotifications)}
+                className={styles.notificationIcon}
+                alt="알림 아이콘"
+                width={24}
+                height={24}
+              />
+            </li>
+            <li>
+              <p onClick={() => setShowDropdown(!showDropdown)}>{user?.name}님</p>
+            </li>
+            <li>
+              <p onClick={handleLogout} >로그아웃</p>
+            </li>
           </div>
-        </div>
-      )}
+        ) : (
+          <li>
+            <Link href="/login">소셜 로그인</Link>
+          </li>
+        )
+      }
+
+      {
+        showModal && (
+          <div className={styles.modalContainer} >
+            <div className={styles.modalContent} ref={modalRef}>
+              <h3>로그아웃 하시겠습니까.</h3>
+              <button onClick={CheckLogout}>yes</button>
+              <button onClick={() => setShowModal(false)}>no</button>
+            </div>
+          </div>
+        )
+      }
+
+      {/* 마이페이지이동 창 */}
+      <UserMenu
+        showDropdown={showDropdown}
+        setShowDropdown={setShowDropdown}
+        handleLogout={handleLogout}
+      />
+
+      {/* {알람} */}
+      <Notification
+        showNotifications={showNotifications}
+        setShowNotifications={setShowNotifications}
+      />
     </ul>
   );
 }

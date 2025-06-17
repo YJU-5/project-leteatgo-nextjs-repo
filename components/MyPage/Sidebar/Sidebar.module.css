@@ -1,0 +1,66 @@
+.sidebar {
+  width: 18vw; /* 화면 너비의 18% */
+  background-color: #1a1a1a;
+  color: #fff;
+  height: 100vh; /* 화면 높이의 100% */
+  position: fixed;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 50% 0 0 50%;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-size: 1.125rem;
+}
+
+.sidebar li:hover {
+  color: #a0a0a0;
+}
+
+.menuItem {
+  text-decoration: none;
+  color: #fff;
+}
+
+.blue {
+  text-decoration: none;
+  color: #4274FF;
+}
+
+@media (max-width: 1115px) {
+  .sidebar {
+    width: 15vw;
+  }
+
+  .sidebar ul {
+    margin-left: 30%;
+  }
+
+  .sidebar li {
+    font-size: 1rem;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 15vw;
+    height: 100%;
+   
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar li {
+    font-size: 0.8rem;
+    max-width: 100px;
+  }
+
+}
