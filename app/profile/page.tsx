@@ -8,12 +8,12 @@ import Image from "next/image";
 import ProfileChange from "@/components/ProfileChange/ProfileChange";
 
 export default function ProfilePage() {
-  const [data /* setData */] = useState([3.5, 4.5, 3.5, 4.5, 3.5]);
-  const [user /* setUser */] = useState({
+  const [data, setData] = useState([3.5, 4.5, 3.5, 4.5, 3.5]);
+  const [user, setUser] = useState({
     name: "차승현",
     introduction: "안녕하세요",
   });
-  const [history /* setHistory */] = useState({
+  const [history, setHistory] = useState({
     host: [
       {
         title: "차승현의 소셜다이닝",

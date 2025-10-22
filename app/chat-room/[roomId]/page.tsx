@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useChat } from "@/hooks/useChat";
 import Image from "next/image";
-import Description from "@/components/Description/Description";
 
 interface ChatMessage {
   id?: string;
@@ -16,51 +15,10 @@ interface ChatMessage {
   isCurrentUser: boolean;
 }
 
-interface Host {
-  id: string;
-  name: string;
-  email: string;
-  phoneNumber: string | null;
-  birthday: string | null;
-  gender: string | null;
-  pictureUrl: string;
-  description: string | null;
-  role: string;
-  socialProvider: string;
-  socialId: string;
-  createdAt: string;
-  updatedAt: string;
-  deleted: boolean;
-}
-
-interface Content {
-  id: number;
-  title: string;
-  description: string;
-  status: string;
-  startDate: string;
-  maxParticipants: number;
-  gender: string;
-  pictureUrl: string;
-  minAge: number;
-  maxAge: number;
-  latitude: string;
-  longitude: string;
-  address: string;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  isActive: number;
-  profileImg: string;
-  username: string;
-  name: string;
-  hostId: Host;
-}
-
 export default function ChatRoomPage() {
-  const { roomId } = useParams();
-  const [roomInfo, setRoomInfo] = useState<Content>({
-    id: 0,
+  const { roomId } = useParams(); // 동적 라우트 값
+  const [roomInfo, setRoomInfo] = useState({
+    id: "",
     title: "",
     description: "",
     status: "",
@@ -77,35 +35,15 @@ export default function ChatRoomPage() {
     createdAt: "",
     updatedAt: "",
     isActive: 0,
-    profileImg: "",
-    username: "",
-    name: "",
-    hostId: {
-      id: "",
-      name: "",
-      email: "",
-      phoneNumber: null,
-      birthday: null,
-      gender: null,
-      pictureUrl: "",
-      description: null,
-      role: "",
-      socialProvider: "",
-      socialId: "",
-      createdAt: "",
-      updatedAt: "",
-      deleted: false,
-    },
   });
-
-  const { messages, sendMessage, userList } = useChat(roomId as string);
+  const { messages, role, sendMessage, leaveRoom, userList } = useChat(
+    roomId as string
+  );
   const [input, setInput] = useState("");
-  const [isComposing, setIsComposing] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [showSidePanel, setShowSidePanel] = useState(false);
-  const [selectedContent, setSelectedContent] = useState<Content | null>(null);
-  const { leaveRoom } = useChat(roomId as string);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // 메시지가 추가될 때마다 스크롤을 가장 아래로 이동
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -129,10 +67,12 @@ export default function ChatRoomPage() {
 
         const data = await response.json();
         setRoomInfo(data);
+        console.log(data);
       } catch (error) {
         console.error("소셜다이닝 데이터를 가져오는데 실패했습니다:", error);
+        // 에러 발생 시 빈 배열 설정
         setRoomInfo({
-          id: 0,
+          id: "",
           title: "",
           description: "",
           status: "",
@@ -149,25 +89,6 @@ export default function ChatRoomPage() {
           createdAt: "",
           updatedAt: "",
           isActive: 0,
-          profileImg: "",
-          username: "",
-          name: "",
-          hostId: {
-            id: "",
-            name: "",
-            email: "",
-            phoneNumber: null,
-            birthday: null,
-            gender: null,
-            pictureUrl: "",
-            description: null,
-            role: "",
-            socialProvider: "",
-            socialId: "",
-            createdAt: "",
-            updatedAt: "",
-            deleted: false,
-          },
         });
       }
     };
@@ -181,43 +102,83 @@ export default function ChatRoomPage() {
 
   return (
     <div className={styles.chatRoom}>
-      {selectedContent && (
-        <Description
-          content={selectedContent}
-          onClose={() => setSelectedContent(null)}
-          link={false}
-        />
-      )}
       <div className={styles.chatRoomHeader}>
-        <h1 className={styles.chatRoomTitle}>Chat Room: {roomInfo.title}</h1>
-        <Image
+        <div className={styles.headerLeft}>
+          <h1 className={styles.chatRoomTitle}>{roomInfo.title}</h1>
+          <h2 className={styles.chatRoomRole}>{role ? role : "GUEST"}</h2>
+        </div>
+        <button
           className={styles.chatRoomHeaderButton}
-          src="/hambugi.png"
-          alt="logo"
-          width={100}
-          height={100}
           onClick={() => setShowSidePanel(!showSidePanel)}
-        />
+        >
+          <Image src="/hambugi.png" alt="menu" width={40} height={40} />
+        </button>
       </div>
+
+      {/* 사이드 패널 */}
+      <div
+        className={`${styles.sidePanel} ${!showSidePanel ? styles.hidden : ""}`}
+      >
+        <button
+          className={styles.sidePanelClose}
+          onClick={() => setShowSidePanel(false)}
+        >
+          ✕
+        </button>
+        <div className={styles.sidePanelContent}>
+          <div className={styles.sidePanelInfo}>
+            참여자 ({userList.length} / {roomInfo.maxParticipants})
+          </div>
+          {userList.map((user, index) => (
+            <div key={index} className={styles.sidePanelProfile}>
+              <Image
+                src={user.userId.pictureUrl || "/profile/profile1.png"}
+                alt={user.userId.name}
+                width={40}
+                height={40}
+                className={styles.sidePanelProfileImg}
+              />
+              <span className={styles.sidePanelProfileName}>
+                {user.userId.name}
+                {user.role === "HOST" && " (HOST)"}
+              </span>
+            </div>
+          ))}
+          <div className={styles.buttonContainer}>
+            <button
+              onClick={() => {
+                leaveRoom();
+              }}
+              className={styles.leaveButton}
+            >
+              채팅방 나가기
+            </button>
+            {role === "HOST" && (
+              <button className={styles.hostButton}>리뷰요청하기</button>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className={styles.chatRoomMessages}>
-        {messages.map((message: ChatMessage) => (
+        {messages.map((msg: ChatMessage, index: number) => (
           <div
-            key={message.id}
+            key={msg.id || index}
             className={`${styles.messageContainer} ${
-              message.isSystem
+              msg.isSystem
                 ? styles.systemMessage
-                : message.isCurrentUser
+                : msg.isCurrentUser
                 ? styles.myMessage
                 : styles.otherMessage
             }`}
           >
             <div className={styles.messageContent}>
-              {!message.isSystem && (
-                <div className={styles.messageName}>{message.userName}</div>
+              {!msg.isSystem && (
+                <div className={styles.messageName}>{msg.userName}</div>
               )}
-              <div className={styles.messageText}>{message.message}</div>
+              <div className={styles.messageText}>{msg.message}</div>
               <div className={styles.messageTime}>
-                {new Date(message.createdAt).toLocaleTimeString()}
+                {new Date(msg.createdAt).toLocaleTimeString()}
               </div>
             </div>
           </div>
@@ -226,14 +187,12 @@ export default function ChatRoomPage() {
       </div>
       <div className={styles.chatRoomInputContainer}>
         <input
-          className={styles.chatRoomInput}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           type="text"
-          onCompositionStart={() => setIsComposing(true)}
-          onCompositionEnd={() => setIsComposing(false)}
+          className={styles.chatRoomInput}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && !isComposing) {
+            if (e.key === "Enter") {
               sendMessage(input);
               setInput("");
             }
@@ -241,63 +200,15 @@ export default function ChatRoomPage() {
           placeholder="메시지를 입력하세요"
         />
         <button
-          className={styles.sendButton}
           onClick={() => {
             sendMessage(input);
             setInput("");
           }}
+          className={styles.sendButton}
         >
           전송
         </button>
       </div>
-      {showSidePanel && (
-        <div
-          className={`${styles.sidePanel} ${
-            !showSidePanel ? styles.hidden : ""
-          }`}
-        >
-          <div className={styles.sidePanelContent}>
-            <p
-              className={styles.sidePanelInfo}
-              onClick={() => setSelectedContent(roomInfo)}
-            >
-              소셜다이닝 정보
-            </p>
-            <hr
-              style={{
-                margin: "10px 0",
-                border: "0.5px solid #fff",
-              }}
-            />
-            <p className={styles.sidePanelInfo}>참여자 정보</p>
-            {userList.map((user) => (
-              <div key={user.id} className={styles.sidePanelProfile}>
-                {user.userId.pictureUrl ? (
-                  <Image
-                    src={user.userId.pictureUrl}
-                    className={styles.sidePanelProfileImg}
-                    alt="profile"
-                    width={50}
-                    height={50}
-                  />
-                ) : null}
-                <p className={styles.sidePanelProfileName}>
-                  {user.userId.name}
-                </p>
-              </div>
-            ))}
-            <hr
-              style={{
-                margin: "10px 0",
-                border: "0.5px solid #fff",
-              }}
-            />
-            <p className={styles.sidePanelInfo} onClick={() => leaveRoom()}>
-              방 나가기
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

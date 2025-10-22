@@ -23,13 +23,6 @@ interface ChatUser {
     pictureUrl: string;
   };
 }
-const socket = io(`${process.env.NEXT_PUBLIC_API_URL}/chat-room/join`, {
-  transports: ["websocket"], // WebSocket만 사용 (보안 Http 풀링방지)
-  withCredentials: true,
-  auth: {
-    token: token,
-  },
-});
 
 interface UseChatReturn {
   messages: ChatMessage[];
@@ -46,7 +39,6 @@ interface UseChatReturn {
 export const useChat = (roomId: string): UseChatReturn => {
   const router = useRouter();
   const socketRef = useRef<Socket | null>(null);
-  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // 메세지 목록
   const [messages, setMessages] = useState<ChatMessage[]>([]);

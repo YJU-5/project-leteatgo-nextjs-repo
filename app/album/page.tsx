@@ -125,7 +125,6 @@ export default function Album() {
       return;
     }
 
-    // 파일을 URL로 변환
     const newImages = Array.from(files).map((file) =>
       URL.createObjectURL(file)
     );

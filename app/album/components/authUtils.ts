@@ -7,7 +7,7 @@ export const getToken = () => {
   const state = store.getState();
   const token = state.user.jwtToken;
   if (token) return token;
-  
+
   // Redux store에 없으면 localStorage에서 가져오기
   return localStorage.getItem("jwtToken");
 };
@@ -17,17 +17,29 @@ export const getCurrentUser = () => {
   const state = store.getState();
   const user = state.user.user;
   if (user) return user;
-  
+
   // Redux store에 없으면 localStorage에서 가져오기
   try {
     const userStr = localStorage.getItem("user");
-    if (userStr) {
-      return JSON.parse(userStr);
+    if (!userStr) {
+      return null;
     }
+
+    const user = JSON.parse(userStr);
+
+    // Google 이메일 기반으로 프로필 이미지 URL 생성
+    if (!user.pictureUrl && user.email) {
+      if (user.email.endsWith("@gmail.com")) {
+        user.pictureUrl = `https://lh3.googleusercontent.com/a/default-user=s150`;
+      } else {
+        user.pictureUrl = "/default-profile.png";
+      }
+    }
+    return user;
   } catch (error) {
     console.error("Failed to parse user info from localStorage:", error);
+    return null;
   }
-  return null;
 };
 
 // 사용자가 리소스의 소유자인지 확인
@@ -82,7 +94,10 @@ export const getAuthHeaders = (isFormData: boolean = false) => {
 };
 
 // 에러 처리
-export const handleApiError = async (error: any) => {
+export const handleApiError = async (error: {
+  status?: number;
+  response?: Response;
+}) => {
   let errorMessage = "알 수 없는 오류가 발생했습니다.";
 
   if (error.status === 401) {
@@ -100,39 +115,43 @@ export const handleApiError = async (error: any) => {
     try {
       const data = await error.response.json();
       errorMessage = data.message || errorMessage;
-    } catch (e) {
+    } catch {
       // JSON 파싱 실패 시 기본 메시지 사용
     }
   }
 
-  const err = new Error(errorMessage);
-  (err as any).status = error.status;
+  const err = new Error(errorMessage) as Error & { status?: number };
+  err.status = error.status;
   throw err;
 };
 
 // 로그인 상태 변경 시 호출할 함수
 export const handleAuthStateChange = () => {
   // Redux store와 localStorage 모두 초기화
-  store.dispatch({ type: 'user/logout' });
+  store.dispatch({ type: "user/logout" });
   localStorage.clear();
+  console.log("=== handleAuthStateChange Debug Info ===");
+  console.log(
+    "Before clear - localStorage user:",
+    localStorage.getItem("user")
+  );
+  console.log(
+    "Before clear - localStorage jwtToken:",
+    localStorage.getItem("jwtToken")
+  );
+
+  // 로컬 스토리지 초기화
+  localStorage.clear();
+
+  console.log("After clear - localStorage user:", localStorage.getItem("user"));
+  console.log(
+    "After clear - localStorage jwtToken:",
+    localStorage.getItem("jwtToken")
+  );
+  console.log("=== End Debug Info ===");
+
+  // 페이지 새로고침
   window.location.reload();
-};
-
-// 로그아웃 함수에 추가
-const handleLogout = () => {
-  localStorage.removeItem("user"); // 기존 코드
-  localStorage.clear(); // 추가: 모든 localStorage 데이터 정리
-};
-
-// 로그인 성공 후
-const handleLoginSuccess = (userData: {
-  id: string;
-  name: string;
-  email: string;
-  pictureUrl?: string;
-  socialId?: string;
-}) => {
-  localStorage.setItem("user", JSON.stringify(userData));
 };
 
 export const refreshUserInfo = async () => {
@@ -144,6 +163,7 @@ export const refreshUserInfo = async () => {
       const userData = await response.json();
       // Redux store와 localStorage 모두 업데이트
       store.dispatch(updateUser(userData));
+      localStorage.setItem("user", JSON.stringify(userData));
       return userData;
     }
     return null;
