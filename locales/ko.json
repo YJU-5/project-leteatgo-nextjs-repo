@@ -1,0 +1,60 @@
+{
+  "common": {
+    "loading": "로딩중...",
+    "error": "오류가 발생했습니다",
+    "confirm": "확인",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "수정",
+    "close": "닫기"
+  },
+  "chatRoom": {
+    "title": "채팅방",
+    "participants": "참여자",
+    "userRole": "유저역할",
+    "guest": "게스트",
+    "host": "호스트",
+    "sendMessage": "전송",
+    "inputPlaceholder": "메시지를 입력하세요",
+    "leaveRoom": "채팅방 나가기",
+    "requestReview": "리뷰요청하기",
+    "participantCount": "명"
+  },
+  "profile": {
+    "hostHistory": "개최 이력",
+    "participateHistory": "참여 이력",
+    "introduction": "자기소개",
+    "average": "평균",
+    "noHistory": "이력이 없습니다"
+  },
+  "album": {
+    "title": "앨범",
+    "createPost": "게시글 작성",
+    "edit": "수정",
+    "delete": "삭제",
+    "like": "좋아요",
+    "comment": "댓글",
+    "writeComment": "댓글을 입력하세요"
+  },
+  "login": {
+    "title": "로그인",
+    "googleLogin": "구글 로그인",
+    "kakaoLogin": "카카오 로그인",
+    "logout": "로그아웃"
+  },
+  "navigation": {
+    "home": "홈",
+    "album": "앨범",
+    "chatRoom": "채팅방",
+    "profile": "프로필",
+    "mypage": "마이페이지"
+  },
+  "mainHeader": {
+    "whatIsSocialDining": "소셜다이닝이란?",
+    "start": "시작하기",
+    "album": "앨범",
+    "map": "지도",
+    "reviews": "리뷰"
+  }
+}

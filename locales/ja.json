@@ -1,0 +1,60 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる"
+  },
+  "chatRoom": {
+    "title": "チャットルーム",
+    "participants": "参加者",
+    "userRole": "ユーザー役割",
+    "guest": "ゲスト",
+    "host": "ホスト",
+    "sendMessage": "送信",
+    "inputPlaceholder": "メッセージを入力してください",
+    "leaveRoom": "チャットルームを退出",
+    "requestReview": "レビューをリクエスト",
+    "participantCount": "名"
+  },
+  "profile": {
+    "hostHistory": "開催履歴",
+    "participateHistory": "参加履歴",
+    "introduction": "自己紹介",
+    "average": "平均",
+    "noHistory": "履歴がありません"
+  },
+  "album": {
+    "title": "アルバム",
+    "createPost": "投稿を作成",
+    "edit": "編集",
+    "delete": "削除",
+    "like": "いいね",
+    "comment": "コメント",
+    "writeComment": "コメントを入力してください"
+  },
+  "login": {
+    "title": "ログイン",
+    "googleLogin": "Googleログイン",
+    "kakaoLogin": "カカオログイン",
+    "logout": "ログアウト"
+  },
+  "navigation": {
+    "home": "ホーム",
+    "album": "アルバム",
+    "chatRoom": "チャットルーム",
+    "profile": "プロフィール",
+    "mypage": "マイページ"
+  },
+  "mainHeader": {
+    "whatIsSocialDining": "ソーシャルダイニングとは？",
+    "start": "始める",
+    "album": "アルバム",
+    "map": "マップ",
+    "reviews": "レビュー"
+  }
+}
