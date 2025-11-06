@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ReduxProvider from "@/store/ReduxProvider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import MainHeader from "../components/MainHeader/MainHeader";
 import SearchUser from "../components/SearchUser/SearchUser";
+import LanguageSwitcher from "../components/LanguageSwitcher/LanguageSwitcher";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -30,9 +32,12 @@ export default function RootLayout({
       </head>
       <body>
         <ReduxProvider>
-          <MainHeader />
-          <div style={{ marginTop: "10vh" }}>{children}</div>
-          <SearchUser />
+          <LanguageProvider>
+            <MainHeader />
+            <div style={{ marginTop: "10vh" }}>{children}</div>
+            <SearchUser />
+            <LanguageSwitcher />
+          </LanguageProvider>
         </ReduxProvider>
       </body>
     </html>

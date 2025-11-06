@@ -51,10 +51,30 @@
     "mypage": "マイページ"
   },
   "mainHeader": {
-    "whatIsSocialDining": "ソーシャルダイニングとは？",
+    "whatIsSocialDining": "概要",
     "start": "始める",
     "album": "アルバム",
     "map": "マップ",
     "reviews": "レビュー"
+  },
+  "home": {
+    "hero1Title": "たくさんの人と\n一緒に食事をしませんか？",
+    "hero1Description": "年齢や性別に関係なく、みんなで食事をしながら会話しましょう。",
+    "hero2Title": "日常に疲れたとき、\n新しい日常を作ってみませんか。",
+    "hero2Description": "新しい人々と新しい場所での出会いがあなたを待っています。",
+    "popularSocialDining": "人気のソーシャルダイニングリスト",
+    "socialDiningReviews": "ソーシャルダイニングのレビュー",
+    "footerTeam": "ヨンジン専門大学 JI-A 5組",
+    "footerAddress": "慶尚北道漆谷郡池川面錦松路60",
+    "footerEmail": "cjhms002@g.yju.ac.kr",
+    "footerPhone": "010-9278-1278"
+  },
+  "whatIsSocialDining": {
+    "title": "ソーシャルダイニングとは？",
+    "description1": "ソーシャルダイニング(Social Dining)とは、共通の関心を持つ人々が集まって食事を楽しみ、会話を交わす文化を意味します。「社会的」を意味するSocialと「食事」を意味するDiningを組み合わせた言葉です。",
+    "description2": "ソーシャルダイニングは単に食事をするだけでなく、人々と交流しながら食事を楽しみ、新しい縁を作ることができるという利点があります。また、趣味を一緒に楽しんだり、他人の情報を学ぶこともできます。",
+    "examplesTitle": "ソーシャルダイニングの例としては、次のようなものがあります。",
+    "example1": "料理を学びたい人々が有名な料理の先生の家に集まり、一緒に料理を学び、作った料理を分け合って食べること",
+    "example2": "レストラン開業を検討している予備起業家やアマチュアシェフが自分の料理を人々に披露する機会を設けること"
   }
 }

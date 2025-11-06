@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/Store";
 import { login } from "@/store/UserSlice";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // 별점도 있어야할 듯
 interface Review {
@@ -58,6 +59,7 @@ interface Content {
 }
 
 export default function Home() {
+  const { t } = useLanguage();
   const userState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -166,44 +168,50 @@ export default function Home() {
       </div>
       <div className={styles.textContainer1}>
         <h1 className={`${styles.upContent} ${styles.delay1}`}>
-          여러 사람들과
-          <br />
-          함께 하는 식사 자리는 어떠세요?
+          {t.home.hero1Title.split("\n").map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < t.home.hero1Title.split("\n").length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <p className={`${styles.upContent} ${styles.delay2}`}>
-          나이와 성별을 구분하지 않고 모두 식사를 나누며 대화해보세요.
+          {t.home.hero1Description}
         </p>
       </div>
       <div className={styles.textContainer2}>
         <h1 className={`${styles.upContent} ${styles.delay2}`}>
-          일상에서 지쳤을 때,
-          <br />
-          새로운 일상을 만들어 보세요.
+          {t.home.hero2Title.split("\n").map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < t.home.hero2Title.split("\n").length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <p className={`${styles.upContent} ${styles.delay3}`}>
-          새로운 사람들과 새로운 장소에서의 만남이 당신을 기다리고 있습니다.
+          {t.home.hero2Description}
         </p>
       </div>
       <div className={styles.frontContainer}>
         <div className={styles.popularSocialDiningContainer}>
           <h1 className={`${styles.upContent} ${styles.delay4}`}>
-            인기 소셜다이닝 리스트
+            {t.home.popularSocialDining}
           </h1>
           <ContentSlider contents={contents} link={true} />
         </div>
         <div className={styles.popularSocialDiningContainer}>
           <h1 className={`${styles.upContent} ${styles.delay5}`}>
-            소셜다이닝 후기
+            {t.home.socialDiningReviews}
           </h1>
           <ImageSlider contents={reviews} />
         </div>
 
         <hr className={styles.hr} />
         <footer>
-          <p>영진전문대학교 JI-A 5조</p>
-          <p>경상북도 칠곡군 지천면 금송로 60</p>
-          <p>cjhms002@g.yju.ac.kr</p>
-          <p>010-9278-1278</p>
+          <p>{t.home.footerTeam}</p>
+          <p>{t.home.footerAddress}</p>
+          <p>{t.home.footerEmail}</p>
+          <p>{t.home.footerPhone}</p>
         </footer>
       </div>
     </div>
