@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import styles from "./page.module.css";
 import RadarChart from "@/components/RadarChart/RadarChart";
 import Chart from "@/components/Chart/Chart";
@@ -8,6 +9,7 @@ import Image from "next/image";
 import ProfileChange from "@/components/ProfileChange/ProfileChange";
 
 export default function ProfilePage() {
+  const { t } = useLanguage();
   const [data, setData] = useState([3.5, 4.5, 3.5, 4.5, 3.5]);
   const [user, setUser] = useState({
     name: "차승현",
@@ -19,14 +21,14 @@ export default function ProfilePage() {
         title: "차승현의 소셜다이닝",
         createdAt: "2025-03-04",
         pictureUrl: "/foods/kr-food.jpg",
-      }
+      },
     ],
     participate: [
       {
         title: "김형선의 소셜다이닝",
         createdAt: "2025-03-04",
         pictureUrl: "/foods/kr-food.jpg",
-      }
+      },
     ],
   });
 
@@ -34,36 +36,38 @@ export default function ProfilePage() {
     const fetchdata = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/review/averagesreview`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-          },
-        }
+          `${process.env.NEXT_PUBLIC_API_URL}/review/averagesreview`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+            },
+          }
         );
         const data = await response.json();
         setData(data);
       } catch (error) {
         console.error("리뷰 데이터를 가져오는데 실패했습니다.", error);
       }
-    }
+    };
 
     const fetchuser = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/user`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-          },
-        }
+          `${process.env.NEXT_PUBLIC_API_URL}/user`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+            },
+          }
         );
-        const user = await response.json()
-        setUser(user)
+        const user = await response.json();
+        setUser(user);
       } catch (error) {
         console.error("유저 정보를 가져오는데 실패했습니다.", error);
       }
-    }
+    };
 
     const fetchhistory = async () => {
       try {
@@ -96,10 +100,10 @@ export default function ProfilePage() {
       }
     };
 
-    fetchhistory() // 데이터와 유저 정보를 가져오는 함수 호출
-    fetchdata() // 리뷰 데이터를 가져오는 함수 호출
-    fetchuser() // 유저 정보를 가져오는 함수 호출
-  }, [])
+    fetchhistory(); // 데이터와 유저 정보를 가져오는 함수 호출
+    fetchdata(); // 리뷰 데이터를 가져오는 함수 호출
+    fetchuser(); // 유저 정보를 가져오는 함수 호출
+  }, []);
 
   console.log(history);
 
@@ -111,9 +115,9 @@ export default function ProfilePage() {
 
   // 문자열에서 형식 날짜까지보여주는 함수
   const formatDate = (isoString: string | null): string => {
-    if (!isoString) return '';
-    return isoString.split('T')[0];
-  }
+    if (!isoString) return "";
+    return isoString.split("T")[0];
+  };
 
   return (
     <div className={styles.profile}>
@@ -152,15 +156,18 @@ export default function ProfilePage() {
       </div>
       <div className={styles.introductionContainer}>
         <div className={styles.introduction}>
-          <h2>자기소개</h2>
+          <h2>{t.profile.introduction}</h2>
           <p>{user.introduction}</p>
         </div>
       </div>
       <div className={styles.historyContainer}>
         <div className={styles.historyWrap}>
-          <h2>개최 이력</h2>
+          <h2>{t.profile.hostHistory}</h2>
           {history.host.map((item, index) => (
-            <div className={styles.historyItem} key={`${item.createdAt}-${index}`}>
+            <div
+              className={styles.historyItem}
+              key={`${item.createdAt}-${index}`}
+            >
               <Image
                 src={item.pictureUrl}
                 alt={item.title}
@@ -170,15 +177,20 @@ export default function ProfilePage() {
               />
               <div className={styles.historyTextContainer}>
                 <h3 className={styles.historyTitle}>{item.title}</h3>
-                <p className={styles.historyDate}>{formatDate(item.createdAt)}</p>
+                <p className={styles.historyDate}>
+                  {formatDate(item.createdAt)}
+                </p>
               </div>
             </div>
           ))}
         </div>
         <div className={styles.historyWrap}>
-          <h2>참여 이력</h2>
+          <h2>{t.profile.participateHistory}</h2>
           {history.participate.map((item, index) => (
-            <div className={styles.historyItem} key={`${item.createdAt}-${index}`}>
+            <div
+              className={styles.historyItem}
+              key={`${item.createdAt}-${index}`}
+            >
               <Image
                 src={item.pictureUrl || "/restaurant.jpg"}
                 alt={item.title}
@@ -188,7 +200,9 @@ export default function ProfilePage() {
               />
               <div className={styles.historyTextContainer}>
                 <h3 className={styles.historyTitle}>{item.title}</h3>
-                <p className={styles.historyDate}>{formatDate(item.createdAt)}</p>
+                <p className={styles.historyDate}>
+                  {formatDate(item.createdAt)}
+                </p>
               </div>
             </div>
           ))}
@@ -197,5 +211,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
-

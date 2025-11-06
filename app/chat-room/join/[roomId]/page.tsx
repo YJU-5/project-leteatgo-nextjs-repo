@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useChat } from "@/hooks/useChat";
+import { useLanguage } from "@/contexts/LanguageContext";
 import styles from "./page.module.css";
 import Image from "next/image";
 
@@ -16,6 +17,7 @@ interface ChatMessage {
 }
 
 export default function ChatRoomPage() {
+  const { t } = useLanguage();
   const { roomId } = useParams(); // 동적 라우트 값
   const [roomInfo, setRoomInfo] = useState({
     id: "",
@@ -84,7 +86,9 @@ export default function ChatRoomPage() {
       <div className={styles.chatRoomHeader}>
         <div className={styles.headerLeft}>
           <h1 className={styles.chatRoomTitle}>{roomInfo.title}</h1>
-          <h2 className={styles.chatRoomRole}>{role ? role : "GUEST"}</h2>
+          <h2 className={styles.chatRoomRole}>
+            {role === "HOST" ? t.chatRoom.host : t.chatRoom.guest}
+          </h2>
         </div>
         <button
           className={styles.chatRoomHeaderButton}
@@ -106,7 +110,8 @@ export default function ChatRoomPage() {
         </button>
         <div className={styles.sidePanelContent}>
           <div className={styles.sidePanelInfo}>
-            참여자 ({userList.length} / {roomInfo.maxParticipants})
+            {t.chatRoom.participants} ({userList.length} /{" "}
+            {roomInfo.maxParticipants})
           </div>
           {userList.map((user, index) => (
             <div key={index} className={styles.sidePanelProfile}>
@@ -130,10 +135,12 @@ export default function ChatRoomPage() {
               }}
               className={styles.leaveButton}
             >
-              채팅방 나가기
+              {t.chatRoom.leaveRoom}
             </button>
             {role === "HOST" && (
-              <button className={styles.hostButton}>리뷰요청하기</button>
+              <button className={styles.hostButton}>
+                {t.chatRoom.requestReview}
+              </button>
             )}
           </div>
         </div>
@@ -175,7 +182,7 @@ export default function ChatRoomPage() {
               setInput("");
             }
           }}
-          placeholder="메시지를 입력하세요"
+          placeholder={t.chatRoom.inputPlaceholder}
         />
         <button
           onClick={() => {
@@ -184,7 +191,7 @@ export default function ChatRoomPage() {
           }}
           className={styles.sendButton}
         >
-          전송
+          {t.chatRoom.sendMessage}
         </button>
       </div>
     </div>
