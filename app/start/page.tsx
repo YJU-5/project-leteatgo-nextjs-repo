@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import ContentSlider from "@/components/ContentSlider/ContentSlider";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Host {
   id: string;
@@ -46,6 +47,7 @@ interface Content {
 }
 
 export default function Start() {
+  const { t } = useLanguage();
   const [contents, setContents] = useState<Content[]>([]);
 
   useEffect(() => {
@@ -69,10 +71,10 @@ export default function Start() {
       <div className={styles.topContainer}>
         <div className={`${styles.buttonGroup} ${styles.upContent}`}>
           <Link href="/start/create" className={styles.createRoom}>
-            개최하기
+            {t.start.createRoom}
           </Link>
           <Link href="/start/join" className={styles.joinRoom}>
-            참가하기
+            {t.start.joinRoom}
           </Link>
         </div>
       </div>
@@ -81,7 +83,7 @@ export default function Start() {
         <h1
           className={`${styles.popularTitle} ${styles.upContent} ${styles.delay1}`}
         >
-          현재 인기 소셜 다이닝
+          {t.start.popularTitle}
         </h1>
         <ContentSlider contents={contents} link={true} />
       </div>
