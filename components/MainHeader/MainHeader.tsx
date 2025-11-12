@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./MainHeader.module.css";
 import MainHeaderLogin from "./MainHeaderLogin/MainHeaderLogin";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function MainHeader() {
+  const { t } = useLanguage();
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
@@ -12,22 +17,26 @@ export default function MainHeader() {
         <nav>
           <ul className={styles.navBarFirst}>
             <li>
-              <Link href="/what-is-social-dining">소셜다이닝이란?</Link>
+              <Link href="/what-is-social-dining">
+                {t.mainHeader.whatIsSocialDining}
+              </Link>
             </li>
             <li>
-              <Link href="/start">시작하기</Link>
+              <Link href="/start">{t.mainHeader.start}</Link>
             </li>
             <li>
-              <Link href="/album">사진첩</Link>
+              <Link href="/album">{t.mainHeader.album}</Link>
             </li>
             <li>
-              <Link href="/map">MAP</Link>
+              <Link href="/map">{t.mainHeader.map}</Link>
             </li>
             <li>
-              <Link href="/reviews">후기</Link>
+              <Link href="/reviews">{t.mainHeader.reviews}</Link>
             </li>
           </ul>
-          <MainHeaderLogin />
+          <div className={styles.headerRight}>
+            <MainHeaderLogin />
+          </div>
         </nav>
       </div>
       <div className={styles.gradient}></div>

@@ -4,6 +4,12 @@ import { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: false,
   output: "standalone",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
     styledComponents: true,

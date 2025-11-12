@@ -25,15 +25,15 @@
         },
         {
           "name": "NEXT_PUBLIC_API_URL",
-          "value": "https://matchash.shop/api"
+          "value": "https://leteatgo.shop/api"
         },
         {
           "name": "NEXT_PUBLIC_KAKAO_REDIRECT_URI",
-          "value": "https://matchash.shop/login/kakao"
+          "value": "https://leteatgo.shop/login/kakao"
         },
         {
           "name": "NEXT_PUBLIC_GOOGLE_REDIRECT_URI",
-          "value": "https://matchash.shop/login/google"
+          "value": "https://leteatgo.shop/login/google"
         }
       ],
       "secrets": [
@@ -52,6 +52,10 @@
         {
           "name": "NEXT_PUBLIC_KAKAO_REST_API_KEY",
           "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/KAKAO_REST_API_KEY"
+        },
+        {
+          "name": "NEXT_PUBLIC_KAKAO_MAP_KEY",
+          "valueFrom": "arn:aws:ssm:ap-northeast-2:654654145004:parameter/leteatgo/KAKAO_MAP_KEY"
         },
         {
           "name": "NEXT_PUBLIC_KAKAO_CLIENT_ID",

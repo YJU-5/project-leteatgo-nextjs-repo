@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ReduxProvider from "@/store/ReduxProvider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import MainHeader from "../components/MainHeader/MainHeader";
 import SearchUser from "../components/SearchUser/SearchUser";
+import LanguageSwitcher from "../components/LanguageSwitcher/LanguageSwitcher";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -19,20 +21,21 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
+      <head></head>
+      <body>
         {kakaoMapKey && (
           <Script
-            strategy="beforeInteractive"
-            type="text/javascript"
+            strategy="afterInteractive"
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&libraries=services,clusterer&autoload=false`}
           />
         )}
-      </head>
-      <body>
         <ReduxProvider>
-          <MainHeader />
-          <div style={{ marginTop: "10vh" }}>{children}</div>
-          <SearchUser />
+          <LanguageProvider>
+            <MainHeader />
+            <div style={{ marginTop: "10vh" }}>{children}</div>
+            <SearchUser />
+            <LanguageSwitcher />
+          </LanguageProvider>
         </ReduxProvider>
       </body>
     </html>
