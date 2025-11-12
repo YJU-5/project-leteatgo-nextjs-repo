@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 // 토큰을 로컬 스토리지에서 가져오기
@@ -83,6 +85,23 @@ export const isOwner = (resourceUserId: string | number) => {
     return false;
   }
 
+  // JWT 토큰에서 직접 id를 가져오기 (UUID)
+  const token = getToken();
+  if (token) {
+    try {
+      const decoded = jwtDecode(token) as any;
+      const currentUserId = decoded.id?.toString(); // JWT의 id 필드 (UUID)
+      const resourceId = resourceUserId?.toString();
+
+      if (currentUserId && resourceId) {
+        return currentUserId === resourceId;
+      }
+    } catch (error) {
+      console.error("JWT 디코딩 실패:", error);
+    }
+  }
+
+  // 폴백: userInfo.id 사용 (socialId일 수 있음)
   const currentUserId = userInfo.id?.toString();
   const resourceId = resourceUserId?.toString();
 

@@ -32,7 +32,7 @@ export default function Album() {
 
   // 각 게시물의 댓글 표시 상태를 관리하는 state
   const [showComments, setShowComments] = useState<{ [key: string]: boolean }>(
-    {},
+    {}
   );
 
   // 각 게시물별 댓글 입력 상태
@@ -48,15 +48,18 @@ export default function Album() {
   const [editingBoardImages, setEditingBoardImages] = useState<string[]>([]);
 
   // 댓글 수정 상태
-  const [editingCommentId, setEditingCommentId] = useState<number | null>(
-    null,
-  );
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [editingCommentContent, setEditingCommentContent] = useState("");
 
   const [write, setWrite] = useState("");
   const [title, setTitle] = useState("");
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+  // 각 게시글별 현재 이미지 인덱스 (슬라이더용)
+  const [currentImageIndex, setCurrentImageIndex] = useState<{
+    [boardId: number]: number;
+  }>({});
 
   // 게시글 불러오기
   useEffect(() => {
@@ -152,10 +155,24 @@ export default function Album() {
     // 새로 추가한 이미지만 메모리 해제 (기존 이미지는 URL이므로 해제하면 안됨)
     if (!isExistingImage) {
       URL.revokeObjectURL(imageUrl);
+      // blob URL인 경우에만 editingBoardFiles에서도 제거
+      // editingBoardFiles는 새로 추가한 파일만 포함하므로,
+      // 기존 이미지가 아닌 경우에만 파일도 제거
+      setEditingBoardFiles((prev) => {
+        // 현재 인덱스에서 기존 이미지 개수를 빼면 파일 인덱스가 됨
+        const existingImageCount = editingBoardImages
+          .slice(0, index)
+          .filter((url) => existingImageUrls.includes(url)).length;
+        const fileIndex = index - existingImageCount;
+
+        if (fileIndex >= 0 && fileIndex < prev.length) {
+          return prev.filter((_, i) => i !== fileIndex);
+        }
+        return prev;
+      });
     }
 
     setEditingBoardImages((prev) => prev.filter((_, i) => i !== index));
-    setEditingBoardFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   // 게시글 작성
@@ -230,9 +247,34 @@ export default function Album() {
     }
 
     try {
+      // 기존 이미지 URL 목록 (수정 전)
+      const originalImageUrls =
+        boards.find((b) => b.id === boardId)?.picture_urls || [];
+
+      // 남아있는 기존 이미지 URL만 필터링 (blob URL 제외)
+      // blob URL은 http:// 또는 https://로 시작하지 않으므로 필터링
+      const remainingImageUrls = editingBoardImages.filter((url) => {
+        // S3 URL인 경우 (http:// 또는 https://로 시작)
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+          // 정확한 URL 매칭 확인
+          const exists = originalImageUrls.some(
+            (originalUrl) =>
+              originalUrl === url || originalUrl.trim() === url.trim()
+          );
+          return exists;
+        }
+        // blob URL인 경우 제외 (새로 추가한 이미지)
+        return false;
+      });
+
+      console.log("수정 전 이미지:", originalImageUrls);
+      console.log("수정 중 이미지:", editingBoardImages);
+      console.log("남아있는 이미지:", remainingImageUrls);
+
       const updateData: UpdateBoardDto = {
         title: editingBoardTitle.trim(),
         content: editingBoardContent.trim(),
+        existingImageUrls: remainingImageUrls, // 남아있는 기존 이미지 URL 목록
       };
 
       if (editingBoardFiles.length > 0) {
@@ -253,7 +295,13 @@ export default function Album() {
       });
 
       cancelEditBoard();
-      fetchBoards();
+      await fetchBoards();
+      // 이미지 인덱스 초기화
+      setCurrentImageIndex((prev) => {
+        const newState = { ...prev };
+        delete newState[boardId];
+        return newState;
+      });
     } catch (error: any) {
       console.error("게시글 수정 실패:", error);
       alert(error?.message || "게시글 수정에 실패했습니다.");
@@ -573,9 +621,7 @@ export default function Album() {
                       />
                       <textarea
                         value={editingBoardContent}
-                        onChange={(e) =>
-                          setEditingBoardContent(e.target.value)
-                        }
+                        onChange={(e) => setEditingBoardContent(e.target.value)}
                         style={{
                           width: "100%",
                           minHeight: "100px",
@@ -689,16 +735,125 @@ export default function Album() {
                       <p className={styles.boardContent}>{board.content}</p>
                       {board.picture_urls && board.picture_urls.length > 0 && (
                         <div className={styles.boardContentImageContainer}>
-                          {board.picture_urls.map((imageUrl, index) => (
-                            <Image
-                              key={`${board.id}-image-${index}`}
-                              className={styles.boardContentImage}
-                              src={imageUrl}
-                              alt={`게시물 ${board.id}의 ${index + 1}번째 이미지`}
-                              width={250}
-                              height={250}
-                            />
-                          ))}
+                          {board.picture_urls.length > 1 && (
+                            <>
+                              <button
+                                className={`${styles.imageNavButton} ${styles.prev}`}
+                                onClick={() => {
+                                  const currentIdx =
+                                    currentImageIndex[board.id] || 0;
+                                  const newIdx =
+                                    currentIdx === 0
+                                      ? board.picture_urls.length - 1
+                                      : currentIdx - 1;
+                                  setCurrentImageIndex((prev) => ({
+                                    ...prev,
+                                    [board.id]: newIdx,
+                                  }));
+                                }}
+                              >
+                                ‹
+                              </button>
+                              <button
+                                className={`${styles.imageNavButton} ${styles.next}`}
+                                onClick={() => {
+                                  const currentIdx =
+                                    currentImageIndex[board.id] || 0;
+                                  const newIdx =
+                                    currentIdx === board.picture_urls.length - 1
+                                      ? 0
+                                      : currentIdx + 1;
+                                  setCurrentImageIndex((prev) => ({
+                                    ...prev,
+                                    [board.id]: newIdx,
+                                  }));
+                                }}
+                              >
+                                ›
+                              </button>
+                            </>
+                          )}
+                          <div
+                            style={{
+                              display: "flex",
+                              overflow: "hidden",
+                              position: "relative",
+                              width: "100%",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              minHeight: "400px",
+                            }}
+                          >
+                            {board.picture_urls.map((imageUrl, index) => {
+                              const currentIdx =
+                                currentImageIndex[board.id] ?? 0;
+                              const isVisible = index === currentIdx;
+
+                              // 현재 이미지만 렌더링
+                              if (!isVisible) return null;
+
+                              return (
+                                <Image
+                                  key={`${board.id}-image-${index}`}
+                                  className={styles.boardContentImage}
+                                  src={imageUrl}
+                                  alt={`게시물 ${board.id}의 ${
+                                    index + 1
+                                  }번째 이미지`}
+                                  width={250}
+                                  height={250}
+                                  style={{
+                                    width:
+                                      board.picture_urls.length === 1
+                                        ? "100%"
+                                        : "auto",
+                                    maxWidth: "800px",
+                                    height: "auto",
+                                    margin: "0 auto",
+                                    objectFit: "cover",
+                                  }}
+                                />
+                              );
+                            })}
+                          </div>
+                          {board.picture_urls.length > 1 && (
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                gap: "5px",
+                                marginTop: "10px",
+                              }}
+                            >
+                              {board.picture_urls.map((_, index) => {
+                                const currentIdx =
+                                  currentImageIndex[board.id] || 0;
+                                return (
+                                  <button
+                                    key={index}
+                                    onClick={() => {
+                                      setCurrentImageIndex((prev) => ({
+                                        ...prev,
+                                        [board.id]: index,
+                                      }));
+                                    }}
+                                    style={{
+                                      width: "8px",
+                                      height: "8px",
+                                      borderRadius: "50%",
+                                      border: "none",
+                                      backgroundColor:
+                                        index === currentIdx
+                                          ? "#4CAF50"
+                                          : "rgba(255, 255, 255, 0.3)",
+                                      cursor: "pointer",
+                                      transition: "background-color 0.2s",
+                                    }}
+                                  />
+                                );
+                              })}
+                            </div>
+                          )}
                         </div>
                       )}
                     </>
@@ -782,7 +937,7 @@ export default function Album() {
                                         onClick={() =>
                                           handleUpdateComment(
                                             comment.id,
-                                            board.id,
+                                            board.id
                                           )
                                         }
                                         style={{
@@ -846,7 +1001,7 @@ export default function Album() {
                                           onClick={() =>
                                             handleDeleteComment(
                                               comment.id,
-                                              board.id,
+                                              board.id
                                             )
                                           }
                                           style={{

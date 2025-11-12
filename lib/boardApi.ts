@@ -1,4 +1,4 @@
-import { getAuthHeaders, handleApiError, getToken } from "./authUtils";
+import { handleApiError, getToken } from "./authUtils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -179,4 +179,3 @@ export const deleteBoard = async (id: number): Promise<void> => {
     throw await handleApiError(error);
   }
 };
-
