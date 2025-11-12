@@ -21,16 +21,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <head>
+      <head></head>
+      <body>
         {kakaoMapKey && (
           <Script
-            strategy="beforeInteractive"
-            type="text/javascript"
+            strategy="afterInteractive"
             src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&libraries=services,clusterer&autoload=false`}
           />
         )}
-      </head>
-      <body>
         <ReduxProvider>
           <LanguageProvider>
             <MainHeader />
