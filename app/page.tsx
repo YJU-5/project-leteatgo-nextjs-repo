@@ -159,7 +159,7 @@ export default function Home() {
     <div className={styles.home}>
       <div className={styles.homeBackground}>
         <Image
-          src="/home/socialhome.png"
+          src="/home/socialhome.webp"
           alt="socialhome"
           width={4000}
           height={2000}

@@ -20,7 +20,7 @@ export default function Loading() {
         }}
       >
         <Image
-          src="/home/socialhome.png"
+          src="/home/socialhome.webp"
           alt="socialhome"
           width={4000}
           height={2000}
