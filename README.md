@@ -3,7 +3,7 @@
 > 食事をきっかけに、新しい人と新しい日常をつなぐソーシャルダイニングプラットフォーム
 
 <p align="center">
-  <img src="./public/home/socialhome.png" alt="Let Eat Go — Social Dining Platform" width="100%" />
+  <img src="./public/home/socialhome.webp" alt="Let Eat Go — Social Dining Platform" width="100%" />
 </p>
 
 <p align="center">
@@ -146,7 +146,7 @@ Open [http://localhost:3005](http://localhost:3005).
 ## Roadmap
 
 - [ ] 公開デモ環境の再構築
-- [ ] `.env.example`の追加と設定手順の統一
+- [x] `.env.example`の追加と設定手順の統一
 - [ ] Frontend / Backend / AI Serviceのローカル起動をDocker Composeで統合
 - [ ] Unit / E2E testとCI quality gateの拡充
 - [ ] API・DB設計ドキュメントとスクリーンショットの追加
