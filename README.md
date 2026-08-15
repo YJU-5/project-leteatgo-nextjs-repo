@@ -1,171 +1,169 @@
-# 🌿 브랜치 네이밍 규칙
-## ✅ 기본 규칙
-- **소문자 사용** (대문자 X)
-- **공백 대신 하이픈(`-`) 사용**
-- **브랜치 타입/설명 형식** 유지
+# Let Eat Go
 
----
+> 食事をきっかけに、新しい人と新しい日常をつなぐソーシャルダイニングプラットフォーム
 
-## 🏛 기본 브랜치
-- `main` 또는 `master` → 제품의 **안정적인 배포 버전**
-
----
-
-## 🛠 기능 개발 브랜치 (Feature)
-- **형식:** `feature/기능명`
-- **예시:**  
-  - `feature/login-page`
-  - `feature/search-bar`
-
----
-
-## 🐞 버그 수정 브랜치 (Bugfix)
-- **형식:** `bugfix/버그명`
-- **예시:**  
-  - `bugfix/fix-login-error`
-  - `bugfix/typo-fix`
-
----
-
-## 🎨 스타일 수정 브랜치 (Style)
-- **형식:** `style/수정대상`
-- **예시:**  
-  - `style/update-button-ui`
-  - `style/fix-css-padding`
-
----
-
-## 🚨 긴급 수정 브랜치 (Hotfix)
-- **형식:** `hotfix/수정내용`
-- **예시:**  
-  - `hotfix/critical-security-fix`
-  - `hotfix/fix-500-error`
-
----
-
-## 🔄 리팩토링 브랜치 (Refactoring)
-- **형식:** `refactoring/리팩토링-대상`
-- **예시:**  
-  - `refactoring/improve-api-structure`
-  - `refactoring/optimize-db-queries`
-
----
-
-## 🧪 실험 브랜치 (Experimental)
-- **형식:** `experiment/실험내용`
-- **예시:**  
-  - `experiment/new-algorithm`
-  - `experiment/ui-redesign`
-
----
-
-## 🔀 병합 브랜치 (Merge)
-- **형식:** `merge/병합-설명`
-- **예시:**
-  - `merge/feature-user-auth  → 여러 기능 브랜치 병합`
-  - `merge/bugfix-auth-errors → 여러 버그 픽스 병합`
-  - `merge/hotfix-security-patch → 긴급 수정 병합`
-
----
-
-📌 **규칙을 지켜 브랜치를 생성하면 협업이 더 원활해집니다! 🚀**
-
-<!-- <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+<p align="center">
+  <img src="./public/home/socialhome.png" alt="Let Eat Go — Social Dining Platform" width="100%" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs" alt="Next.js 15" />
+  <img src="https://img.shields.io/badge/NestJS-11-E0234E?logo=nestjs" alt="NestJS 11" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript 5" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/AWS-ECS%20%7C%20ECR%20%7C%20S3-FF9900?logo=amazonwebservices&logoColor=white" alt="AWS" />
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-<!-- ## Description
+## About
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Let Eat Goは、共通の関心を持つ人々が食事を通じて交流できるWebアプリケーションです。
 
-## Project setup
+ユーザーは地域・日程・参加条件からソーシャルダイニングを探し、自分でイベントを開催したり、既存のイベントに参加したりできます。参加前後のコミュニケーションまで一つのサービスで完結できるよう、リアルタイムチャット、レビュー、アルバム、プロフィール機能を統合しました。
 
-```bash
-$ npm install
+本プロジェクトは4名で開発したチームプロジェクトです。フロントエンド、バックエンド、AIサービスを独立したリポジトリとして構成し、GitHub Issues・Pull Requests・Docker・GitHub Actionsを用いて開発とデプロイを行いました。
+
+> **Project status:** 現在、公開デモ環境とローカル開発手順を再整備しています。ソースコードと主要機能は各リポジトリで確認できます。
+
+## Key Features
+
+| Feature | Description |
+| --- | --- |
+| ソーシャルダイニング検索 | 開催中のイベントを一覧・地図から検索し、地域や条件に合う食事会を発見 |
+| イベント開催・参加 | 開催日時、場所、定員、年齢・性別条件、料金などを設定して募集・参加 |
+| リアルタイムチャット | Socket.IOを利用したイベント参加者間のリアルタイムメッセージング |
+| ソーシャルログイン | Google・Kakao OAuthとJWTによる認証・セッション管理 |
+| マップ連携 | Kakao Maps上にイベントを表示し、位置情報から詳細を確認 |
+| アルバム・コミュニティ | 画像投稿、コメント、いいねを通じて食事会の思い出を共有 |
+| レビュー・プロフィール | 開催・参加履歴、レビュー、ユーザー情報を一元管理 |
+| 多言語UI | 韓国語・日本語の表示切り替えに対応 |
+| AIセーフティ | FastAPIとDistilBERTによる不適切表現の推論APIをバックエンドから利用 |
+
+## Service Repositories
+
+| Service | Responsibility | Repository |
+| --- | --- | --- |
+| Web Client | UI、状態管理、OAuth連携、地図、チャット、国際化 | **This repository** |
+| Backend API | REST API、JWT認証、WebSocket、ドメインロジック、DB・S3連携 | [project-leteatgo-nestjs-repo](https://github.com/YJU-5/project-leteatgo-nestjs-repo) |
+| AI Service | DistilBERTモデルのロード、テキスト分類、ヘルスチェックAPI | [ai-service](https://github.com/YJU-5/ai-service) |
+
+## Architecture
+
+```mermaid
+flowchart TD
+    U[Browser] --> FE[Next.js Web Client]
+    FE -->|REST / JWT| API[NestJS API]
+    FE <-->|Socket.IO| API
+    API --> DB[(PostgreSQL)]
+    API --> S3[AWS S3]
+    API --> AI[FastAPI AI Service]
+    FE --> OAuth[Google / Kakao OAuth]
 ```
 
-## Compile and run the project
+- Frontend・BackendはDocker imageとしてビルドし、GitHub ActionsからAmazon ECR / ECSへデプロイする構成です。
+- BackendはNestJSの機能単位のModuleとTypeORM Entityでドメインを分割しています。
+- AI Serviceは起動時にS3から学習済みモデルを取得し、推論APIとしてBackendから利用されます。
 
-```bash
-# development
-$ npm run start
+## Tech Stack
 
-# watch mode
-$ npm run start:dev
+| Layer | Technologies |
+| --- | --- |
+| Frontend | Next.js 15, React 18, TypeScript, Redux Toolkit, MUI, Chart.js, Socket.IO Client, Kakao Maps SDK |
+| Backend | NestJS 11, TypeScript, TypeORM, PostgreSQL, Passport, JWT, Socket.IO, Swagger |
+| AI | FastAPI, PyTorch, Transformers, DistilBERT, Pydantic |
+| Infrastructure | Docker, AWS ECS, Amazon ECR, Amazon S3, GitHub Actions |
+| Collaboration | GitHub Issues, Pull Requests, issue / PR templates, branch conventions |
 
-# production mode
-$ npm run start:prod
+## Frontend Structure
+
+```text
+app/          # App Router pages and route-level UI
+components/   # Reusable UI components
+contexts/     # Language context
+hooks/        # Reusable React hooks
+lib/          # Authentication and API utilities
+locales/      # Korean and Japanese translations
+public/       # Static assets
+store/        # Global application state
 ```
 
-## Run tests
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- npm 10+
+- Running [Let Eat Go Backend API](https://github.com/YJU-5/project-leteatgo-nestjs-repo)
+- Google / Kakao developer credentials for OAuth and Kakao Maps
+
+### Installation
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/YJU-5/project-leteatgo-nextjs-repo.git
+cd project-leteatgo-nextjs-repo
+npm ci
 ```
 
-## Deployment
+Create `.env.local` in the project root:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+```dotenv
+NEXT_PUBLIC_API_URL=http://localhost:3001/api
+NEXT_PUBLIC_ENV=development
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+NEXT_PUBLIC_KAKAO_CLIENT_ID=
+NEXT_PUBLIC_KAKAO_REDIRECT_URI=http://localhost:3005/login/kakao
+NEXT_PUBLIC_KAKAO_MAP_KEY=
+NEXT_PUBLIC_KAKAO_REST_API_KEY=
+
+NEXT_PUBLIC_GOOGLE_ID=
+NEXT_PUBLIC_GOOGLE_REDIRECT_URI=http://localhost:3005/login/google
+```
+
+Start the development server:
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+npm run dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Open [http://localhost:3005](http://localhost:3005).
 
-## Resources
+### Available Commands
 
-Check out a few resources that may come in handy when working with NestJS:
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server on port 3005 |
+| `npm run build` | Create a production build |
+| `npm run start` | Start the production server |
+| `npm run lint` | Run the configured lint command |
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Contribution Highlight — @lemonwasp
 
-## Support
+[@lemonwasp](https://github.com/lemonwasp) contributed across both the frontend and backend, including:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- アルバム機能のフロントエンド・バックエンド実装
+- Kakao Mapsを利用した地図、マーカー、ツールチップ、詳細モーダルの実装
+- ReduxとWeb Storageを利用した認証状態の復元・管理
+- チャットルーム関連Entity・Relationの設計と修正
+- Docker・Frontend build・デプロイ設定の整備
+- Comment DTO、S3画像削除処理、Album API連携の不具合修正
 
-## Stay in touch
+See the full [frontend contribution history](https://github.com/YJU-5/project-leteatgo-nextjs-repo/commits/main/?author=lemonwasp) and [backend contribution history](https://github.com/YJU-5/project-leteatgo-nestjs-repo/commits/main/?author=lemonwasp).
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Team
+
+- [chatmdgus](https://github.com/chatmdgus)
+- [jinmo550](https://github.com/jinmo550)
+- [KimHyeongSun445](https://github.com/KimHyeongSun445)
+- [lemonwasp](https://github.com/lemonwasp)
+
+## Roadmap
+
+- [ ] 公開デモ環境の再構築
+- [ ] `.env.example`の追加と設定手順の統一
+- [ ] Frontend / Backend / AI Serviceのローカル起動をDocker Composeで統合
+- [ ] Unit / E2E testとCI quality gateの拡充
+- [ ] API・DB設計ドキュメントとスクリーンショットの追加
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE). --> -->
+This repository was created as an educational team project. No open-source license has been declared.
