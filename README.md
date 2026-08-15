@@ -136,19 +136,6 @@ Open [http://localhost:3005](http://localhost:3005).
 | `npm run start` | Start the production server |
 | `npm run lint` | Run the configured lint command |
 
-## Contribution Highlight — @lemonwasp
-
-[@lemonwasp](https://github.com/lemonwasp) contributed across both the frontend and backend, including:
-
-- アルバム機能のフロントエンド・バックエンド実装
-- Kakao Mapsを利用した地図、マーカー、ツールチップ、詳細モーダルの実装
-- ReduxとWeb Storageを利用した認証状態の復元・管理
-- チャットルーム関連Entity・Relationの設計と修正
-- Docker・Frontend build・デプロイ設定の整備
-- Comment DTO、S3画像削除処理、Album API連携の不具合修正
-
-See the full [frontend contribution history](https://github.com/YJU-5/project-leteatgo-nextjs-repo/commits/main/?author=lemonwasp) and [backend contribution history](https://github.com/YJU-5/project-leteatgo-nestjs-repo/commits/main/?author=lemonwasp).
-
 ## Team
 
 - [chatmdgus](https://github.com/chatmdgus)
