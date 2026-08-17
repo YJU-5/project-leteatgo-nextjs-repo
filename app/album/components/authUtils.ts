@@ -94,26 +94,30 @@ export const getAuthHeaders = (isFormData: boolean = false) => {
 };
 
 // 에러 처리
-export const handleApiError = async (error: {
+type ApiError = {
   status?: number;
   response?: Response;
-}) => {
+};
+
+export const handleApiError = async (error: unknown) => {
+  const apiError =
+    typeof error === "object" && error !== null ? (error as ApiError) : {};
   let errorMessage = "알 수 없는 오류가 발생했습니다.";
 
-  if (error.status === 401) {
+  if (apiError.status === 401) {
     errorMessage = "로그인이 필요한 서비스입니다.";
-  } else if (error.status === 403) {
+  } else if (apiError.status === 403) {
     errorMessage = "해당 작업에 대한 권한이 없습니다.";
-  } else if (error.status === 404) {
+  } else if (apiError.status === 404) {
     errorMessage = "요청한 리소스를 찾을 수 없습니다.";
-  } else if (error.status === 500) {
+  } else if (apiError.status === 500) {
     errorMessage = "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
   }
 
   // 서버 응답이 있는 경우 해당 메시지 사용
-  if (error.response) {
+  if (apiError.response) {
     try {
-      const data = await error.response.json();
+      const data = await apiError.response.json();
       errorMessage = data.message || errorMessage;
     } catch {
       // JSON 파싱 실패 시 기본 메시지 사용
@@ -121,7 +125,7 @@ export const handleApiError = async (error: {
   }
 
   const err = new Error(errorMessage) as Error & { status?: number };
-  err.status = error.status;
+  err.status = apiError.status;
   throw err;
 };
 

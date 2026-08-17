@@ -7,6 +7,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/YJU-5/project-leteatgo-nextjs-repo/actions/workflows/ci.yml"><img src="https://github.com/YJU-5/project-leteatgo-nextjs-repo/actions/workflows/ci.yml/badge.svg" alt="Frontend CI" /></a>
   <img src="https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs" alt="Next.js 15" />
   <img src="https://img.shields.io/badge/NestJS-11-E0234E?logo=nestjs" alt="NestJS 11" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript 5" />
@@ -134,7 +135,8 @@ Open [http://localhost:3005](http://localhost:3005).
 | `npm run dev` | Start the local development server on port 3005 |
 | `npm run build` | Create a production build |
 | `npm run start` | Start the production server |
-| `npm run lint` | Run the configured lint command |
+| `npm run lint` | Run ESLint across the frontend source |
+| `npm run typecheck` | Check TypeScript types without emitting files |
 
 ## Team
 
