@@ -31,6 +31,7 @@ export interface UpdateBoardDto {
   title?: string;
   content?: string;
   files?: File[];
+  existingImageUrls?: string[];
 }
 
 // 게시글 목록 조회

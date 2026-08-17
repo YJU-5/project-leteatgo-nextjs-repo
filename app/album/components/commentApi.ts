@@ -2,7 +2,6 @@ import {
   getAuthHeaders,
   handleApiError,
   checkAuth,
-  redirectToLogin,
 } from "./authUtils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
