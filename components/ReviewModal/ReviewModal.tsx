@@ -109,7 +109,7 @@ export default function ReviewModal({ review, onClose }: ReviewModalProps) {
       } else {
         alert("리뷰 등록에 실패했습니다.");
       }
-    } catch (error) {
+    } catch {
       alert("에러가 발생했습니다.");
     }
   };

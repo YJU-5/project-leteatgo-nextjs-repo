@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { Dispatch, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './EventList.module.css'
 
 interface List {
@@ -22,7 +22,7 @@ interface EventListProps {
 export default function EventList({ list, total }: EventListProps) {
   const router = useRouter();
   const [page, setPage] = useState(1); //현재 페이지 번호
-  const [prevPage, setPrevPage] = useState(1); // 이전페이지 번호
+  const prevPage = useRef(1); // 이전페이지 번호
   const [slideClass, setSlideClass] = useState("");// 한페이지에 표시할 데이터수 
   const [limit, setLimit] = useState(9) //페이지당 개수
   const pageNum = Math.ceil(total / limit) // 전체 페이지 개수
@@ -33,13 +33,13 @@ export default function EventList({ list, total }: EventListProps) {
   const isDragging = useRef(false);
 
   useEffect(() => {
-    if (page > prevPage) {
+    if (page > prevPage.current) {
       setSlideClass(styles.slideFromRight); // 오른쪽으로 슬라이드
-    } else if (page < prevPage) {
+    } else if (page < prevPage.current) {
       setSlideClass(styles.slideFromLeft);
     }
 
-    setPrevPage(page);
+    prevPage.current = page;
 
     // 0.4초 뒤 슬라이드 클래스 초기화
     const timeout = setTimeout(() => setSlideClass(""), 400);
@@ -98,7 +98,7 @@ export default function EventList({ list, total }: EventListProps) {
     }
   };
 
-  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseUp = () => {
 
     isDragging.current = false;
     startX.current = null;

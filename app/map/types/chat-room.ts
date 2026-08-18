@@ -8,8 +8,8 @@ export interface ChatRoom {
   averagePrice: number;
   maxParticipants: number;
   currentParticipants?: number;
-  pictureUrl?: string;
-  category?: string;
+  pictureUrl?: string | null;
+  category?: string | null;
   startDate?: string;
 }
 

@@ -21,7 +21,6 @@ export default function UserDropdown({
 }: UserDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const user = useSelector((state: RootState) => state.user.user);
-  const token = localStorage.getItem('jwtToken')
   const router = useRouter();
 
 

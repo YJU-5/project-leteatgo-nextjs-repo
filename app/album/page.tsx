@@ -22,6 +22,23 @@ import {
 } from "@/lib/commentApi";
 import { isOwner } from "@/lib/authUtils";
 
+const getErrorMessage = (error: unknown, fallback: string) => {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof error.message === "string"
+  ) {
+    return error.message;
+  }
+
+  return fallback;
+};
+
 export default function Album() {
   const userState = useSelector((state: RootState) => state.user);
   const [boards, setBoards] = useState<Board[]>([]);
@@ -204,9 +221,9 @@ export default function Album() {
 
       // 게시글 목록 새로고침
       fetchBoards();
-    } catch (error: any) {
+    } catch (error) {
       console.error("게시글 작성 실패:", error);
-      alert(error?.message || "게시글 작성에 실패했습니다.");
+      alert(getErrorMessage(error, "게시글 작성에 실패했습니다."));
     }
   };
 
@@ -302,9 +319,9 @@ export default function Album() {
         delete newState[boardId];
         return newState;
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error("게시글 수정 실패:", error);
-      alert(error?.message || "게시글 수정에 실패했습니다.");
+      alert(getErrorMessage(error, "게시글 수정에 실패했습니다."));
     }
   };
 
@@ -318,9 +335,9 @@ export default function Album() {
       await deleteBoard(boardId);
       alert("게시글이 삭제되었습니다!");
       fetchBoards();
-    } catch (error: any) {
+    } catch (error) {
       console.error("게시글 삭제 실패:", error);
-      alert(error?.message || "게시글 삭제에 실패했습니다.");
+      alert(getErrorMessage(error, "게시글 삭제에 실패했습니다."));
     }
   };
 
@@ -348,9 +365,9 @@ export default function Album() {
 
       // 댓글 목록 새로고침
       await fetchCommentsForBoard(boardId);
-    } catch (error: any) {
+    } catch (error) {
       console.error("댓글 작성 실패:", error);
-      alert(error?.message || "댓글 작성에 실패했습니다.");
+      alert(getErrorMessage(error, "댓글 작성에 실패했습니다."));
     }
   };
 
@@ -378,9 +395,9 @@ export default function Album() {
       alert("댓글이 수정되었습니다!");
       cancelEditComment();
       await fetchCommentsForBoard(boardId);
-    } catch (error: any) {
+    } catch (error) {
       console.error("댓글 수정 실패:", error);
-      alert(error?.message || "댓글 수정에 실패했습니다.");
+      alert(getErrorMessage(error, "댓글 수정에 실패했습니다."));
     }
   };
 
@@ -394,9 +411,9 @@ export default function Album() {
       await deleteComment(commentId);
       alert("댓글이 삭제되었습니다!");
       await fetchCommentsForBoard(boardId);
-    } catch (error: any) {
+    } catch (error) {
       console.error("댓글 삭제 실패:", error);
-      alert(error?.message || "댓글 삭제에 실패했습니다.");
+      alert(getErrorMessage(error, "댓글 삭제에 실패했습니다."));
     }
   };
 

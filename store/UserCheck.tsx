@@ -6,6 +6,14 @@ import { login } from "./UserSlice";
 import { jwtDecode } from "jwt-decode";
 import { User } from "./UserSlice";
 
+interface UserTokenPayload {
+  socialId: string;
+  name: string;
+  email: string;
+  pictureUrl?: string;
+  deleted: boolean;
+}
+
 export default function UserCheck({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true); //  로딩 상태 추가
@@ -15,7 +23,7 @@ export default function UserCheck({ children }: { children: React.ReactNode }) {
 
     if (token) {
       try {
-        const decoded = jwtDecode(token) as any;
+        const decoded = jwtDecode<UserTokenPayload>(token);
         const userInfo: User = {
           id: decoded.socialId,
           name: decoded.name,

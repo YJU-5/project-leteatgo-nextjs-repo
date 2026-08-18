@@ -47,7 +47,7 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
       }
     }
     getEvents();
-  }, []);
+  }, [id]);
 
   console.log(events);
 
@@ -55,9 +55,9 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
   const startX = useRef<number | null>(null);
   const isDragging = useRef(false);
   const [page, setPage] = useState(1); //현재 페이지 번호
-  const [prevPage, setPrevPage] = useState(1); // 이전페이지 번호
+  const prevPage = useRef(1); // 이전페이지 번호
   const [slideClass, setSlideClass] = useState("");// 한페이지에 표시할 데이터수 
-  const [limit, setLimit] = useState(3) //페이지당 개수
+  const limit = 3; //페이지당 개수
   const offset = (page - 1) * limit; //현재 페이지에서 표시할 데이터의 시작위치
 
 
@@ -67,13 +67,13 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
   console.log(slicePageData);
 
   useEffect(() => {
-    if (page > prevPage) {
+    if (page > prevPage.current) {
       setSlideClass(styles.slideFromRight); // 오른쪽으로 슬라이드
-    } else if (page < prevPage) {
+    } else if (page < prevPage.current) {
       setSlideClass(styles.slideFromLeft);
     }
 
-    setPrevPage(page);
+    prevPage.current = page;
 
     // 0.4초 뒤 슬라이드 클래스 초기화
     const timeout = setTimeout(() => setSlideClass(""), 400);
@@ -105,7 +105,7 @@ export default function MyReviewsDetail({ params }: { params: Promise<{ id: stri
     }
   };
 
-  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseUp = () => {
     isDragging.current = false;
     startX.current = null;
   };
