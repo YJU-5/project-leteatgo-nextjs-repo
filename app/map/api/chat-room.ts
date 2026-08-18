@@ -8,6 +8,21 @@ declare const process: {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
+interface ChatRoomResponse {
+  id: string;
+  title?: string;
+  description?: string;
+  address?: string;
+  latitude?: number | string;
+  longitude?: number | string;
+  price?: number;
+  maxParticipants?: number;
+  userChatRooms?: unknown[];
+  pictureUrl?: string | null;
+  categories?: Array<{ name?: string | null }>;
+  startDate?: string | number;
+}
+
 const getHeaders = () => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("jwtToken") : null;
@@ -30,10 +45,10 @@ export async function getAllChatRooms(): Promise<ChatRoom[]> {
     throw new Error(`Failed to fetch chat rooms: ${res.status}`);
   }
 
-  const data = await res.json();
+  const data: ChatRoomResponse[] = await res.json();
 
   // 백엔드 응답을 프론트엔드 타입에 맞게 변환
-  return data.map((room: any) => ({
+  return data.map((room) => ({
     id: room.id,
     title: room.title || "",
     description: room.description || "",
