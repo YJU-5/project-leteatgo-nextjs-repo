@@ -92,8 +92,8 @@ store/        # Global application state
 
 ### Prerequisites
 
-- Node.js 20+
-- npm 10+
+- Node.js 20+ and npm 10+ for native local development
+- Docker and Docker Compose for containerized local development
 - Running [Let Eat Go Backend API](https://github.com/YJU-5/project-leteatgo-nestjs-repo)
 - Google / Kakao developer credentials for OAuth and Kakao Maps
 
@@ -127,6 +127,50 @@ npm run dev
 ```
 
 Open [http://localhost:3005](http://localhost:3005).
+
+### Local Docker
+
+The frontend can also be built and run locally with Docker Compose.
+
+Make sure the local Backend API is running on `http://localhost:3001`, then run:
+
+```bash
+docker compose up --build
+```
+
+Open [http://localhost:3005](http://localhost:3005).
+
+The Docker build uses the following `NEXT_PUBLIC_*` build-time variables:
+
+| Variable | Local Default |
+| --- | --- |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:3001/api` |
+| `NEXT_PUBLIC_KAKAO_REDIRECT_URI` | `http://localhost:3005/login/kakao` |
+| `NEXT_PUBLIC_GOOGLE_REDIRECT_URI` | `http://localhost:3005/login/google` |
+| `NEXT_PUBLIC_KAKAO_MAP_KEY` | Empty |
+
+You can override a build-time variable when starting Docker Compose:
+
+```bash
+NEXT_PUBLIC_KAKAO_MAP_KEY=your_key docker compose up --build
+```
+
+> `NEXT_PUBLIC_*` variables are embedded into the Next.js application at build time.
+> If these values change, rebuild the image with `docker compose up --build`.
+
+The local port mapping is:
+
+```text
+Host localhost:3005
+        ↓
+Next.js container:3000
+```
+
+To stop the frontend container:
+
+```bash
+docker compose down
+```
 
 ### Available Commands
 
