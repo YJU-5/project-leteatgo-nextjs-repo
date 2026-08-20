@@ -9,11 +9,10 @@
 <p align="center">
   <a href="https://github.com/YJU-5/project-leteatgo-nextjs-repo/actions/workflows/ci.yml"><img src="https://github.com/YJU-5/project-leteatgo-nextjs-repo/actions/workflows/ci.yml/badge.svg" alt="Frontend CI" /></a>
   <img src="https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs" alt="Next.js 15" />
-  <img src="https://img.shields.io/badge/NestJS-11-E0234E?logo=nestjs" alt="NestJS 11" />
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black" alt="React 18" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript 5" />
-  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white" alt="Docker" />
-  <img src="https://img.shields.io/badge/AWS-ECS%20%7C%20ECR%20%7C%20S3-FF9900?logo=amazonwebservices&logoColor=white" alt="AWS" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white" alt="GitHub Actions" />
 </p>
 
 ## About
